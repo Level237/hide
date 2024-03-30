@@ -6,7 +6,7 @@ import getUser from "./db/queries/users/getUser";
 import bcrypt from 'bcrypt';
 
 export const {auth,signIn,signOut}=NextAuth({
-    ...authConfig,
+
     providers:[
         Credentials({
             async authorize(credentials){
