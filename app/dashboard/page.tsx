@@ -1,6 +1,7 @@
 'use server'
 import { logout } from '@/actions/auth/logout';
 import { auth } from '@/auth';
+import FormBtn from '@/components/common/FormBtn';
 import { Button } from '@/components/ui/button';
 import getUser from '@/db/queries/users/getUser';
 import { useSession } from 'next-auth/react'
@@ -12,7 +13,7 @@ export default async function Dashboard() {
   return (
     <div>
       <form action={logout}>
-                    <Button type="submit">Sign Out</Button>
+                    <FormBtn>Logout</FormBtn>
                 </form>
       {session?.user?.phone}
     </div>
