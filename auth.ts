@@ -8,7 +8,7 @@ import { compare } from "bcrypt";
 
 
 export const {handlers:{GET,POST},auth,signIn,signOut}=NextAuth({
-...authConfig,
+  secret: process.env.AUTH_SECRET,
     providers: [
         CredentialsProvider({
           credentials: {
