@@ -2,7 +2,14 @@
 import { signIn } from "@/auth";
 import { db } from "@/db";
 
+interface createUserFormState{
+  name?:string[],
+  email?:string[],
+  _form?:string[]
+}
+
 export async function register(
+  formState:createUserFormState,
 formData:FormData
 ){
 try {
@@ -21,7 +28,9 @@ try {
     })
    
 } catch (error) {
-    
+    if(error instanceof Error){
+
+    }
 }
 
 }
