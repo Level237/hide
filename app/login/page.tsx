@@ -13,7 +13,7 @@ export default async function LoginPage(){
         <>
         <section className="container mt-36 flex items-center flex-col justify-center">
             <h1 className="text-2xl font-bold text-center">Login</h1>
-            {users.map(u=>u.password)}
+            {users.map(u=>u.email)}
    <LoginForm/>
         </section>
        

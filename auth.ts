@@ -1,5 +1,5 @@
 import NextAuth from "next-auth";
-import { authConfig } from "./auth.config";
+import { authConfig } from './auth.config';
 import {z} from "zod"
 import CredentialsProvider from "@auth/core/providers/credentials";
 import getUser from "./db/queries/users/getUser";
@@ -8,7 +8,7 @@ import { compare } from "bcrypt";
 
 
 export const {handlers:{GET,POST},auth,signIn,signOut}=NextAuth({
-
+...authConfig,
     providers: [
         CredentialsProvider({
           credentials: {
