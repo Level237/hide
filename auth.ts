@@ -32,11 +32,45 @@ export const {handlers:{GET,POST},auth,signIn,signOut}=NextAuth({
             if (!isValid) {
                 throw new Error('Wrong credentials. Try again.')
               }
-            return {id:user?.id,email:user?.email}
+            return {id:user?.id,email:user?.email,name:user?.name,phone:user?.phone}
           }
           
             return null;
           }
-        })
-      ]
+        }),
+       
+      ],
+     callbacks:{
+      async jwt({token,user,session}){
+        console.log("jwt callback",{token,user,session});
+       if(user){
+        return {
+          ...token,
+          id:user.id,
+          phone:user.phone,
+          profile:user.profile,
+          email:user.email,
+          name:user.name
+        }
+       }
+     return token;
+      },
+      async session({session,token,user}){
+        console.log("session callback",{session,token,user});
+       
+        return {
+          ...session,
+          user:{
+            ...session.user,
+            id:token.id,
+            phone:token.phone,
+            
+          }
+        }
+            return session
+      }
+     },
+     session:{
+      strategy:"jwt",
+     }
 })
