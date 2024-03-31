@@ -13,7 +13,7 @@ interface createUserFormState{
   }
 
 
-export async function register(
+export async function registerAction(
   formState:createUserFormState,
 formData:FormData
 ):Promise<createUserFormState>
