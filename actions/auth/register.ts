@@ -3,7 +3,7 @@ import { signIn } from "@/auth";
 import { db } from "@/db";
 import { registerSchema } from "@/db/schema/register.schema";
 import { redirect } from "next/navigation";
-
+import {hash} from 'bcrypt';
 interface createUserFormState{
   errors:{
     name?:string[],
@@ -28,18 +28,20 @@ formData:FormData
     password:formData.get('password')
   })
 
+  
   if(!result.success){
     return{
       errors:result.error.flatten().fieldErrors
     }
   }
 try {
+  const hashedPassword=await hash(result.data.password,10)
    await db.user.create({
      data:{
       name:result.data.name,
       email:result.data.email,
       phone:result.data.phone,
-      password:result.data.password
+      password:hashedPassword
      }
     })
    

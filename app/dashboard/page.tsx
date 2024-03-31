@@ -1,9 +1,12 @@
+'use client'
+import { useSession } from 'next-auth/react'
 import React from 'react'
 
 export default function Dashboard() {
+  const session=useSession();
   return (
     <div>
-      sdd
+      {session.data?.user?.email}
     </div>
   )
 }

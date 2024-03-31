@@ -12,7 +12,7 @@ export default function FormBtn({children}:FormButtonProps) {
   return (
     <div>
       {
-        !pending ?  <Button type="submit" className="mt-5"  >{children}</Button> : <Button className="mt-5" disabled>
+        !pending ?  <Button  type="submit" className="mt-5"  >{children}</Button> : <Button className="mt-5" disabled>
         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
         Please wait
       </Button>

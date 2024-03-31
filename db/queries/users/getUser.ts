@@ -1,6 +1,6 @@
 import { db } from "@/db";
 
-export default async function getUser(email:string){
+export default async function getUser(email:any){
     try {
         const user=await db.user.findFirst({
             where:{email}
