@@ -8,7 +8,7 @@ export const registerSchema=z.object({
     }),
     email:z.string()
     .email(),
-    phone:z.number(),
+    phone:z.string(),
     password:z.string()
     .min(5)
 

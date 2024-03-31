@@ -1,36 +1,57 @@
 'use server'
 import { signIn } from "@/auth";
 import { db } from "@/db";
+import { registerSchema } from "@/db/schema/register.schema";
+import { redirect } from "next/navigation";
 
 interface createUserFormState{
-  name?:string[],
-  email?:string[],
-  _form?:string[]
-}
+  errors:{
+    name?:string[],
+    email?:string[],
+    _form?:string[]
+  }
+  }
+
 
 export async function register(
   formState:createUserFormState,
 formData:FormData
-){
+):Promise<createUserFormState>
+
+{
+
+  await new Promise((resolve)=>setTimeout(resolve,2500))
+  const result= registerSchema.safeParse({
+    name:formData.get('name'),
+    email:formData.get('email'),
+    phone:formData.get('phone'),
+    password:formData.get('password')
+  })
+
+  if(!result.success){
+    return{
+      errors:result.error.flatten().fieldErrors
+    }
+  }
 try {
-  const email=formData.get('email') as string
-  const phone=formData.get('phone') as string
-  const password=formData.get('password') as string
-  const name=formData.get('name') as string
- 
    await db.user.create({
      data:{
-      name,
-      email,
-      phone,
-      password
+      name:result.data.name,
+      email:result.data.email,
+      phone:result.data.phone,
+      password:result.data.password
      }
     })
    
-} catch (error) {
+} catch (error:unknown) {
     if(error instanceof Error){
-
+      return {
+        errors:{
+          _form:[error.message]
+        }
+      }
     }
 }
+redirect('/login')
 
 }
