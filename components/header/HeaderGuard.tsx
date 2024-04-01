@@ -1,5 +1,6 @@
 'use client'
 import { ArrowRightToLine } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
@@ -25,7 +26,7 @@ useEffect(() => {
 const Brand = () => (
     <div className="flex items-center justify-between py-5 md:block">
         <a href="javascript:void(0)">
-            <img
+            <Image
                 src="https://www.floatui.com/logo-dark.svg"
                 width={120}
                 height={50}

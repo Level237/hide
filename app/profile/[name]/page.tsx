@@ -10,7 +10,7 @@ export default async function ProfilePage() {
         <form action={logout}>
                     <FormBtn>Logout</FormBtn>
                 </form>
-        {session?.user?.phone}
+        {session?.user?.name}
     </div>
   )
 }

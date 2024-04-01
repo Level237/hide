@@ -43,7 +43,7 @@ export default async function Header() {
   
     if(session?.user){
         authContent= <div>
-<HeaderAuth/>
+<HeaderAuth firstName={session.user.name?.charAt(0)}/>
         
       </div>
     }else{

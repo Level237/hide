@@ -7,8 +7,10 @@ import { ArrowRightToLine } from 'lucide-react';
 import { auth } from '@/auth';
 import HeaderGuard from './HeaderGuard';
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
-export default  function HeaderAuth() {
+
+export default  function HeaderAuth({firstName}:any) {
 
 
     const [state, setState] = useState(false)
@@ -31,7 +33,7 @@ export default  function HeaderAuth() {
   const Brand = () => (
       <div className="flex items-center justify-between py-5 md:block">
           <a href="javascript:void(0)">
-              <img
+              <Image
                   src="https://www.floatui.com/logo-dark.svg"
                   width={120}
                   height={50}
@@ -69,7 +71,7 @@ export default  function HeaderAuth() {
                         <li>
                         <Avatar>
                 
-                <AvatarFallback className='font-bold bg-primary text-white'>m</AvatarFallback>
+                <AvatarFallback className='font-bold bg-primary text-white'>{firstName}</AvatarFallback>
               </Avatar>
     
                         </li>
