@@ -9,7 +9,7 @@ import React from 'react'
 
 export default async function Dashboard() {
   const session=await auth();
-  const user=await getUser(session?.user?.email)
+  //const user=await getUser(session?.user?.email)
   return (
     <div>
       <form action={logout}>

@@ -9,11 +9,11 @@ export async function middleware(request:NextRequest){
         secret: process.env.AUTH_SECRET,
       });
     if(!token){
-        console.log(token,process.env.AUTH_SECRET);
+        //console.log(token,process.env.AUTH_SECRET);
         return NextResponse.redirect(new URL('/login',request.url))
     }else{
         console.log(token);
-        return NextResponse.next() 
+        return NextResponse.next()
         
     }
       
