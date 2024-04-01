@@ -5,6 +5,7 @@ import { AuthError } from "next-auth";
 import { revalidatePath } from "next/cache";
 
 import { redirect } from "next/navigation";
+import getUser from '@/db/queries/users/getUser';
 
 export default async function LoginAction(formData:FormData){
     try{
@@ -26,5 +27,6 @@ export default async function LoginAction(formData:FormData){
           }
           console.log(error);
     }
-    redirect('/dashboard')
+    const user=await getUser(formData.get('email'))
+    redirect(`profile/${user?.name}`)
 }

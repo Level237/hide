@@ -1,4 +1,4 @@
-'use server'
+
 import { logout } from '@/actions/auth/logout';
 import { auth } from '@/auth';
 import FormBtn from '@/components/common/FormBtn';
