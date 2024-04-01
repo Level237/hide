@@ -58,6 +58,8 @@
 @layer base {
   * {
     @apply border-border;
+    overflow-x: hidden;
+    overflow-y: hidden
   }
   body {
     @apply bg-background text-foreground;
