@@ -71,13 +71,13 @@ export default function LoginForm() {
                     <label className="font-medium">
                         Email
                     </label>
-                    <Input type="email" />
+                    <Input name="email" type="email" />
                 </div>
-                <div>
+                <div className="mt-5">
                     <label className="font-medium">
                         Password
                     </label>
-                    <Input type="password" />
+                    <Input name="password"  type="password" />
                 </div>
                 <FormBtn className="w-full px-4 py-2 text-white font-medium">  Sign in</FormBtn>
             </form>

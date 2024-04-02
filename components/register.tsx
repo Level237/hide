@@ -3,7 +3,7 @@ import { registerAction } from "@/actions/auth/register"
 import { useFormState } from "react-dom"
 import { Input } from "./ui/input"
 import { Button } from "./ui/button"
-import FormBtn from "./common/FormBtn"
+import {FormBtn} from "./common/FormBtn"
 
 export default function RegisterForm() {
 
@@ -22,7 +22,7 @@ export default function RegisterForm() {
 <Input type="text" name="phone" placeholder="Enter your phone number" className="w-96 mt-5"/>
 <Input type="password" name="password" placeholder="Enter your password" className="w-96 mt-5"/>
 
-<FormBtn>Register</FormBtn>
+<FormBtn className="w-full px-4 py-2 text-white font-medium">  Sign in</FormBtn>
 </form>
     </>
   )
