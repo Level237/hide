@@ -22,21 +22,6 @@ export default async function Header() {
 
 
 
-  const Brand = () => (
-      <div className="flex items-center justify-between py-5 md:block">
-          <a href="javascript:void(0)">
-              <img
-                  src="https://www.floatui.com/logo-dark.svg"
-                  width={120}
-                  height={50}
-                  alt="Float UI logo"
-              />
-          </a>
-          <div className="md:hidden">
-              
-          </div>
-      </div>
-  )
     const session=await auth();
     let authContent:React.ReactNode
 
