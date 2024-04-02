@@ -13,7 +13,7 @@ export default async function HomeComponent() {
     let authContent:React.ReactNode;
     if(session?.user){
         authContent=<>
-        <div className='text-white'>Authenticated</div>
+        <div className='text-white'></div>
         </>
     }else{
         authContent=<>
