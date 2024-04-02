@@ -42,6 +42,7 @@ import {
     DropdownMenuSubTrigger,
     DropdownMenuTrigger,
   } from "@/components/ui/dropdown-menu"
+import { logout } from '@/actions/auth/logout';
 
 
 export default  function HeaderAuth({firstName}:any) {
@@ -177,7 +178,10 @@ export default  function HeaderAuth({firstName}:any) {
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <LogOut className="mr-2 h-4 w-4" />
-          <span>Log out</span>
+          <form action={logout}>
+          <Button type='submit' className='w-full bg-transparent text-black hover:bg-transparent'>Log out</Button>
+          </form>
+          
           <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>
