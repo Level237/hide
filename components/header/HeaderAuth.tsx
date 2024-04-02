@@ -3,7 +3,7 @@
 import { Avatar, AvatarFallback } from '../ui/avatar'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link';
-import { ArrowRightToLine } from 'lucide-react';
+
 import { auth } from '@/auth';
 import HeaderGuard from './HeaderGuard';
 import { useEffect, useState } from 'react';
@@ -18,7 +18,7 @@ export default  function HeaderAuth({firstName}:any) {
   const navigation = [
       { title: "Features", path: "javascript:void(0)" },
       { title: "Integrations", path: "javascript:void(0)" },
-      { title: "Customers", path: "javascript:void(0)" },
+      { title: "Cushrefmers", path: "javascript:void(0)" },
       { title: "Pricing", path: "javascript:void(0)" }
   ]
 
@@ -34,8 +34,8 @@ export default  function HeaderAuth({firstName}:any) {
       <div className="flex items-center justify-between py-5 md:block">
           <a href="javascript:void(0)">
               <Image
-                  src="https://www.floatui.com/logo-dark.svg"
-                  width={120}
+                  src="/logo.png"
+                  width={50}
                   height={50}
                   alt="Float UI logo"
               />
@@ -48,38 +48,16 @@ export default  function HeaderAuth({firstName}:any) {
    
     return(
      
-<header>
-        <div className={`md:hidden ${state ? "mx-2 pb-5" : "hidden"}`}>
-            <Brand />
+<header   className='w-[100%] sticky top-0 z-50  py-1 px-1 sm:px-10 bg-gray-900 font-[sans-serif] max-h-[80px]' >
+        <div className='flex flex-wrap items-center gap-x-2 max-lg:gap-y-6'>
+         <Brand/>
+         <div className='text-white font-bold'> Dashboard</div>
+          
+          
+         
         </div>
-        <nav className={`pb-5 md:text-sm ${state ? "absolute z-20 top-0 inset-x-0 bg-gray-800 rounded-xl mx-2 mt-2 md:mx-0 md:mt-0 md:relative md:bg-transparent" : ""}`}>
-            <div className="gap-x-14 items-center max-w-screen-xl mx-auto px-4 md:flex md:px-8">
-                <Brand />
-                <div className={`flex-1 items-center mt-8 md:mt-0 md:flex ${state ? 'block' : 'hidden'} `}>
-                    <ul className="flex-1 justify-end items-center space-y-6 md:flex md:space-x-6 md:space-y-0">
-                        {
-                            navigation.map((item, idx) => {
-                                return (
-                                    <li key={idx} className="text-gray-300 hover:text-gray-400">
-                                        <a href={item.path} className="block">
-                                            {item.title}
-                                        </a>
-                                    </li>
-                                )
-                            })
-                        }
-                        <li>
-                        <Avatar>
-                
-                <AvatarFallback className='font-bold bg-primary text-white'>{firstName}</AvatarFallback>
-              </Avatar>
-    
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+        
+      </header>
         
         )
 }

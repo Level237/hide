@@ -7,7 +7,7 @@ export default function Home() {
    <section>
     <div className="bg-gray-900">
     <Header/>
-   <HomeComponent/>
+    <HomeComponent/>
     </div>
     
    </section>
