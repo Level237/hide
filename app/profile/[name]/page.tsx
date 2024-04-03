@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 
 import Header from '@/components/ui/Header';
 import getUserByName from '@/db/queries/users/getUserByName';
-import { Eye } from 'lucide-react';
+import { Eye, Plus } from 'lucide-react';
 import { notFound } from 'next/navigation';
 import React from 'react'
 
@@ -61,6 +61,30 @@ export default async function ProfilePage({params}:ProfileShowPageProps) {
     <HomeComponent>
    <section  className='flex mt-10 mx-10'>
     <ProfileSection/>
+    <div className=' w-full py-12 rounded-lg pl-12 pr-12 max-h-96 border-[#00000013] border-[0.12rem]' >
+      <h2 className='text-center text-black font-bold text-2xl mb-5'>Welcome in Hide,{session?.user?.name}</h2>
+<div className='grid grid-cols-3 gap-5'>
+  <div className='flex flex-col'>
+  <div className=' py-[5rem] flex items-center justify-center rounded-lg cursor-pointer  hover:text-black hover:bg-[#0000001c] duration-150  border-[#0000002f] border-[0.12rem]'>
+<Plus/>
+</div>
+<h2 className='text-center mt-3 text-primary font-bold'>New Post</h2>
+  </div>
+  <div className='flex flex-col'>
+  <div className=' py-[5rem] flex items-center justify-center rounded-lg cursor-pointer  hover:text-black hover:bg-[#0000001c] duration-150  border-[#0000002f] border-[0.12rem]'>
+<Plus/>
+</div>
+<h2 className='text-center mt-3 text-primary font-bold'>New Notes</h2>
+  </div>
+  <div className='flex flex-col'>
+  <div className=' py-[5rem] flex items-center justify-center rounded-lg cursor-pointer  hover:text-black hover:bg-[#0000001c] duration-150  border-[#0000002f] border-[0.12rem]'>
+<Plus/>
+</div>
+<h2 className='text-center mt-3 text-primary font-bold'>New Hide response</h2>
+  </div>
+
+</div>
+    </div>
    </section>
     </HomeComponent>
        

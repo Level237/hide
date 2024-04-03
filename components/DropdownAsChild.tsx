@@ -1,3 +1,5 @@
+
+'use client'
 import React from 'react'
 import {
     Cloud,
@@ -32,9 +34,12 @@ import {
   } from "@/components/ui/dropdown-menu"
 import { logout } from '@/actions/auth/logout'
 import { Button } from './ui/button'
+import Link from 'next/link'
+import { useSession } from 'next-auth/react'
 
 
 export default function DropdownAsChild({children}:any) {
+  const session=useSession()
   return (
     <div>
        <DropdownMenu>
@@ -47,7 +52,10 @@ export default function DropdownAsChild({children}:any) {
         <DropdownMenuGroup>
           <DropdownMenuItem>
             <User className="mr-2 h-4 w-4" />
+            <Link href={`/profile/${session.data?.user?.name}`}>
             <span>Profile</span>
+            </Link>
+          
             <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>

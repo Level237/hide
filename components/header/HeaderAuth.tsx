@@ -62,14 +62,14 @@ export default  function HeaderAuth(props?:any) {
 
   const Brand = () => (
       <div className="flex items-center justify-between py-5 md:block">
-          <a href="javascript:void(0)">
+          <Link href="/">
               <Image
                   src="/logo.png"
                   width={50}
                   height={50}
                   alt="Float UI logo"
               />
-          </a>
+          </Link>
           <div className="md:hidden">
               
           </div>
@@ -87,7 +87,7 @@ export default  function HeaderAuth(props?:any) {
            
         <div className='flex gap-2 items-center'>
             <div className='relative'>
-            <Input placeholder='Search' type='text' className='bg-transparent placeholder:pl-5 border-[0.1px] pl-7 border-[#ffffff4f] w-[290px] h-full focus: h-8  text-white hover:text-white  hover:bg-[#2dac5c3d]'/>
+            <Input placeholder='Search' type='text' className='bg-transparent placeholder:pl-5 border-[0.1px] pl-7 border-[#ffffff4f] w-[290px] h-full focus:   text-white hover:text-white  hover:bg-[#2dac5c3d]'/>
             <div className='absolute left-0 top-1 text-[#ffffff4f] w-12'>
                 <Search className='w-4 mx-2'/>
             </div>
