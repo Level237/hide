@@ -2,6 +2,7 @@ import Hero from "@/components/Hero";
 import Header from "@/components/ui/Header";
 import {HomeComponent} from "@/components/Home/Home";
 import Sidebar from "@/components/sidebar";
+import HomeAuth from "@/components/Home/HomeAuth";
 
 export default function Home() {
   return (
@@ -12,9 +13,7 @@ export default function Home() {
     
     </div>
     <HomeComponent>
-    <div className="bg-gray-800 w-[20rem] h-[100vh]">
-
-    </div>
+    <HomeAuth/>
     </HomeComponent>
    </section>
   );
