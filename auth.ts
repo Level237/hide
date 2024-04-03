@@ -42,7 +42,7 @@ export const {handlers:{GET,POST},auth,signIn,signOut}=NextAuth({
       ],
      callbacks:{
       async jwt({token,user,session}){
-        console.log("jwt callback",{token,user,session});
+        //console.log("jwt callback",{token,user,session});
        if(user){
         return {
           ...token,
@@ -56,7 +56,7 @@ export const {handlers:{GET,POST},auth,signIn,signOut}=NextAuth({
      return token;
       },
       async session({session,token,user}){
-        console.log("session callback",{session,token,user});
+        //console.log("session callback",{session,token,user});
        
         return {
           ...session,

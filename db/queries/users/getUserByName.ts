@@ -1,9 +1,10 @@
 import { db } from "@/db";
+import { notFound } from "next/navigation";
 
-export default async function getUser(email:string){
+export default async function getUserByName(name:string){
     try {
         const user=await db.user.findFirst({
-            where:{email}
+            where:{name}
         })
 
         return user;

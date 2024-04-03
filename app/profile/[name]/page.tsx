@@ -5,16 +5,21 @@ import HeaderAuth from '@/components/header/HeaderAuth';
 import { HomeComponent } from '@/components/Home/Home';
 
 import Header from '@/components/ui/Header';
+import getUserByName from '@/db/queries/users/getUserByName';
+import { notFound } from 'next/navigation';
 import React from 'react'
 
 interface ProfileShowPageProps{
   params:{
-      slug:string;
+      name:string;
   }
 }
 export default async function ProfilePage({params}:ProfileShowPageProps) {
-  const {slug}=params
-  
+  const {name}=params
+  const user=await getUserByName(name);
+ if(!user){
+  notFound()
+ }
   const submenuNav = [
     { title: "Overview", path: "javascript:void(0)" },
     { title: "Integration", path: "javascript:void(0)" },
