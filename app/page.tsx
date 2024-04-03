@@ -1,15 +1,21 @@
 import Hero from "@/components/Hero";
 import Header from "@/components/ui/Header";
-import HomeComponent from "@/components/Home/Home";
+import {HomeComponent} from "@/components/Home/Home";
+import Sidebar from "@/components/sidebar";
 
 export default function Home() {
   return (
    <section>
     <div className="bg-gray-900">
     <Header/>
-    <HomeComponent/>
-    </div>
+   
     
+    </div>
+    <HomeComponent>
+    <div className="bg-black w-[20rem] h-[100vh]">
+
+    </div>
+    </HomeComponent>
    </section>
   );
 }

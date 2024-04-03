@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function Hero() {
   return (
-    <div>
+    <div className='bg-gray-900'>
 <section className="relative">
                 <div className="relative z-10 max-w-screen-xl mx-auto px-4 py-28 md:px-8">
                     <div className="space-y-5 max-w-4xl mx-auto text-center">

@@ -5,15 +5,18 @@ import { useSession } from 'next-auth/react'
 import React from 'react'
 import Hero from '../Hero';
 import { auth } from '@/auth';
+import HomeAuth from './HomeAuth';
 
-
-export default async function HomeComponent() {
+export interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
+  }
+export  const HomeComponent=async({children}:any) =>{
     const session=await auth();
 
     let authContent:React.ReactNode;
     if(session?.user){
         authContent=<>
-        <div className='text-white'></div>
+        {children}
         </>
     }else{
         authContent=<>
