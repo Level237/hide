@@ -12,7 +12,7 @@ export default function Home() {
     
     </div>
     <HomeComponent>
-    <div className="bg-black w-[20rem] h-[100vh]">
+    <div className="bg-gray-800 w-[20rem] h-[100vh]">
 
     </div>
     </HomeComponent>

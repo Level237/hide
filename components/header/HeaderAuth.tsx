@@ -45,12 +45,11 @@ import {
 import { logout } from '@/actions/auth/logout';
 
 
-export default  function HeaderAuth({firstName}:any) {
+export default  function HeaderAuth(props?:any) {
 
 
     const [state, setState] = useState(false)
   // Replace javascript:void(0) paths with your paths
-
 
 
   useEffect(() => {
@@ -78,9 +77,9 @@ export default  function HeaderAuth({firstName}:any) {
    
     return(
      
-<header   className='w-[100%]   flex flex-wrap items-center justify-between gap-x-2 max-lg:gap-y-6   sm:px-10 bg-gray-900 pb-2 font-[sans-serif] ' >
-        
-            <div className='flex items-center gap-3'>
+<header   className='w-[100%]    max-lg:gap-y-6   sm:px-10 bg-gray-900 pb-2 font-[sans-serif] ' >
+        <div className='flex flex-wrap items-center justify-between gap-x-2'>
+        <div className='flex items-center gap-3'>
             <Brand/>
          <div className='text-white font-bold'> Dashboard</div>
             </div>
@@ -188,9 +187,11 @@ export default  function HeaderAuth({firstName}:any) {
     </DropdownMenu>
      
         </div>
+        </div>
           
           
-         
+          
+       {props?.children}
         
         
       </header>
