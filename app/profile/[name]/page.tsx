@@ -68,7 +68,12 @@ export default async function ProfilePage({params}:ProfileShowPageProps) {
       <h2 className='text-center text-black font-bold text-2xl mb-5'>Welcome in Hide,{session?.user?.name}</h2>
       <NewHideSection/>
       <section className='mt-20'>
-      <h2 className=' text-black font-bold text-xl mb-5'>Recents Activities</h2>
+       
+      
+      <div className='flex  justify-between mb-2 items-center'>
+      <h2 className=' text-black font-bold text-xl'>Recents Activities</h2>
+           <Button>More Activities</Button>         
+      </div>
       <div className=' py-[5rem] flex items-center justify-center rounded-lg   hover:text-black   border-[#0000002f] border-[0.12rem]'>
                     No recents activities
       </div>
