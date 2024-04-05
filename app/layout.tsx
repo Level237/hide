@@ -22,7 +22,9 @@ export default function RootLayout({
       
       <body className={inter.className}>
       <Providers>
-      
+      <NextTopLoader
+      color="#2cac5c"
+      />
       {children}
         </Providers>
         </body>
