@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/styles/globals.css"
 import Providers from "./provider";
+import NextTopLoader from 'nextjs-toploader';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,7 +22,9 @@ export default function RootLayout({
       
       <body className={inter.className}>
       <Providers>
-        
+      <NextTopLoader
+      color="#2cac5c"
+      />
       {children}
         </Providers>
         </body>
