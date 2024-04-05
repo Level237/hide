@@ -19,3 +19,5 @@ const paths={
         return '/new/note'
     }
 }
+
+export default paths
