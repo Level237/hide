@@ -2,12 +2,14 @@
 
 import React, { useState } from 'react'
 import { Textarea } from '../ui/textarea'
-import { Palette } from 'lucide-react'
+import { MoveLeft, Palette, Save } from 'lucide-react'
 import { Button } from '../ui/button'
 import { PickerExample } from '../PicExample'
+import { useRouter } from 'next/navigation'
+
 
 export default function Post() {
-
+  const router=useRouter()
     const [bgPost,setBgPost]=useState('#2dac5c')
 
     const changeBgHandler=(color:string)=>{
@@ -16,6 +18,13 @@ export default function Post() {
     }
   return (
     <div>
+      <section className='h-16 flex  bg-gray-50 items-center justify-between  border-b-[0.03px] border-primary'>
+        <Button onClick={()=>router.back()} className='bg-transparent text-primary mx-12 hover:bg-transparent'><MoveLeft/>Back</Button>
+        <div className='flex items-center gap-2'>
+        <Button className='mx-12'>Publier <Save className='w-5 ml-2'/></Button>
+        </div>
+        
+      </section>
       <section className='container mt-[4rem] '>
       <h2 className='text-center font-bold text-2xl'>New Post</h2>
       <form action="" className='mt-5'>
