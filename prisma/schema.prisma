@@ -36,7 +36,7 @@ model User{
     profile String?
     email String @unique
     phone String @unique
-    notes Note[]
+    posts Post[]
      accounts      Account[]
   sessions      Session[]
     createdAt DateTime @default(now())
@@ -51,11 +51,11 @@ model Session {
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
-model Note {
-  id        Int      @id @default(autoincrement())
-  title     String
+model Post {
+  id        String   @id @default(cuid())
   content   String
   userId    String
+  bgColor   String?
   user    User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

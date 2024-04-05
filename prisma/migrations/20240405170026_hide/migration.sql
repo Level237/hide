@@ -37,14 +37,14 @@ CREATE TABLE "Session" (
 );
 
 -- CreateTable
-CREATE TABLE "Note" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "title" TEXT NOT NULL,
+CREATE TABLE "Post" (
+    "id" TEXT NOT NULL PRIMARY KEY,
     "content" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
+    "bgColor" TEXT,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL,
-    CONSTRAINT "Note_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+    CONSTRAINT "Post_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- CreateIndex
