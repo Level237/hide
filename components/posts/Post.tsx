@@ -1,6 +1,7 @@
 import React from 'react'
 import { Textarea } from '../ui/textarea'
 import { Palette } from 'lucide-react'
+import { Button } from '../ui/button'
 
 export default function Post() {
   return (
@@ -13,8 +14,8 @@ export default function Post() {
         <Textarea placeholder="Type your message here." className='font-bold mx-36 overflow-y-hidden placeholder:text-gray-300 placeholder:flex py-[5rem] focus:border-none text-center h-[15rem] text-white flex justify-center text-xl bg-primary' />
         
         </div>
-        <section className='mx-[32rem]'>
-        <div className='mt-5 grid grid-cols-4 gap-4'>
+        <section className=' mx-36 flex items-center justify-between'>
+        <div className='mt-5  w-[14rem] grid grid-cols-4 gap-4'>
             <div className='h-12 cursor-pointer bg-primary rounded-sm'>
 
             </div>
@@ -28,6 +29,9 @@ export default function Post() {
                 <Palette/>
             </div>
             
+        </div>
+        <div>
+            <Button>Publier</Button>
         </div>
         </section>
        
