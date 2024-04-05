@@ -6,8 +6,10 @@ import { MoveLeft, Save } from 'lucide-react'
 
 import React from 'react'
 
-export default function CreatePostPage() {
-
+export default async function CreatePostPage() {
+    await new Promise((receive)=>{
+      setTimeout(receive,2000)
+  })
   return (
     <section>
       
