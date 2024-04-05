@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { Textarea } from '../ui/textarea'
 import { Palette } from 'lucide-react'
 import { Button } from '../ui/button'
+import { PickerExample } from '../PicExample'
 
 export default function Post() {
 
@@ -33,8 +34,9 @@ export default function Post() {
             <div onClick={()=>changeBgHandler("#000")} className='h-12 cursor-pointer bg-[#000] rounded-sm'>
 
             </div>
-            <div className='h-12 flex justify-center items-center cursor-pointer bg-gray-200 border-[0.03px] border-primary rounded-sm'>
+            <div className='h-12 relative flex flex-row justify-center items-center cursor-pointer bg-gray-200 border-[0.03px] border-primary rounded-sm'>
                 <Palette/>
+                <PickerExample changeBg={()=>setBgPost}/>
             </div>
             
         </div>
