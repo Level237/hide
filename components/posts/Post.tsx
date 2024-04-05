@@ -12,6 +12,7 @@ export default function Post() {
 
     const changeBgHandler=(color:string)=>{
         setBgPost(color)
+        console.log(color);
     }
   return (
     <div>
@@ -20,7 +21,7 @@ export default function Post() {
       <form action="" className='mt-5'>
        
         <div className='mt-4 flex justify-center'>
-        <Textarea placeholder="Type your message here." className={`font-bold mx-36 overflow-y-hidden placeholder:text-gray-300  py-[5rem]  text-center h-[15rem] text-white flex justify-center text-xl bg-[${bgPost}]`} />
+        <Textarea placeholder="Type your message here." className={`font-bold mx-36 overflow-y-hidden placeholder:text-gray-300  py-[5rem]  text-center h-[15rem] text-white flex justify-center text-xl`} style={{ background:`${bgPost}` }} />
         
         </div>
         <section className=' mx-36 flex items-center justify-between'>
@@ -36,9 +37,10 @@ export default function Post() {
             </div>
             <div className='h-12 relative flex flex-row justify-center items-center cursor-pointer bg-gray-200 border-[0.03px] border-primary rounded-sm'>
                 <Palette/>
-                <PickerExample changeBg={()=>setBgPost}/>
+                <PickerExample changeBgHandler={changeBgHandler}/>
+                
             </div>
-            
+          
         </div>
         <div>
             <Button>Publier</Button>
@@ -50,3 +52,5 @@ export default function Post() {
     </div>
   )
 }
+
+

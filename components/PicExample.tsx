@@ -13,7 +13,8 @@ import { Brush, Paintbrush, Palette } from 'lucide-react'
 import Link from 'next/link'
 import { useMemo, useState } from 'react'
 
-export function PickerExample({changeBg}:{changeBg:()=>void}) {
+export function PickerExample(props:any) {
+    const {changeBgHandler}=props
   const [background, setBackground] = useState('')
 
   return (
@@ -21,7 +22,7 @@ export function PickerExample({changeBg}:{changeBg:()=>void}) {
       className="w-full h-full preview flex min-h-[350px] justify-center p-10 items-center rounded !bg-cover !bg-center transition-all"
      
     >
-      <GradientPicker background={background} setBackground={setBackground} />
+      <GradientPicker changeBgHandler={changeBgHandler} background={background} setBackground={setBackground} />
     </div>
   )
 }
@@ -30,10 +31,12 @@ export function GradientPicker({
   background,
   setBackground,
   className,
+  changeBgHandler
 }: {
   background: string
   setBackground: (background: string) => void
-  className?: string
+  className?: string,
+  changeBgHandler:(color:string)=>void
 }) {
   const solids = [
     '#E2E2E2',
@@ -114,6 +117,8 @@ export function GradientPicker({
 
   const changeBg=(color:string)=>{
 setBackground(color)
+changeBgHandler(color)
+
   }
   return (
     <Popover>
@@ -163,7 +168,7 @@ setBackground(color)
                 key={s}
                 style={{ background: s }}
                 className="rounded-md h-6 w-6 cursor-pointer active:scale-105"
-                onClick={() => changeBg(s)}
+                onClick={() => {changeBgHandler(s)}}
               />
             ))}
           </TabsContent>
@@ -175,7 +180,7 @@ setBackground(color)
                   key={s}
                   style={{ background: s }}
                   className="rounded-md h-6 w-6 cursor-pointer active:scale-105"
-                  onClick={() => changeBg(s)}
+                  onClick={() => {changeBgHandler(s)}}
                 />
               ))}
             </div>
