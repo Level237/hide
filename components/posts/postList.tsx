@@ -12,7 +12,7 @@ export default async function PostList() {
                 <Link href={`/posts/${post.id}`}>
     
     <div className='flex flex-col'>
-    <div style={{ background:`${post.bgColor}` }} className={`relative py-[5rem]  flex items-center justify-center rounded-lg cursor-pointer  hover:text-black hover:bg-[#00000013] duration-150  border-[#0000002f] border-[0.12rem]`}>
+    <div style={{ background:`${post.bgColor}` }} className={`relative h-[200px]  flex items-center justify-center rounded-lg cursor-pointer  hover:text-black hover:bg-[#00000013] duration-150  border-[#0000002f] border-[0.12rem]`}>
     <p className='text-center text-white p-3'>{post.content}</p>
     </div>
     <h2 className='text-center mt-3 text-primary font-bold'>New Post</h2>
