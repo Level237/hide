@@ -17,7 +17,7 @@ interface ProfileShowPageProps{
       name:string;
   },
   searchParams:{
-    term:string
+    tab:string
 }
 }
 interface SearchPageProps{
@@ -29,7 +29,7 @@ export default async function ProfilePage({params,searchParams}:ProfileShowPageP
   await new Promise((receive)=>{
     setTimeout(receive,2000)
 })
-  const term=searchParams.term;
+  const term=searchParams.tab;
   const {name}=params;
   console.log(term);
   const session=await auth()
@@ -50,7 +50,7 @@ export default async function ProfilePage({params,searchParams}:ProfileShowPageP
    <section  className='flex mt-10 mx-10'>
     <ProfileSection/>
     <div className=' w-full py-12 rounded-lg pl-12 pr-12  border-[#00000013] border-[0.12rem]' >
-      <HomeContent/>
+      <HomeContent tab={term}/>
     </div>
    </section>
     </HomeComponent>
