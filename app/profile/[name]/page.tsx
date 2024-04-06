@@ -1,16 +1,12 @@
-import { logout } from '@/actions/auth/logout';
+
 import { auth } from '@/auth';
-import {FormBtn} from '@/components/common/FormBtn';
 import HeaderAuth from '@/components/header/HeaderAuth';
 import { HomeComponent } from '@/components/Home/Home';
 import NewHideSection from '@/components/profile/NewHideSection';
 import ProfileSection from '@/components/profile/ProfileSection';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-
-import Header from '@/components/ui/Header';
 import getUserByName from '@/db/queries/users/getUserByName';
-import { Eye, Plus } from 'lucide-react';
+
 import { notFound, redirect } from 'next/navigation';
 import React from 'react'
 
