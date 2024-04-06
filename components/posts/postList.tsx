@@ -1,5 +1,6 @@
 
 import fetchPostCurrentUser from '@/db/queries/posts/fetchPostCurrentUser'
+import { BookAudio, LucideMessageSquare } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
@@ -15,7 +16,15 @@ export default async function PostList() {
     <div style={{ background:`${post.bgColor}` }} className={`relative h-[200px]  flex items-center justify-center rounded-lg cursor-pointer  hover:text-black hover:bg-[#00000013] duration-150  border-[#0000002f] border-[0.12rem]`}>
     <p className='text-center text-white p-3'>{post.content}</p>
     </div>
-    <h2 className='text-center mt-3 text-primary font-bold'>New Post</h2>
+    <div className='flex mt-3'>
+      <div className='flex'>
+      <LucideMessageSquare/> <span className='text-[0.8rem]'>0 commentaire</span> 
+      </div>
+    <div>
+      <BookAudio/>
+    </div>
+    </div>
+    
     </div>
     </Link>
             </div>)}

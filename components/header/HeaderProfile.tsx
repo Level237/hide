@@ -9,6 +9,13 @@ import Link from 'next/link'
 
 export default function HeaderProfile() {
    const [tab,setTab]=useState(0)
+
+   const changeTabHandler=async(id:number)=>{
+    await new Promise((receive)=>{
+        setTimeout(receive,2000)
+    })
+    setTab(id)
+   }
     const session=useSession()
     const submenuNav = [
         { title: "Profile", path: `/profile/${session.data?.user?.name}` },
@@ -27,7 +34,7 @@ export default function HeaderProfile() {
                         submenuNav.map((item, idx) => {
                             return (
                                 // Replace [idx == 0] with [window.location.pathname == item.path]
-                                <li onClick={()=>{setTab(idx)}} key={idx} className={`py-1 ${idx == tab ? "border-b-2 border-primary" : ""}`}>
+                                <li onClick={()=>changeTabHandler(idx)} key={idx} className={`py-1 ${idx == tab ? "border-b-2 border-primary" : ""}`}>
                                     <Link href={item.path} className="block py-2 px-3 rounded-lg text-white hover:text-white hover:bg-[#ffffff15] duration-150">
                                         {item.title}
                                     </Link>
