@@ -13,6 +13,7 @@ export default function HomeContent():React.ReactNode {
   let HomeContent:React.ReactNode
 
   if(tab==='posts'){
+    
     HomeContent=<p>dd</p>
   }else if(!tab){
     HomeContent=<HomeProfile/>

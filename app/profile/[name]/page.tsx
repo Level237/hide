@@ -26,6 +26,9 @@ interface SearchPageProps{
   }
 }
 export default async function ProfilePage({params,searchParams}:ProfileShowPageProps) {
+  await new Promise((receive)=>{
+    setTimeout(receive,2000)
+})
   const term=searchParams.term;
   const {name}=params;
   console.log(term);
