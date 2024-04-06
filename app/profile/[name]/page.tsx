@@ -25,8 +25,8 @@ export default async function ProfilePage({params}:ProfileShowPageProps) {
   redirect('/')
  }
   const submenuNav = [
-    { title: "Overview", path: "javascript:void(0)" },
-    { title: "Integration", path: "javascript:void(0)" },
+    { title: "Profile", path: `/profile/${session.user.name}` },
+    { title: "Posts", path: `/profile/${session.user.name}?tab=posts` },
     { title: "Billing", path: "javascript:void(0)" },
     { title: "Transactions", path: "javascript:void(0)" },
     { title: "Plans", path: "javascript:void(0)" },
