@@ -30,5 +30,5 @@ await new Promise((receive)=>{
         }
     }
     
-   redirect(`/profile/${session?.user?.name}`)
+   redirect(`/profile/${session?.user?.name}?tab=posts`)
 }
