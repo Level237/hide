@@ -53,12 +53,37 @@ model Session {
 }
 model Post {
   id        String   @id @default(cuid())
-  content   String
+  content   String?
   userId    String
   bgColor   String?
   user    User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  audio     Audio?
+  poll      Poll?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Audio {
+  id        Int       @id @default(autoincrement())
+  url       String
+  post      Post      @relation(fields: [postId], references: [id])
+  postId    String @unique
+}
+
+model Poll {
+  id        Int       @id @default(autoincrement())
+  question  String
+  options   Option[]
+  post      Post      @relation(fields: [postId], references: [id])
+  postId    String @unique
+}
+
+model Option {
+  id        Int       @id @default(autoincrement())
+  text      String
+  votes     Int       @default(0)
+  poll      Poll      @relation(fields: [pollId], references: [id])
+  pollId    Int
 }
 
 
