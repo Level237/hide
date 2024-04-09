@@ -7,14 +7,14 @@ import { useSession } from 'next-auth/react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 
-export default function HeaderProfile() {
-   const [tab,setTab]=useState(0)
-
-   const changeTabHandler=async(id:number)=>{
+export default function HeaderProfile({param}:any) {
+   const [tab,setTab]=useState(param)
+    console.log(param);
+   const changeTabHandler=async(title:string)=>{
     await new Promise((receive)=>{
         setTimeout(receive,2000)
     })
-    setTab(id)
+    setTab(title)
    }
     const session=useSession()
     const submenuNav = [
@@ -34,7 +34,7 @@ export default function HeaderProfile() {
                         submenuNav.map((item, idx) => {
                             return (
                                 // Replace [idx == 0] with [window.location.pathname == item.path]
-                                <li onClick={()=>changeTabHandler(idx)} key={idx} className={`py-1 ${idx == tab ? "border-b-2 border-primary" : ""}`}>
+                                <li onClick={()=>changeTabHandler(item.title)} key={idx} className={`py-1 ${item.title == tab ? "border-b-2 border-primary" : ""}`}>
                                     <Link href={item.path} className="block py-2 px-3 rounded-lg text-white hover:text-white hover:bg-[#ffffff15] duration-150">
                                         {item.title}
                                     </Link>

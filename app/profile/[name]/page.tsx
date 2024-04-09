@@ -45,7 +45,7 @@ export default async function ProfilePage({params,searchParams}:ProfileShowPageP
     
   return (
     <div>
-      <HeaderProfile/>
+      <HeaderProfile param={term}/>
     <HomeComponent>
    <section  className='flex mt-10 mx-10'>
     <ProfileSection/>
