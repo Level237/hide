@@ -1,5 +1,5 @@
 'use server'
-import { signIn } from "@/auth";
+
 import { db } from "@/db";
 import { registerSchema } from "@/db/schema/register.schema";
 import { redirect } from "next/navigation";
