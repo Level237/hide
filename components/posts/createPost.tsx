@@ -9,6 +9,8 @@ import { PickerExample } from '../PicExample'
 import { useRouter } from 'next/navigation'
 import { Input } from '../ui/input'
 import CreatePost from '@/actions/post/create'
+import { FormBtn } from "../common/FormBtn"
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 
 
 
@@ -36,8 +38,11 @@ export default function Post() {
         <section className='absolute w-full top-1 mx-5  flex   items-center justify-between '>
           <X onClick={()=>router.back()} className='text-white w-[2rem] mx-5 cursor-pointer h-[2rem] '/>
         
-        <div className='flex items-center gap-2'>
-        <Button className='mx-12'>Publier <Save className='w-5 ml-2'/></Button>
+        <div className='flex items-center gap-2 mx-5 mt-3'>
+        <Avatar className='cursor-pointer'>
+                <AvatarImage src="/hidd.jpg" alt="@shadcn" />
+        <AvatarFallback>CN</AvatarFallback>
+        </Avatar>
         </div>
         <motion.div className="p-2 rounded-md left-[-11rem] bg-white absolute flex justify-center top-[35vh]"
          
@@ -46,7 +51,7 @@ export default function Post() {
           duration:1
           }}
          >
-        <div className='  w-[14rem] grid grid-cols-4 gap-4 z-20'>
+        <div className='  w-[14rem] grid grid-cols-4 gap-4 z-20' >
             <div  onClick={()=>changeBgHandler("#2cac5c")} className='h-10 cursor-pointer bg-primary rounded-sm'>
 
             </div>
@@ -68,7 +73,7 @@ export default function Post() {
         </div>
         <Input type="hidden" name='color' value={bgPost} />
         <section className='  bottom-0  w-[95vw] my-5 flex items-center justify-between absolute'>
-        <div className='mt-5 bg-white py-3 px-6 w-[14rem] grid grid-cols-3 gap-4 z-20'>
+        <div className=' bg-white py-3 px-6 w-[14rem] grid grid-cols-3 gap-4 z-20'style={{ gridAutoFlow:"column" }}>
             <div   className='h-12 cursor-pointer  rounded-sm'>
             <VenetianMaskIcon className="h-8 w-8"/>
             </div>
@@ -82,7 +87,8 @@ export default function Post() {
           
         </div>
         <div className='z-10'>
-            <Button variant="outline" type='submit'>Publish <Send className='w-5 ml-2'/></Button>
+          <FormBtn className="bg-white hover:bg-current hover:bg-gray-200 text-black" >Publish<Send className='w-5 ml-2'/></FormBtn>
+            
         </div>
         </section>
        
