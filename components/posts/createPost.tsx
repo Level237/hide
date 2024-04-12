@@ -20,7 +20,7 @@ export default function Post() {
         console.log(color);
     }
   return (
-    <div>
+    <div className='relative h-[100vh]'>
       <section className='h-16 flex  bg-gray-50 items-center justify-between  border-b-[0.03px] border-primary'>
         <Button onClick={()=>router.back()} className='bg-transparent text-primary mx-12 hover:bg-transparent'><MoveLeft/>Back</Button>
         <div className='flex items-center gap-2'>
@@ -33,12 +33,12 @@ export default function Post() {
       <form action={CreatePost} className='mt-5'>
        
         <div className='mt-4 flex justify-center'>
-        <Textarea name='content' placeholder="Type your message here." className={`font-bold mx-36 overflow-y-hidden placeholder:text-gray-300  py-[6rem]  text-center h-[15rem] text-white flex justify-center text-xl`} style={{ background:`${bgPost}` }} />
+        <Textarea name='content' placeholder="Type your message here." className={`font-bold mx-36 overflow-y-hidden placeholder:text-gray-300   absolute  top-0 h-full py-60  text-center  text-white flex justify-center  text-xl`} style={{ background:`${bgPost}` }} />
      
         </div>
         <Input type="hidden" name='color' value={bgPost} />
-        <section className=' mx-36 flex items-center justify-between'>
-        <div className='mt-5  w-[14rem] grid grid-cols-4 gap-4'>
+        <section className='  bottom-0  w-[95vw] my-5 flex items-center justify-between absolute'>
+        <div className='mt-5  w-[14rem] grid grid-cols-4 gap-4 z-20'>
             <div  onClick={()=>changeBgHandler("#2cac5c")} className='h-12 cursor-pointer bg-primary rounded-sm'>
 
             </div>
@@ -55,7 +55,7 @@ export default function Post() {
             </div>
           
         </div>
-        <div>
+        <div className='z-10'>
             <Button type='submit'>Publier</Button>
         </div>
         </section>

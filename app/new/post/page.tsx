@@ -13,7 +13,7 @@ export default async function CreatePostPage() {
   return (
     <section>
       
-      <div>
+      <div className='relative overflow-y-hidden overflow-x-hidden'>
         <Post/>
       </div>
     </section>
