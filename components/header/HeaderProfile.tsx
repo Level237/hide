@@ -18,8 +18,9 @@ export default function HeaderProfile({param}:any) {
    }
     const session=useSession()
     const submenuNav = [
+        { title: "Home", path: `/` },
         { title: "Profile", path: `/profile/${session.data?.user?.name}` },
-        { title: "Posts", path: `/profile/${session.data?.user?.name}?tab=posts` },
+        { title: "Posts", path: `/posts` },
         { title: "Billing", path: "javascript:void(0)" },
         { title: "Transactions", path: "javascript:void(0)" },
         { title: "Plans", path: "javascript:void(0)" },

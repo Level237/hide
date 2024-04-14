@@ -3,18 +3,12 @@ import Header from "@/components/ui/Header";
 import {HomeComponent} from "@/components/Home/Home";
 import Sidebar from "@/components/sidebar";
 import HomeAuth from "@/components/Home/HomeAuth";
+import HeaderProfile from "@/components/header/HeaderProfile";
 
 export default function Home() {
   return (
-   <section>
-    <div className="bg-gray-900">
-    <Header/>
-   
-    
-    </div>
-    <HomeComponent>
-    <HomeAuth/>
-    </HomeComponent>
-   </section>
+    <div>
+    <HeaderProfile param="posts"/>
+  </div>
   );
 }
