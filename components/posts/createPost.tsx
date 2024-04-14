@@ -73,14 +73,14 @@ export default function Post() {
         </div>
         <Input type="hidden" name='color' value={bgPost} />
         <section className='  bottom-0  w-[95vw] my-5 flex items-center justify-between absolute'>
-        <div className=' bg-white py-3 px-6 w-[14rem] grid grid-cols-3 gap-4 z-20'style={{ gridAutoFlow:"column" }}>
-            <div   className='h-12 cursor-pointer  rounded-sm'>
+        <div className=' bg-white py-2 px-8 flex  justify-center items-center gap-4 z-20'>
+            <div   className='h-12 mt-5 cursor-pointer  rounded-sm'>
             <VenetianMaskIcon className="h-8 w-8"/>
             </div>
-            <div  className='h-12 cursor-pointer  rounded-sm'>
+            <div  className='h-12 mt-5 cursor-pointer  rounded-sm'>
             <MicVocalIcon className="h-8 w-8"/>
             </div>
-            <div  className='h-12 cursor-pointer  rounded-sm'>
+            <div  className='h-12 mt-5 cursor-pointer  rounded-sm'>
             <BookHeart className="h-8 w-8"/>
             </div>
             
