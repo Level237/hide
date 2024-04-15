@@ -5,6 +5,7 @@ import { Textarea } from '../ui/textarea'
 import { CirclePlus, Mic, Send } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '../ui/button'
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 
 export default function CreateWidget() {
 
@@ -19,9 +20,16 @@ export default function CreateWidget() {
   return (
     <div className="bg-white relative rounded-3xl w-[90vw] py-[1rem] mt-3 flex justify-center">
   <div className="w-[90%] relative">
-  <Textarea style={{ background:`${bgPost}`,color:`${color}` }} name='content' placeholder="Type your message here." className={`font-bold w-full py-[5rem] flex justify-center relative overflow-y-hidden border-[#00000041] rounded-2xl placeholder:text-gray-300         text-black  text-xl`}  />
-  <div className="flex justify-end absolute bottom-4 w-[100vw]">
-  <div className="flex flex-1  items-center gap-3 mx-4 ">
+    <div className='flex justify-center gap-3 items-center'>
+    <Avatar className='cursor-pointer'>
+                <AvatarImage src="/hidd.jpg" alt="@shadcn" />
+        <AvatarFallback>CN</AvatarFallback>
+        </Avatar>
+        <Textarea style={{ background:`${bgPost}`,color:`${color}` }} name='content' placeholder="Type your message here." className={`font-bold mt-5 w-full h-[2rem] flex justify-center relative overflow-y-hidden border-[#00000041] rounded-2xl placeholder:text-gray-300         text-black  text-xl`}  />
+    </div>
+  
+  <div className="mt-5">
+  <div className="flex  justify-center  items-center gap-3 ">
       <div onClick={()=>changeBgHandler("#000")}  className="bg-black p-4 rounded-full cursor-pointer">
 
       </div>
@@ -44,9 +52,7 @@ export default function CreateWidget() {
         
       </div>
   </div>
-  <div className="w-[28%]">
-    <Button>Publier<Send className="w-5 ml-1"/></Button>
-  </div>
+ 
   </div>
   
   </div>

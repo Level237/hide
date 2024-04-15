@@ -31,6 +31,17 @@ export default function Home() {
 <section>
 <div>
 <h2 className="font-bold text-gray-700 text-xl">Post Récents</h2>
+<div className="grid grid-cols-3 gap-3 mb-6 mt-5">
+<div className="p-[8rem] rounded-2xl bg-white">
+
+</div>
+<div className="p-[8rem] rounded-2xl bg-white">
+
+</div>
+<div className="p-[8rem] rounded-2xl bg-white">
+
+</div>
+</div>
 </div>
 </section>
 </section>
