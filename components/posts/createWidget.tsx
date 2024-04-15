@@ -17,7 +17,7 @@ export default function CreateWidget() {
         console.log(color);
     }
   return (
-    <div className="bg-white relative rounded-3xl w-[90vw] py-[5rem] mt-3 flex justify-center">
+    <div className="bg-white relative rounded-3xl w-[90vw] py-[1rem] mt-3 flex justify-center">
   <div className="w-[90%] relative">
   <Textarea style={{ background:`${bgPost}`,color:`${color}` }} name='content' placeholder="Type your message here." className={`font-bold w-full py-[5rem] flex justify-center relative overflow-y-hidden border-[#00000041] rounded-2xl placeholder:text-gray-300         text-black  text-xl`}  />
   <div className="flex justify-end absolute bottom-4 w-[100vw]">

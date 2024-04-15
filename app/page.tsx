@@ -9,21 +9,32 @@ import { CirclePlus, Mic, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import CreateWidget from "@/components/posts/createWidget";
+import HeaderAuth from "@/components/header/HeaderAuth";
 
 export default function Home() {
   return (
     <section>
+
+<div className="bg-gray-900">
+    
+   
+    
+    </div>
+
+    <HomeComponent>
+
     <HeaderProfile param="posts"/>
 
-    <section className="flex flex-col mx-10 gap-10 justify-center">
+<section className="flex flex-col mx-10 gap-10 justify-center">
 <CreateWidget/>
 
 <section>
-  <div>
-    <h2 className="font-bold text-gray-700 text-xl">Post Récents</h2>
-  </div>
+<div>
+<h2 className="font-bold text-gray-700 text-xl">Post Récents</h2>
+</div>
 </section>
-    </section>
+</section>
+    </HomeComponent>
   </section>
   );
 }
