@@ -5,7 +5,7 @@ import Sidebar from "@/components/sidebar";
 import HomeAuth from "@/components/Home/HomeAuth";
 import HeaderProfile from "@/components/header/HeaderProfile";
 import { Textarea } from "@/components/ui/textarea";
-import { CirclePlus, LucideMessageSquare, Mic, MoreHorizontal, Send, Share, ThumbsDown, ThumbsUp } from "lucide-react";
+import { CirclePlus, Heart, LucideMessageSquare, Mic, MoreHorizontal, Send, Share, ThumbsDown, ThumbsUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import CreateWidget from "@/components/posts/createWidget";
@@ -66,6 +66,31 @@ zz
           <h2 className="text-3xl font-bold" style={{ color:"white" }}>-How create post in Hide ,Please..I have forget that...</h2>
         </div>
         
+    </div>
+    
+    <div className="flex mt-5 justify-between items-center">
+      <div className="flex items-center gap-3 flex-1">
+        
+      <Avatar className='cursor-pointer'>
+                    <AvatarImage src="/hidd.jpg" alt="@shadcn" />
+            <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+            <div className="w-full">
+            <Textarea className="" placeholder="Enter your comment" />
+            </div>
+            
+      </div>
+      <div className='flex w-[12rem]  justify-around text-black mt-5'>
+          <div className='flex items-center gap-1'>
+          <Heart className="font-bold text-primary text-xl"/><span className='text-[0.8rem] text-primary font-bold'>3</span> 
+          
+          </div>
+        <div className='flex items-center gap-1'>
+          <Share/><span className='text-[0.8rem]'>0</span> 
+        </div>
+       
+        
+        </div>
     </div>
   </div>
 </div>
