@@ -27,7 +27,11 @@ export default function Home() {
 
     <HeaderProfile param="posts"/>
 
-<section className="flex flex-col mx-10 gap-10 justify-center">
+<section className="flex">
+<section className="w-[20rem]">
+zz
+</section>
+<section className="flex-1  flex flex-col gap-10 justify-center">
 <CreateWidget/>
 
 <section>
@@ -35,8 +39,39 @@ export default function Home() {
 <h2 className="font-bold text-gray-700 text-xl">Recents posts</h2>
 <RecentPost/>
 </div>
+<section>
+<h2 className="font-bold text-gray-700 text-xl">Mon Mur</h2>
+<div className="mt-5 flex flex-col gap-3">
+  <div className="bg-white px-36 py-12">
+  <div className="  p-10 px-8 rounded-2xl " style={{ background:"linear-gradient(to top left,#000000,#434343)" }}>
+        <div className="flex justify-between w-[5rem] gap-3 ">
+        <Avatar className='cursor-pointer'>
+                    <AvatarImage src="/hidd.jpg" alt="@shadcn" />
+            <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+    
+            <div className="flex flex-col">
+              <h2 className="font-bold text-md " style={{ color:"white" }}>#uizog234</h2>
+              <span className="text-sm text-gray-500 text-primary">1h ago</span>
+            </div>
+        </div>
+        <div className="mt-5">
+          <h2 className="text-3xl font-bold" style={{ color:"white" }}>-How create post in Hide ,Please..I have forget that...</h2>
+        </div>
+        
+    </div>
+  </div>
+</div>
+
+</section>
+
 </section>
 </section>
+<section className="w-[6rem]">
+
+</section>
+</section>
+
     </HomeComponent>
   </section>
   );

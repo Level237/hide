@@ -18,7 +18,7 @@ export default function RecentPost() {
             </div>
         </div>
         <div className="mt-5">
-          <h2 className="text-3xl font-bold" style={{ color:"white" }}>-How create post in Hide ,Please..I have forget that...</h2>
+          <h2 className="text-2xl font-bold" style={{ color:"white" }}>-How create post in Hide ,Please..I have forget that...</h2>
         </div>
         <div className='flex  justify-between text-white mt-5'>
           <div className='flex items-center gap-1'>
@@ -49,7 +49,7 @@ export default function RecentPost() {
             </div>
         </div>
         <div className="mt-5">
-          <h2 className="text-3xl font-bold" style={{ color:"white" }}>-Hello i like this social media.it{`'`} very beautiful post...</h2>
+          <h2 className="text-2xl font-bold" style={{ color:"white" }}>-Hello i like this social media.it{`'`} very beautiful post...</h2>
         </div>
         <div className='flex  justify-between text-white mt-5'>
           <div className='flex items-center gap-1'>
@@ -80,7 +80,7 @@ export default function RecentPost() {
             </div>
         </div>
         <div className="mt-5">
-          <h2 className="text-3xl font-bold" style={{ color:"white" }}>-how create a voice in my post..i don{`'`}t know how create..</h2>
+          <h2 className="text-2xl font-bold" style={{ color:"white" }}>-how create a voice in my post..i don{`'`}t know how create..</h2>
         </div>
         <div className='flex  justify-between text-white mt-5'>
           <div className='flex items-center gap-1'>

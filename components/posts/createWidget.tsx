@@ -18,7 +18,7 @@ export default function CreateWidget() {
         console.log(color);
     }
   return (
-    <div className="bg-white relative rounded-3xl w-[90vw] py-[1rem] mt-3 flex justify-center">
+    <div className="bg-white relative rounded-3xl w-full py-[1rem] mt-3 flex justify-center">
   <div className="w-[90%] relative">
     <div className='flex justify-center gap-3 items-center'>
     <Avatar className='cursor-pointer'>
