@@ -53,7 +53,7 @@ export default function RecentPost() {
         </div>
         <div className='flex  justify-between text-white mt-5'>
           <div className='flex items-center gap-1'>
-          <ThumbsUp/><span className='text-[0.8rem]'>50</span> 
+          <ThumbsUp/><span className='text-[0.8rem] text-white fill-white'>50</span> 
           
           </div>
         <div className='flex items-center gap-1'>
