@@ -5,7 +5,7 @@ import Sidebar from "@/components/sidebar";
 import HomeAuth from "@/components/Home/HomeAuth";
 import HeaderProfile from "@/components/header/HeaderProfile";
 import { Textarea } from "@/components/ui/textarea";
-import { CirclePlus, Heart, LucideMessageSquare, Mic, MoreHorizontal, Send, Share, ThumbsDown, ThumbsUp } from "lucide-react";
+import { CirclePlus, Heart, LucideMessageSquare, Mic, MoreHorizontal, Send, SendIcon, Share, ThumbsDown, ThumbsUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import CreateWidget from "@/components/posts/createWidget";
@@ -78,7 +78,7 @@ SideBar Section
             <div className="w-full relative">
             <Textarea className="" placeholder="Enter your comment" />
             <div className="absolute bottom-6  right-4">
-            <LucideMessageSquare className="text-primary fill-current"/> 
+            <SendIcon className=""/> 
             </div>
             </div>
             
@@ -89,7 +89,7 @@ SideBar Section
           
           </div>
           <div className='flex items-center gap-1'>
-          <Mic/><span className='text-[0.8rem]'>0</span> 
+          <LucideMessageSquare className=""/> <span className='text-[0.8rem]'>0</span> 
         </div>
         <div className='flex items-center gap-1'>
           <Share/><span className='text-[0.8rem]'>0</span> 
@@ -135,7 +135,8 @@ SideBar Section
             <div className="w-full relative">
             <Textarea className="" placeholder="Enter your comment" />
             <div className="absolute bottom-6  right-4">
-            <LucideMessageSquare className="text-primary fill-current"/> 
+            <SendIcon className=""/> 
+            
             </div>
             </div>
             
@@ -147,7 +148,7 @@ SideBar Section
           </div>
           <div className='flex items-center gap-1'>
           
-          <Mic/><span className='text-[0.8rem]'>0</span> 
+          <LucideMessageSquare className=""/> <span className='text-[0.8rem]'>0</span> 
         </div>
         <div className='flex items-center gap-1'>
 
