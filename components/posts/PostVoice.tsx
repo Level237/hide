@@ -10,7 +10,7 @@ const PostVoice: React.FC<{ audioUrl: string }> = ({ audioUrl }) => {
         waveformRef.current = WaveSurfer.create({
             container: '#waveform',
             waveColor: '#fff',
-            progressColor: '#2cac5c',
+            progressColor: '#2CAC5DB9',
             height: 100,
             normalize: false,
             hideScrollbar: true,
