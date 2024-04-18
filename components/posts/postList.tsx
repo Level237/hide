@@ -142,8 +142,10 @@ export default function PostList() {
         </div>
     </div>
   
-  <div className="mt-5 h-96 flex justify-center items-center  p-10 px-8 rounded-2xl " style={{ background:"linear-gradient(to top left,#40E0D0,#FF8C00,#FF0080)" }}>
-        
+  <div className="mt-5 h-96 flex justify-center items-center relative  p-10 px-8 rounded-2xl " style={{ background:"linear-gradient(to top left,#40E0D0,#FF8C00,#FF0080)" }}>
+  <div className='bg-[#0000003d] absolute inset-0  top-0 left-0 w-full h-full'>
+
+</div>
         <div className="mt-5">
           <h2 className="text-3xl font-bold" style={{ color:"white" }}><PostVoice audioUrl={'afrobeat.mp3'}/></h2>
         </div>
