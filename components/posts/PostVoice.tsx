@@ -3,28 +3,26 @@ import { Pause, PauseCircle, Play, PlayCircle } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
 import WaveSurfer from 'wavesurfer.js';
 
-const PostVoice: React.FC<{ audioUrl: string }> = ({ audioUrl }) => {
+const PostVoice: React.FC<{ audioUrl: string,waveId:string }> = ({ audioUrl,waveId }) => {
   const waveformRef = useRef<any>(null);
 const [isPlay, setIsPlay] = useState<boolean>(false);
+const [isVisible, setIsVisible] = useState<boolean>(true);
   useEffect(() => {
     if (!waveformRef.current) {
         waveformRef.current = WaveSurfer.create({
-            container: '#waveform',
+            container: `#${waveId}`,
             waveColor: '#fff',
             progressColor: '#2CAC5DB9',
             height: 100,
             normalize: false,
-            hideScrollbar: true,
+            hideScrollbar: false,
               backend: 'WebAudio',
               width:600
           });
           waveformRef.current.load(audioUrl);
 
     // Optional: Add event listeners or controls (play, pause, etc.)
-    waveformRef.current.on('ready', () => {
-      waveformRef.current?.play();
-     
-    });
+   
     }
    
    
@@ -35,12 +33,14 @@ const [isPlay, setIsPlay] = useState<boolean>(false);
   const handlePlay = () => {
     waveformRef.current?.playPause();
     setIsPlay(!isPlay)
+    setIsVisible(!isVisible)
   };
   return <>
-  <div className='relative absolute' onClick={handlePlay}>
-  <div id="waveform" />
+  <div className='relative flex gap-5 justify-center items-center' >
+  <button className='' >{isPlay ?  <PauseCircle onClick={handlePlay} className='w-[5rem] h-[5rem]'/>   :   <PlayCircle onClick={handlePlay} className='w-[5rem] h-[5rem] '/>}</button>
+  <div id={waveId} />
 
-  <button className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[999]' >{isPlay ?  <PlayCircle className='w-56 h-56'/> :  <PauseCircle className='w-56 h-56'/>}</button>
+  
   </div>
   
 
