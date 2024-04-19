@@ -29,7 +29,7 @@ export default function Home() {
     <HeaderProfile param="posts"/>
 
 <section className="flex">
-<section className="w-[20rem]">
+<section className="w-[30rem]">
 SideBar Section
 </section>
 <section className="flex-1  flex flex-col gap-10 justify-center">
@@ -50,6 +50,9 @@ SideBar Section
 </section>
 <section className="w-[6rem]">
 
+</section>
+<section className="w-[20rem]">
+SideBar Section
 </section>
 </section>
 
