@@ -38,6 +38,7 @@ const [isVisible, setIsVisible] = useState<boolean>(true);
   return <>
   <div className='relative flex gap-5 justify-center items-center' >
   <button className='' >{isPlay ?  <PauseCircle onClick={handlePlay} className='w-[5rem] h-[5rem]'/>   :   <PlayCircle onClick={handlePlay} className='w-[5rem] h-[5rem] '/>}</button>
+  
   <div id={waveId} />
 
   
