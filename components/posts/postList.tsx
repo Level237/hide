@@ -28,7 +28,7 @@ export default function PostList() {
   <div className="mt-5 h-96 flex justify-center items-center  p-10 px-8 rounded-2xl " style={{ background:"linear-gradient(to top left,#000000,#434343)" }}>
         
         <div className="mt-5">
-          <h2 className="text-3xl font-bold" style={{ color:"white" }}>-How create post in Hide ,Please..I have forget that...</h2>
+          <h2 className="text-3xl text-center font-bold" style={{ color:"white" }}>-How create post in Hide ,Please..I have forget that...</h2>
         </div>
         
     </div>
@@ -85,7 +85,7 @@ export default function PostList() {
   <div className="mt-5 h-96 flex justify-center items-center  p-10 px-8 rounded-2xl " style={{ background:"linear-gradient(to top left,#40E0D0,#FF8C00,#FF0080)" }}>
         
         <div className="mt-5">
-          <h2 className="text-3xl font-bold" style={{ color:"white" }}>-Hello i like this social media.it{`'`} very beautiful post...</h2>
+          <h2 className="text-3xl text-center font-bold" style={{ color:"white" }}>-Hello i like this social media.it{`'`} very beautiful post...</h2>
         </div>
         
     </div>

@@ -13,11 +13,11 @@ const [isVisible, setIsVisible] = useState<boolean>(true);
             container: `#${waveId}`,
             waveColor: '#fff',
             progressColor: '#2CAC5DB9',
-            height: 100,
+            height: 50,
             normalize: false,
             hideScrollbar: false,
               backend: 'WebAudio',
-              width:600
+              width:500
           });
           waveformRef.current.load(audioUrl);
 
@@ -37,7 +37,7 @@ const [isVisible, setIsVisible] = useState<boolean>(true);
   };
   return <>
   <div className='relative flex gap-5 justify-center items-center' >
-  <button className='' >{isPlay ?  <PauseCircle onClick={handlePlay} className='w-[5rem] h-[5rem]'/>   :   <PlayCircle onClick={handlePlay} className='w-[5rem] h-[5rem] '/>}</button>
+  <button className='' >{isPlay ?  <PauseCircle onClick={handlePlay} className='w-[2rem] h-[2rem]'/>   :   <PlayCircle onClick={handlePlay} className='w-[2rem] h-[2rem] '/>}</button>
   
   <div id={waveId} />
 
