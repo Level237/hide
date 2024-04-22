@@ -3,7 +3,7 @@
 import {motion} from "framer-motion"
 import React, { useState } from 'react'
 import { Textarea } from '../ui/textarea'
-import { BookHeart, MicOff, MicVocalIcon, MoveLeft, Palette, Save, Send, VenetianMaskIcon, Waves, X } from 'lucide-react'
+import { BookHeart, Mic, MicOff, MicVocalIcon, MoveLeft, Palette, Save, Send, VenetianMaskIcon, Waves, X } from 'lucide-react'
 import { Button } from '../ui/button'
 import { PickerExample } from '../PicExample'
 import { useRouter } from 'next/navigation'
@@ -11,10 +11,13 @@ import { Input } from '../ui/input'
 import CreatePost from '@/actions/post/create'
 import { FormBtn } from "../common/FormBtn"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
-
+import {useQueryState} from "nuqs"
 
 
 export default function Post() {
+  const [query,setQuery]=useQueryState("type",{
+    defaultValue:""
+  })
   const router=useRouter()
     const [bgPost,setBgPost]=useState('#2dac5c')
 
@@ -78,10 +81,10 @@ export default function Post() {
             <VenetianMaskIcon className="h-8 w-8"/>
             </div>
             <div  className='h-12 mt-5 cursor-pointer  rounded-sm'>
-            <MicVocalIcon className="h-8 w-8"/>
+            <Mic className="h-8 w-8" onClick={()=>setQuery("recording")}/>
             </div>
             <div  className='h-12 mt-5 cursor-pointer  rounded-sm'>
-            <BookHeart className="h-8 w-8"/>
+            <BookHeart onClick={()=>setQuery("book")} className="h-8 w-8"/>
             </div>
             
           
