@@ -3,7 +3,7 @@
 import {motion,useAnimate} from "framer-motion"
 import React, { useEffect, useState } from 'react'
 import { Textarea } from '../ui/textarea'
-import { BookHeart, Mic, MicOff, MicVocalIcon, MoveLeft, Palette, Save, Send, VenetianMaskIcon, Waves, X } from 'lucide-react'
+import { BookHeart, Circle, CircleStop, ListMusic, Mic, MicOff, MicVocalIcon, MoveLeft, Palette, Pause, Play, Save, Send, StopCircle, VenetianMaskIcon, Waves, X } from 'lucide-react'
 import { Button } from '../ui/button'
 import { PickerExample } from '../PicExample'
 import { useRouter } from 'next/navigation'
@@ -28,9 +28,10 @@ export default function Post(props:PostType) {
     await animate('#target',{x:0})
    await animate('#target',{y:150,rotate:"360deg"},{duration:0.5})
 
-   await animate('#target',{x:0,y:150,rotate:"0deg"},{duration:0.5})
+   await animate('#target',{x:0,y:250,rotate:"0deg"},{duration:0.5})
+    await animate('#target',{opacity:"0"},{duration:0.5})
+   await animate('#target2',{display:"block"},{duration:0.5})
    
-  
 }
   const handleClickType=(type:string)=>{
    
@@ -48,19 +49,31 @@ export default function Post(props:PostType) {
    const PostInit=<> <motion.div 
    initial={{ scale:0,opacity:0 }}
    animate={{ scale:1,opacity:1 }}
-   className='relative h-[100vh]'>
+   className='relative h-[100vh] overflow-y-hidden'>
      
-     <section className='container'>
-     <h2 className='text-center font-bold text-2xl'>New Post</h2>
+     <section>
+     
      <form action={CreatePost} className='mt-5'>
       
-       <div className='mt-4 flex justify-center' >
+       <div className='mt-4 flex justify-center ' >
         {props.type==="recording" && <div style={{ background:`${bgPost}` }} className={`font-bold mx-36 overflow-y-hidden placeholder:text-gray-300   absolute  top-0 h-full w-full p-60  text-center  text-white flex justify-center  text-xl`}>
           <motion.div
           ref={scope} 
-          onClick={()=>handleAnimation()}
+          
           >
-<Mic id='target' className="w-16 h-16 cursor-pointer"/>
+<Mic id='target'onClick={()=>handleAnimation()} className="w-16 h-16 cursor-pointer"/>
+
+<Circle id="target2" className="text-[#f33] hidden fill-current animate-pulse w-[8rem] h-[8rem] border-gray-600"/>
+<div className="flex justify-center items-center mt-5 w-full gap-5">
+<div >
+  <Button type="button" variant="outline" className="text-primary p-5">Pause<Pause/></Button>
+</div>
+
+<div >
+  <Button type="button" variant="outline" className="text-primary p-5">Stop<StopCircle/></Button>
+</div>
+
+</div>
           </motion.div>
           
           
