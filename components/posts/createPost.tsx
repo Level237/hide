@@ -14,7 +14,10 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 import {useQueryState} from "nuqs"
 
 
-export default function Post() {
+type PostType={
+  type:string
+}
+export default function Post(props:PostType) {
   const [query,setQuery]=useQueryState("type",{
     defaultValue:""
   })
