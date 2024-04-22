@@ -13,6 +13,7 @@ import { FormBtn } from "../common/FormBtn"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 import {useQueryState} from "nuqs"
 import { PostStore } from "@/store/PostStore"
+import PaletteContainer from "./PaletteContainer"
 
 
 type PostType={
@@ -53,7 +54,7 @@ export default function Post(props:PostType) {
           duration:1
           }}
          >
-        
+        <PaletteContainer/>
         </motion.div>
       </section>
         </div>
