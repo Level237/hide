@@ -1,6 +1,6 @@
 'use client'
 
-import {motion} from "framer-motion"
+import {motion,useAnimate} from "framer-motion"
 import React, { useEffect, useState } from 'react'
 import { Textarea } from '../ui/textarea'
 import { BookHeart, Mic, MicOff, MicVocalIcon, MoveLeft, Palette, Save, Send, VenetianMaskIcon, Waves, X } from 'lucide-react'
@@ -22,7 +22,16 @@ type PostType={
 }
 export default function Post(props:PostType) {
   const [query,setQuery]=useQueryState("type",parseAsString)
+  const [scope,animate]=useAnimate();
 
+  const handleAnimation=async()=>{
+    await animate('#target',{x:0})
+   await animate('#target',{y:150,rotate:"360deg"},{duration:0.5})
+
+   await animate('#target',{x:0,y:150,rotate:"0deg"},{duration:0.5})
+   
+  
+}
   const handleClickType=(type:string)=>{
    
     setQuery(type)
@@ -45,8 +54,17 @@ export default function Post(props:PostType) {
      <h2 className='text-center font-bold text-2xl'>New Post</h2>
      <form action={CreatePost} className='mt-5'>
       
-       <div className='mt-4 flex justify-center'>
-        {props.type==="recording" && <div style={{ background:`${bgPost}` }} className={`font-bold mx-36 overflow-y-hidden placeholder:text-gray-300   absolute  top-0 h-full w-full p-60  text-center  text-white flex justify-center  text-xl`}><Mic className="w-16 h-16 cursor-pointer"/></div>}
+       <div className='mt-4 flex justify-center' >
+        {props.type==="recording" && <div style={{ background:`${bgPost}` }} className={`font-bold mx-36 overflow-y-hidden placeholder:text-gray-300   absolute  top-0 h-full w-full p-60  text-center  text-white flex justify-center  text-xl`}>
+          <motion.div
+          ref={scope} 
+          onClick={()=>handleAnimation()}
+          >
+<Mic id='target' className="w-16 h-16 cursor-pointer"/>
+          </motion.div>
+          
+          
+          </div>}
         {props.type==="" && <Textarea name='content' placeholder="Type your message here." className={`font-bold mx-36 overflow-y-hidden placeholder:text-gray-300   absolute  top-0 h-full py-60  text-center  text-white flex justify-center  text-xl`} style={{ background:`${bgPost}` }} />}
        
        <section className='absolute w-full top-1 mx-5  flex   items-center justify-between '>
