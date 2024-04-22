@@ -43,9 +43,7 @@ const [isVisible, setIsVisible] = useState<boolean>(true);
 
   
   </div>
-  
 
-  
   </>;
 };
 
