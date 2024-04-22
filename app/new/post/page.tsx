@@ -14,7 +14,7 @@ export default async function CreatePostPage(props:any) {
 
   const searchParams=searchParamsCache.parse(props.searchParams);
 
-  console.log(props.searchParams,searchParams);
+ 
     await new Promise((receive)=>{
       setTimeout(receive,1000)
   })

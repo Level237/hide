@@ -1,7 +1,7 @@
 'use client'
 
 import {motion} from "framer-motion"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Textarea } from '../ui/textarea'
 import { BookHeart, Mic, MicOff, MicVocalIcon, MoveLeft, Palette, Save, Send, VenetianMaskIcon, Waves, X } from 'lucide-react'
 import { Button } from '../ui/button'
@@ -11,7 +11,7 @@ import { Input } from '../ui/input'
 import CreatePost from '@/actions/post/create'
 import { FormBtn } from "../common/FormBtn"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
-import {useQueryState} from "nuqs"
+import {parseAsString, useQueryState} from "nuqs"
 import { PostStore } from "@/store/PostStore"
 import PaletteContainer from "./PaletteContainer"
 
@@ -20,14 +20,27 @@ type PostType={
   type:string
 }
 export default function Post(props:PostType) {
-  const [query,setQuery]=useQueryState("type",{
-    defaultValue:""
-  })
+  const [query,setQuery]=useQueryState("type",parseAsString)
+
+  const handleClickType=(type:string)=>{
+   
+    setQuery(type)
+    
+  }
+ useEffect(()=>{
+ 
+    props.type=query
+  
+  
+ },[query])
   const router=useRouter()
    const bgPost=PostStore((state)=>state.bgPost)
-  return (
+   let containerPost:React.ReactNode;
 
-    <motion.div 
+   if(props.type==="recording"){
+    containerPost=<><div>Recording...</div></>
+   }else if(props.type===""){
+    containerPost=<> <motion.div 
     initial={{ scale:0,opacity:0 }}
     animate={{ scale:1,opacity:1 }}
     className='relative h-[100vh]'>
@@ -65,7 +78,7 @@ export default function Post(props:PostType) {
             <VenetianMaskIcon className="h-8 w-8"/>
             </div>
             <div  className='h-12 mt-5 cursor-pointer  rounded-sm'>
-            <Mic className="h-8 w-8" onClick={()=>setQuery("recording")}/>
+            <Mic className="h-8 w-8" onClick={()=>setQuery(c=> "recording")}/>
             </div>
             <div  className='h-12 mt-5 cursor-pointer  rounded-sm'>
             <BookHeart onClick={()=>setQuery("book")} className="h-8 w-8"/>
@@ -81,8 +94,9 @@ export default function Post(props:PostType) {
        
       </form>
     </section>
-    </motion.div>
-  )
+    </motion.div></>
+   }
+  return containerPost
 }
 
 

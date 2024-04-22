@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 interface PostStoreState{
-    bgPost:string
+    bgPost:string,
     changeBgHandler:(color:string)=>void
 }
 export const PostStore=create<PostStoreState>((set)=>({
