@@ -5,10 +5,10 @@ import RecordPlugin from 'wavesurfer.js/dist/plugins/record.js';
 import TimelinePlugin from 'wavesurfer.js/dist/plugins/timeline.js';
 
 const AudioVisualizer = () => {
-  const waveformRef = useRef<any>(null);
+  const waveformRef = useRef(null);
   const wavesurfer = useRef<any>(null);
-  const [isRecording, setIsRecording] = useState(false);
-  const [audioURL, setAudioURL] = useState('');
+  const [isRecording, setIsRecording] = useState<any>(false);
+  const [audioURL, setAudioURL] = useState<any>('');
   const mediaRecorder = useRef<any>(null);
 
   useEffect(() => {
@@ -30,14 +30,22 @@ const AudioVisualizer = () => {
         ],
       });
 
+      wavesurfer.current.on('ready', () => {
+        const timeline = Object.create(TimelinePlugin);
+        
+      });
+
       wavesurfer.current.on('audioprocess', (time:number) => {
         if (isRecording) {
-          const duration = wavesurfer.current.getDuration();
-          wavesurfer.current.clearRegions();
-          wavesurfer.current.addRegion({
-            start: 0,
-            end: time,
-            color: 'rgba(0, 123, 255, 0.1)',
+          // Throttle updates to avoid performance issues
+          requestAnimationFrame(() => {
+            const duration = wavesurfer.current.getDuration();
+            wavesurfer.current.clearRegions();
+            wavesurfer.current.addRegion({
+              start: 0,
+              end: time,
+              color: 'rgba(0, 123, 255, 0.1)',
+            });
           });
         }
       });
@@ -57,7 +65,7 @@ const AudioVisualizer = () => {
 
     mediaRecorder.current.onstart = () => {
       setIsRecording(true);
-      
+      wavesurfer.current.empty();
     };
 
     mediaRecorder.current.onstop = () => {
@@ -68,7 +76,7 @@ const AudioVisualizer = () => {
       const audioBlob = new Blob([event.data], { type: 'audio/wav' });
       const audioUrl = URL.createObjectURL(audioBlob);
       setAudioURL(audioUrl);
-      wavesurfer.current.load(audioUrl);
+      wavesurfer.current.loadBlob(audioBlob);
     };
 
     mediaRecorder.current.start();
