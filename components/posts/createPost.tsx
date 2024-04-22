@@ -17,7 +17,7 @@ import PaletteContainer from "./PaletteContainer"
 
 
 type PostType={
-  type:string
+  type:string | null
 }
 export default function Post(props:PostType) {
   const [query,setQuery]=useQueryState("type",parseAsString)
