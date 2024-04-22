@@ -12,6 +12,7 @@ import CreatePost from '@/actions/post/create'
 import { FormBtn } from "../common/FormBtn"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 import {useQueryState} from "nuqs"
+import { PostStore } from "@/store/PostStore"
 
 
 type PostType={
@@ -22,12 +23,7 @@ export default function Post(props:PostType) {
     defaultValue:""
   })
   const router=useRouter()
-    const [bgPost,setBgPost]=useState('#2dac5c')
-
-    const changeBgHandler=(color:string)=>{
-        setBgPost(color)
-        console.log(color);
-    }
+   const bgPost=PostStore((state)=>state.bgPost)
   return (
 
     <motion.div 
