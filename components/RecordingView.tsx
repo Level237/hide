@@ -10,7 +10,10 @@ const AudioVisualizer = () => {
   const [isRecording, setIsRecording] = useState<any>(false);
   const [audioURL, setAudioURL] = useState<any>('');
   const mediaRecorder = useRef<any>(null);
+  const [recordingTime, setRecordingTime] = useState(0);
+  const timelineRef = useRef<any>(null);
 
+  let time = null;
   useEffect(() => {
     if (waveformRef.current) {
       wavesurfer.current = WaveSurfer.create({
@@ -25,7 +28,7 @@ const AudioVisualizer = () => {
           RegionsPlugin.create(),
           RecordPlugin.create({}),
           TimelinePlugin.create({
-            container: '#timeline',
+            container: timelineRef.current,
           }),
         ],
       });
@@ -50,6 +53,7 @@ const AudioVisualizer = () => {
         }
       });
     }
+
     let timer:any;
     console.log(isRecording);
     
@@ -58,7 +62,7 @@ const AudioVisualizer = () => {
         
         setIsRecording(false);
         console.log("stoping");
-      }, 30000); // 30000 ms = 30 secondes
+      }, 15000); // 30000 ms = 30 secondes
     
     return () => {
       clearTimeout(timer);
@@ -79,11 +83,15 @@ const AudioVisualizer = () => {
 
     mediaRecorder.current.onstart = () => {
       setIsRecording(true);
+      time = setInterval(() => {
+        setRecordingTime((prevTime) => prevTime + 1);
+      }, 1000);
       wavesurfer.current.empty();
     };
 
     mediaRecorder.current.onstop = () => {
       setIsRecording(false);
+      setRecordingTime(0);
     };
 
     mediaRecorder.current.ondataavailable = (event:any) => {
@@ -112,9 +120,15 @@ const AudioVisualizer = () => {
     wavesurfer.current?.playPause();
   };
 
+  const formatTime = (time:any) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+  };
+
   return (
     <div>
-      <div id='timeline'></div>
+      <div id='timeline' ref={timelineRef}>{formatTime(recordingTime)}</div>
       <button onClick={handleRecordClick}>
         {isRecording ? 'Arrêter' : 'Enregistrer'}
       </button>
