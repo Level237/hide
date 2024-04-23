@@ -27,11 +27,12 @@ export default function Post(props:PostType) {
   const handleAnimation=async()=>{
     await animate('#target',{x:0})
    await animate('#target',{y:150,rotate:"360deg"},{duration:0.5})
-
+  animate('#target2',{display:"block"},{duration:0.5})
+    animate('#target4',{scale:1,display:"flex"})
+    animate('#target3',{scale:1,display:"flex"})
    await animate('#target',{x:0,y:250,rotate:"0deg"},{duration:0.5})
     await animate('#target',{opacity:"0"},{duration:0.5})
-   await animate('#target2',{display:"block"},{duration:0.5})
-   
+  
 }
   const handleClickType=(type:string)=>{
    
@@ -63,14 +64,14 @@ export default function Post(props:PostType) {
           >
 <Mic id='target'onClick={()=>handleAnimation()} className="w-16 h-16 cursor-pointer"/>
 
-<Circle id="target2" className="text-[#f33] hidden fill-current animate-pulse w-[8rem] h-[8rem] border-gray-600"/>
-<div className="flex justify-center items-center mt-5 w-full gap-5">
+<Circle id="target2" className="text-[#f33] hidden fill-current absolute top-56 animate-pulse w-[8rem] h-[8rem] border-gray-600"/>
+<div className="flex justify-center items-center mt-16 w-full gap-5">
 <div >
-  <Button type="button" variant="outline" className="text-primary p-5">Pause<Pause/></Button>
+  <Button type="button" id='target4' variant="outline" className="text-primary p-5 hidden">Pause<Pause/></Button>
 </div>
 
 <div >
-  <Button type="button" variant="outline" className="text-primary p-5">Stop<StopCircle/></Button>
+  <Button id="target3" type="button" variant="outline" className="text-primary p-5 hidden">Stop<StopCircle/></Button>
 </div>
 
 </div>
@@ -101,7 +102,7 @@ export default function Post(props:PostType) {
      </section>
        </div>
        <Input type="hidden" name='color' value={bgPost} />
-       <section className='  bottom-0  w-[95vw] my-5 flex items-center justify-between absolute'>
+       <section className='  bottom-0 mx-5  w-[95vw] my-5 flex items-center justify-between absolute'>
        <div className=' bg-white py-2 px-8 flex  justify-center items-center gap-4 z-20'>
            <div   className='h-12 mt-5 cursor-pointer  rounded-sm'>
            <VenetianMaskIcon className="h-8 w-8" onClick={()=>setQuery(c=> "recording")}/>
