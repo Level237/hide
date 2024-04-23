@@ -50,8 +50,22 @@ const AudioVisualizer = () => {
         }
       });
     }
-
-    return () => wavesurfer.current?.destroy();
+    let timer:any;
+    console.log(isRecording);
+    
+      timer = setTimeout(() => {
+        mediaRecorder.current?.stop();
+        
+        setIsRecording(false);
+        console.log("stoping");
+      }, 30000); // 30000 ms = 30 secondes
+    
+    return () => {
+      clearTimeout(timer);
+      if (wavesurfer.current) {
+        wavesurfer.current.destroy();
+      }
+    };
   }, []);
 
   const startRecording = async () => {
