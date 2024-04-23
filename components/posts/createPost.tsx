@@ -26,12 +26,13 @@ export default function Post(props:PostType) {
 
   const handleAnimation=async()=>{
     await animate('#target',{x:0})
-   await animate('#target',{y:150,rotate:"360deg"},{duration:0.5})
+   await animate('#target',{y:100},{duration:0.5})
+   await animate('#target',{opacity:"0"},{duration:0.5})
   animate('#target2',{display:"block"},{duration:0.5})
     animate('#target4',{scale:1,display:"flex"})
     animate('#target3',{scale:1,display:"flex"})
-   await animate('#target',{x:0,y:250,rotate:"0deg"},{duration:0.5})
-    await animate('#target',{opacity:"0"},{duration:0.5})
+
+  
   
 }
   const handleClickType=(type:string)=>{
@@ -56,16 +57,17 @@ export default function Post(props:PostType) {
      
      <form action={CreatePost} className='mt-5'>
       
-       <div className='mt-4 flex justify-center ' >
+       <div className='mt-16 flex justify-center ' >
         {props.type==="recording" && <div style={{ background:`${bgPost}` }} className={`font-bold mx-36 overflow-y-hidden placeholder:text-gray-300   absolute  top-0 h-full w-full p-60  text-center  text-white flex justify-center  text-xl`}>
           <motion.div
           ref={scope} 
           
           >
-<Mic id='target'onClick={()=>handleAnimation()} className="w-16 h-16 cursor-pointer"/>
 
-<Circle id="target2" className="text-[#f33] hidden fill-current absolute top-56 animate-pulse w-[8rem] h-[8rem] border-gray-600"/>
-<div className="flex justify-center items-center mt-16 w-full gap-5">
+
+<Circle id="target2" className="text-[#f33] hidden fill-current mx-[-1rem] mb-12  animate-pulse w-[8rem] h-[8rem] border-gray-600"/>
+<Mic id='target'onClick={()=>handleAnimation()} className="w-16 h-16 z-[99999] cursor-pointer"/>
+<div className="flex justify-center mx-[-2rem] items-center mt-5 w-full gap-5">
 <div >
   <Button type="button" id='target4' variant="outline" className="text-primary p-5 hidden">Pause<Pause/></Button>
 </div>
