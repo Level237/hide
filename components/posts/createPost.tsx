@@ -49,7 +49,7 @@ export default function Post(props:PostType) {
      <form action={CreatePost} className='mt-5'>
       
        <div className='mt-16 flex justify-center ' >
-        {props.type==="recording" && <div style={{ background:`${bgPost}` }} className={`font-bold mx-36 overflow-y-hidden placeholder:text-gray-300   absolute  top-0 h-full w-full p-60  text-center  text-white flex justify-center  text-xl`}>
+        {props.type==="recording" && <div style={{ background:`${bgPost}` }} className={`font-bold mx-36 overflow-y-hidden placeholder:text-gray-300   absolute  top-0 h-full w-full p-60  text-center  text-white flex justify-center items-center  text-xl`}>
           <motion.div
           ref={scope} 
           

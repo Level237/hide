@@ -1,4 +1,4 @@
-import { Circle, Mic, Pause, PlayCircle, StopCircle } from 'lucide-react'
+import { Circle, Mic, Pause, PlayCircle, Speech, StopCircle } from 'lucide-react'
 import React, { useEffect, useRef, useState } from 'react'
 import { Button } from '../../ui/button'
 import { animate } from 'framer-motion'
@@ -36,11 +36,9 @@ export default function PostMic() {
           normalize: true,
           hideScrollbar: true,
           plugins: [
-            RegionsPlugin.create(),
+           
             RecordPlugin.create({}),
-            TimelinePlugin.create({
-              container: timelineRef.current,
-            }),
+            
           ],
         });
   
@@ -54,6 +52,7 @@ export default function PostMic() {
             // Throttle updates to avoid performance issues
             requestAnimationFrame(() => {
               const duration = wavesurfer.current.getDuration();
+              
               wavesurfer.current.clearRegions();
               wavesurfer.current.addRegion({
                 start: 0,
@@ -137,24 +136,24 @@ export default function PostMic() {
       return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
     };
   return (
-    <div>
+    <div className='flex flex-col justify-center items-center gap-3'>
       <Circle id="target2" className="text-[#f33] hidden fill-current mx-[-1rem] mb-12  animate-pulse w-[8rem] h-[8rem] border-gray-600"/>
       
-<Mic id='target'onClick={()=>handleAnimation()} className="w-16 h-16 z-[99999] cursor-pointer"/>
+<Mic id='target' className="w-16 h-16 z-[99999] cursor-pointer"/>
 <div id='timeline' ref={timelineRef}>{formatTime(recordingTime)}</div>
 <div className="flex justify-center mx-[-2rem] items-center mt-5 w-full gap-5">
+
+
+<div >
+  <Button onClick={handlePlay} disabled={!audioURL}  type="button" variant="outline" className="text-primary p-5">Play/Pause</Button>
+</div>
 <div >
   <Button onClick={handleRecordClick} type="button"  variant="outline" className="text-primary p-5">
-  {isRecording ? <><div className='flex gap-2 items-center'>Stop<StopCircle/></div></> : <><div className='flex gap-2 items-center'>Play<PlayCircle/></div></>}
+  {isRecording ? <><div className='flex gap-2 items-center'>Stop<StopCircle/></div></> : <><div className='flex gap-2 items-center'>Vocal<Speech/></div></>}
     </Button>
 </div>
-
-<div >
-  <Button onClick={handlePlay} disabled={!audioURL}  type="button" variant="outline" className="text-primary p-5">Lire/Pause</Button>
 </div>
-
-</div>
-<div ref={waveformRef} className='waveform mt-5 w-full'></div>
+<div ref={waveformRef} className='waveform w-full '></div>
     </div>
   )
 }
