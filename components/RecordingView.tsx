@@ -13,7 +13,7 @@ const AudioVisualizer = () => {
   const [recordingTime, setRecordingTime] = useState(0);
   const timelineRef = useRef<any>(null);
 
-  let time = null;
+  let time :any;
   useEffect(() => {
     if (waveformRef.current) {
       wavesurfer.current = WaveSurfer.create({
@@ -91,7 +91,7 @@ const AudioVisualizer = () => {
 
     mediaRecorder.current.onstop = () => {
       setIsRecording(false);
-      setRecordingTime(0);
+      clearInterval(time)
     };
 
     mediaRecorder.current.ondataavailable = (event:any) => {
@@ -112,6 +112,7 @@ const AudioVisualizer = () => {
     if (isRecording) {
       stopRecording();
     } else {
+      setRecordingTime(0)
       startRecording();
     }
   };
