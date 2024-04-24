@@ -15,7 +15,7 @@ import {parseAsString, useQueryState} from "nuqs"
 import { PostStore } from "@/store/PostStore"
 import PaletteContainer from "./PaletteContainer"
 import paths from "@/path"
-import PostMic from "./PostMic"
+import PostMic from "./mic/PostMic"
 
 
 type PostType={
