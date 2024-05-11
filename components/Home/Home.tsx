@@ -6,6 +6,7 @@ import React from 'react'
 import Hero from '../Hero';
 import { auth } from '@/auth';
 import HomeAuth from './HomeAuth';
+import Header from '../ui/Header';
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -20,7 +21,12 @@ export  const HomeComponent=async({children}:any) =>{
         </>
     }else{
         authContent=<>
+        <section className='bg-gray-900'>
+        <Header/>
         <Hero/>
+        </section>
+        
+        
         </>
     }
   return authContent;
