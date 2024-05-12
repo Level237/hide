@@ -7,6 +7,7 @@ interface PostStoreState{
 export const PostStore=create<PostStoreState>((set)=>({
     bgPost:"#2dac5c",
 changeBgHandler:(color:string)=>{
+    console.log("leve");
 set({bgPost:color})
 }
 }))

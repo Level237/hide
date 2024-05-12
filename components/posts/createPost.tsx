@@ -42,9 +42,9 @@ export default function Post(props:PostType) {
    const PostInit=<> <motion.div 
    initial={{ scale:0,opacity:0 }}
    animate={{ scale:1,opacity:1 }}
-   className='relative h-[100vh] overflow-y-hidden'>
+   className='relative h-[100vh] bg-blue-600 overflow-y-hidden'>
      
-     <section>
+     <section className="">
      
      <form action={CreatePost} className='mt-5'>
       
@@ -61,7 +61,9 @@ export default function Post(props:PostType) {
           
           
           </div>}
-        {props.type==="" && <Textarea name='content' placeholder="Type your message here." className={`font-bold mx-36 overflow-y-hidden placeholder:text-gray-300   absolute  top-0 h-full py-60  text-center  text-white flex justify-center  text-xl`} style={{ background:`${bgPost}` }} />}
+        {props.type==="" && 
+        <div  className={`font-bold mx-36 overflow-y-hidden placeholder:text-gray-300   absolute  top-0 h-full w-full p-60  text-center  text-white flex justify-center items-center  text-xl`}></div>
+        }
        
        <section className='absolute w-full top-1 mx-5  flex   items-center justify-between '>
          <X onClick={()=>router.back()} className='text-white w-[2rem] mx-5 cursor-pointer h-[2rem] '/>
