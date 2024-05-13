@@ -51,7 +51,7 @@ export default function Post() {
           
           
           </div>}
-          {!query &&
+          {!query  &&
           
           
           <Textarea name='content' placeholder="Type your message here." className={`font-bold mx-36 overflow-y-hidden placeholder:text-gray-300   absolute  top-0 h-full py-60  text-center  text-white flex justify-center  text-xl`} style={{ background:`${bgPost}` }} />}
