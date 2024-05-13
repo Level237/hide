@@ -3,7 +3,7 @@
 import {motion,useAnimate} from "framer-motion"
 import React, { useEffect, useState } from 'react'
 import { Textarea } from '../ui/textarea'
-import { BookHeart, Circle, CircleStop, ListMusic, Mic, MicOff, MicVocalIcon, MoveLeft, Palette, Pause, Play, Save, Send, StopCircle, VenetianMaskIcon, Waves, X } from 'lucide-react'
+import { BookHeart, Circle, CircleStop, ListMusic, Mic, MicOff, MicVocalIcon, MoveLeft, Pause, Play, Save, Send, StopCircle, VenetianMaskIcon, Waves, X } from 'lucide-react'
 import { Button } from '../ui/button'
 import { PickerExample } from '../PicExample'
 import { useRouter } from 'next/navigation'
@@ -19,6 +19,8 @@ import paths from "@/path"
 import PostMic from "./mic/PostMic"
 import Image from "next/image"
 import { Separator } from "../ui/separator"
+import { z } from 'zod';
+import Palette from "./Palette"
 
 
 type PostType={
@@ -28,17 +30,17 @@ export default function Post() {
   const searchParams=useQueryState('type',)
   const [query,setQuery]=useQueryState("type",{defaultValue:""})
   const [scope,animate]=useAnimate();
-  
+  const changeBgHandler=PostStore((state)=>state.changeBgHandler)
 
   const router=useRouter()
    const bgPost=PostStore((state)=>state.bgPost)
    const PostInit=<> <div 
  
    className='  flex h-[100vh] bg-blue-600 overflow-y-hidden'>
-     <section className="w-[16rem] bg-gray-200 relative ">
+     <section className="w-[16rem] bg-white relative ">
       <section className="flex mx-5 flex-col gap-3">
         <div>
-        <Image src="/full-logo.png" alt="logo" height={150} width={150} className="mx-auto" />
+        <Image src="/full-logo.png" alt="logo" height={100} width={100} className="mx-auto" />
         </div>
         
         <div className="flex flex-col">
@@ -59,15 +61,19 @@ export default function Post() {
            <Separator className="my-1 h-6 bg-slate-400" orientation="vertical" />
            </div>
            <div  className='h-12 flex flex-col mt-5 cursor-pointer  rounded-sm'>
-           <BookHeart onClick={()=>setQuery("book")} className="h-6 w-6"/>
+           <BookHeart onClick={()=>setQuery("")} className="h-6 w-6"/>
            
            </div>
           </div>
         </div>
-        <div>
+        <div className="flex flex-col gap-4">
           <h2 className="text-sm">background</h2>
-        </div>
-          <div className="mt-4 flex gap-5">
+
+          <Palette color="#2cac5c"/>
+
+          </div>
+  
+          <div className="mt-[8rem] flex gap-5">
             <Button className="border-primary" variant="outline">Cancel</Button>
             <Button className="px-8">Save</Button>
           </div>
@@ -77,8 +83,8 @@ export default function Post() {
      
      <form action={CreatePost} className=''>
       
-       <div className='flex justify-center  ' >
-        {query==="recording" && <div style={{ background:`${bgPost}` }} className={`font-bold mx-36 overflow-y-hidden placeholder:text-gray-300   absolute  top-0 h-full w-full p-60  text-center  text-white flex justify-center items-center  text-xl`}>
+       <div className='' >
+        {query==="recording" && <div style={{ background:`${bgPost}` }} className={`font-bold overflow-y-hidden placeholder:text-gray-300     top-0 h-full py-[18rem]  text-center  text-white   text-xl`}>
           <motion.div
           ref={scope} 
           
@@ -114,7 +120,7 @@ export default function Post() {
        <section className='  bottom-0 mx-5  w-[95vw] my-5 flex items-center justify-between absolute'>
        <div className=' bg-white py-2 px-8 flex   items-center gap-4 z-20'>
 
-           
+          
          
        </div>
        <div className='z-10'>

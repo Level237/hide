@@ -1,43 +1,12 @@
-'use client'
-
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import  {cn} from '@/lib/utils'
-import { Brush, Paintbrush, Palette } from 'lucide-react'
+import { PostStore } from '@/store/PostStore'
+import React, { useMemo, useState } from 'react'
+import { GradientButton, GradientPicker } from '../PicExample'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
 import Link from 'next/link'
-import { useMemo, useState } from 'react'
 
-export function PickerExample(props:any) {
-    const {changeBgHandler}=props
+export default function Palette(props:{color:string}) {
+  const changeBgHandler=PostStore((state)=>state.changeBgHandler)
   const [background, setBackground] = useState('')
-
-  return (
-    <div
-      className="w-full h-full preview flex min-h-[350px] justify-center p-10 items-center rounded !bg-cover !bg-center transition-all"
-     
-    >
-      <GradientPicker changeBgHandler={changeBgHandler} background={background} setBackground={setBackground} />
-    </div>
-  )
-}
-
-export function GradientPicker({
-  background,
-  setBackground,
-  className,
-  changeBgHandler
-}: {
-  background: string
-  setBackground: (background: string) => void
-  className?: string,
-  changeBgHandler:(color:string)=>void
-}) {
   const solids = [
     '#E2E2E2',
     '#ff75c3',
@@ -103,53 +72,19 @@ export function GradientPicker({
   ]
 
   const images = [
-    'url(https://images.unsplash.com/photo-1691200099282-16fd34790ade?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2532&q=90)',
-    'url(https://images.unsplash.com/photo-1691226099773-b13a89a1d167?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2532&q=90',
+    'url(https://images.unsplash.com/photo-1634746422832-5e41836d4642?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)',
+    'url(https://images.unsplash.com/photo-1634746422769-435961a85f5c?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)',
     'url(https://images.unsplash.com/photo-1688822863426-8c5f9b257090?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2532&q=90)',
-    'url(https://images.unsplash.com/photo-1691225850735-6e4e51834cad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2532&q=90)',
+    'url(https://images.unsplash.com/photo-1596865249308-2472dc5807d7?q=80&w=1506&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)',
   ]
-
   const defaultTab = useMemo(() => {
     if (background.includes('url')) return 'image'
     if (background.includes('gradient')) return 'gradient'
     return 'solid'
   }, [background])
-
-  const changeBg=(color:string)=>{
-setBackground(color)
-changeBgHandler(color)
-
-  }
   return (
-    <Popover>
-      <PopoverTrigger asChild>
-        <Button
-          variant={'outline'}
-          className={cn(
-            'w-[20px] absolute justify-start text-left font-normal',
-            !background && 'text-muted-foreground bg-transparent',
-            className
-          )}
-          style={{ background }}
-        >
-            <Palette/>
-          <div className="w-full flex items-center gap-2">
-            {background ? (
-              <div
-                className="h-4 w-4 rounded !bg-center !bg-cover transition-all"
-                style={{ background }}
-              ></div>
-            ) : (
-              <Paintbrush className="h-4 w-4" />
-            )}
-            <div className="truncate flex-1">
-              {background ? background : <Palette/>}
-            </div>
-          </div>
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-64">
-        <Tabs defaultValue={defaultTab} className="w-full">
+    <div>
+       <Tabs defaultValue={defaultTab} className="w-full">
           <TabsList className="w-full mb-4">
             <TabsTrigger className="flex-1" value="solid">
               Solid
@@ -204,7 +139,7 @@ changeBgHandler(color)
                   key={s}
                   style={{ backgroundImage: s }}
                   className="rounded-md bg-cover bg-center h-12 w-full cursor-pointer active:scale-105"
-                  onClick={() => changeBg(s)}
+                  onClick={() => {changeBgHandler(s)}}
                 />
               ))}
             </div>
@@ -224,32 +159,6 @@ changeBgHandler(color)
           <TabsContent value="password">Change your password here.</TabsContent>
         </Tabs>
 
-        <Input
-          id="custom"
-          value={background}
-          className="col-span-2 h-8 mt-4"
-          onChange={(e) => changeBg(e.currentTarget.value)}
-        />
-      </PopoverContent>
-    </Popover>
-  )
-}
-
-export const GradientButton = ({
-  background,
-  children,
-}: {
-  background: string
-  children: React.ReactNode
-}) => {
-  return (
-    <div
-      className="p-0.5 rounded-md relative !bg-cover !bg-center transition-all"
-      style={{ background }}
-    >
-      <div className="bg-popover/80 rounded-md p-1 text-xs text-center">
-        {children}
-      </div>
-    </div>
+</div>
   )
 }
