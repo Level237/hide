@@ -17,6 +17,8 @@ import PaletteContainer from "./PaletteContainer"
 import paths from "@/path"
 
 import PostMic from "./mic/PostMic"
+import Image from "next/image"
+import { Separator } from "../ui/separator"
 
 
 type PostType={
@@ -32,13 +34,50 @@ export default function Post() {
    const bgPost=PostStore((state)=>state.bgPost)
    const PostInit=<> <div 
  
-   className='relative h-[100vh] bg-blue-600 overflow-y-hidden'>
+   className='  flex h-[100vh] bg-blue-600 overflow-y-hidden'>
+     <section className="w-[16rem] bg-gray-200 relative ">
+      <section className="flex mx-5 flex-col gap-3">
+        <div>
+        <Image src="/full-logo.png" alt="logo" height={150} width={150} className="mx-auto" />
+        </div>
+        
+        <div className="flex flex-col">
+          <h2 className="text-sm">Type</h2>
+          <div className="flex justify-around">
+          <div   className='h-12 flex-col  mt-5 cursor-pointer  rounded-sm'>
+           <VenetianMaskIcon className="h-6 w-6" onClick={()=>setQuery(c=> "recording")}/>
+          
+           </div>
+           <div className="flex justify-center items-center">
+           <Separator className="my-1 h-6 bg-slate-400" orientation="vertical" />
+           </div>
+           <div  className='h-12 flex flex-col mt-5 cursor-pointer  rounded-sm'>
+           <Mic className="h-6 w-6" onClick={()=>setQuery(c=> "recording")}/>
+           
+           </div>
+           <div className="flex justify-center items-center">
+           <Separator className="my-1 h-6 bg-slate-400" orientation="vertical" />
+           </div>
+           <div  className='h-12 flex flex-col mt-5 cursor-pointer  rounded-sm'>
+           <BookHeart onClick={()=>setQuery("book")} className="h-6 w-6"/>
+           
+           </div>
+          </div>
+        </div>
+        <div>
+          <h2 className="text-sm">background</h2>
+        </div>
+          <div className="mt-4 flex gap-5">
+            <Button className="border-primary" variant="outline">Cancel</Button>
+            <Button className="px-8">Save</Button>
+          </div>
+      </section>
+     </section>
+     <section className="flex-1">
      
-     <section className="">
-     
-     <form action={CreatePost} className='mt-5'>
+     <form action={CreatePost} className=''>
       
-       <div className='mt-16 flex justify-center ' >
+       <div className='flex justify-center  ' >
         {query==="recording" && <div style={{ background:`${bgPost}` }} className={`font-bold mx-36 overflow-y-hidden placeholder:text-gray-300   absolute  top-0 h-full w-full p-60  text-center  text-white flex justify-center items-center  text-xl`}>
           <motion.div
           ref={scope} 
@@ -54,18 +93,13 @@ export default function Post() {
           {!query  &&
           
           
-          <Textarea name='content' placeholder="Type your message here." className={`font-bold mx-36 overflow-y-hidden placeholder:text-gray-300   absolute  top-0 h-full py-60  text-center  text-white flex justify-center  text-xl`} style={{ background:`${bgPost}` }} />}
+          <Textarea name='content' placeholder="Type your message here." className={`font-bold overflow-y-hidden placeholder:text-gray-300     top-0 h-full py-[18rem]  text-center  text-white   text-xl`} style={{ background:`${bgPost}` }} />}
        
        <section className='absolute w-full top-1 mx-5  flex   items-center justify-between '>
-         <X onClick={()=>router.back()} className='text-white w-[2rem] mx-5 cursor-pointer h-[2rem]'/>
+        
        
-       <div className='flex items-center gap-2 mx-5 mt-3'>
-       <Avatar className='cursor-pointer'>
-               <AvatarImage src="/hidd.jpg" alt="@shadcn" />
-       <AvatarFallback>CN</AvatarFallback>
-       </Avatar>
-       </div>
-       <motion.div className="p-2 rounded-md left-[-11rem] bg-white absolute flex justify-center top-[35vh]"
+       
+       <motion.div className="p-2 hidden rounded-md left-[-11rem] bg-white absolute  justify-center top-[35vh]"
         
         whileHover={{ x:175}}
         transition={{ 
@@ -78,16 +112,8 @@ export default function Post() {
        </div>
        <Input type="hidden" name='color' value={bgPost} />
        <section className='  bottom-0 mx-5  w-[95vw] my-5 flex items-center justify-between absolute'>
-       <div className=' bg-white py-2 px-8 flex  justify-center items-center gap-4 z-20'>
-           <div   className='h-12 mt-5 cursor-pointer  rounded-sm'>
-           <VenetianMaskIcon className="h-8 w-8" onClick={()=>setQuery(c=> "recording")}/>
-           </div>
-           <div  className='h-12 mt-5 cursor-pointer  rounded-sm'>
-           <Mic className="h-8 w-8" onClick={()=>setQuery(c=> "recording")}/>
-           </div>
-           <div  className='h-12 mt-5 cursor-pointer  rounded-sm'>
-           <BookHeart onClick={()=>setQuery("book")} className="h-8 w-8"/>
-           </div>
+       <div className=' bg-white py-2 px-8 flex   items-center gap-4 z-20'>
+
            
          
        </div>

@@ -46,7 +46,7 @@ export default function CreateWidget() {
         <Mic className="w-[2rem]"/>
       </div>
       <div className="cursor-pointer">
-        <Link href="/new/post?type=post">
+        <Link href="/new/post">
         <CirclePlus/>
         </Link>
         
