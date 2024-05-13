@@ -18,11 +18,7 @@ export default function Home() {
   return (
     <section>
 
-<div className="bg-gray-900">
-    
-   
-    
-    </div>
+
 
     <HomeComponent>
 

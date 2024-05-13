@@ -3,24 +3,17 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { MoveLeft, Save } from 'lucide-react'
-import {createSearchParamsCache, parseAsString} from "nuqs/server"
 import React from 'react'
 
 
-const searchParamsCache=createSearchParamsCache({
-  type:parseAsString.withDefault("")
-})
 export default async function CreatePostPage(props:any) {
 
-  const searchParams=searchParamsCache.parse(props.searchParams);
-
- 
 
   return (
     <section>
       
       <div className='relative overflow-y-hidden overflow-x-hidden'>
-        <Post type={searchParams.type}/>
+        <Post/>
       </div>
     </section>
   )

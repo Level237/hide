@@ -15,33 +15,23 @@ import {parseAsString, useQueryState} from "nuqs"
 import { PostStore } from "@/store/PostStore"
 import PaletteContainer from "./PaletteContainer"
 import paths from "@/path"
+
 import PostMic from "./mic/PostMic"
 
 
 type PostType={
   type:string | null
 }
-export default function Post(props:PostType) {
-  const [query,setQuery]=useQueryState("type",parseAsString)
+export default function Post() {
+  const searchParams=useQueryState('type',)
+  const [query,setQuery]=useQueryState("type",{defaultValue:""})
   const [scope,animate]=useAnimate();
+  
 
-  
-  const handleClickType=(type:string)=>{
-   
-    setQuery(type)
-    
-  }
- useEffect(()=>{
- 
-    props.type=query
-  
-  
- },[query])
   const router=useRouter()
    const bgPost=PostStore((state)=>state.bgPost)
-   const PostInit=<> <motion.div 
-   initial={{ scale:0,opacity:0 }}
-   animate={{ scale:1,opacity:1 }}
+   const PostInit=<> <div 
+ 
    className='relative h-[100vh] bg-blue-600 overflow-y-hidden'>
      
      <section className="">
@@ -49,7 +39,7 @@ export default function Post(props:PostType) {
      <form action={CreatePost} className='mt-5'>
       
        <div className='mt-16 flex justify-center ' >
-        {props.type==="recording" && <div style={{ background:`${bgPost}` }} className={`font-bold mx-36 overflow-y-hidden placeholder:text-gray-300   absolute  top-0 h-full w-full p-60  text-center  text-white flex justify-center items-center  text-xl`}>
+        {query==="recording" && <div style={{ background:`${bgPost}` }} className={`font-bold mx-36 overflow-y-hidden placeholder:text-gray-300   absolute  top-0 h-full w-full p-60  text-center  text-white flex justify-center items-center  text-xl`}>
           <motion.div
           ref={scope} 
           
@@ -61,12 +51,13 @@ export default function Post(props:PostType) {
           
           
           </div>}
-        {props.type==="" && 
-        <div  className={`font-bold mx-36 overflow-y-hidden placeholder:text-gray-300   absolute  top-0 h-full w-full p-60  text-center  text-white flex justify-center items-center  text-xl`}></div>
-        }
+          {!query &&
+          
+          
+          <Textarea name='content' placeholder="Type your message here." className={`font-bold mx-36 overflow-y-hidden placeholder:text-gray-300   absolute  top-0 h-full py-60  text-center  text-white flex justify-center  text-xl`} style={{ background:`${bgPost}` }} />}
        
        <section className='absolute w-full top-1 mx-5  flex   items-center justify-between '>
-         <X onClick={()=>router.back()} className='text-white w-[2rem] mx-5 cursor-pointer h-[2rem] '/>
+         <X onClick={()=>router.back()} className='text-white w-[2rem] mx-5 cursor-pointer h-[2rem]'/>
        
        <div className='flex items-center gap-2 mx-5 mt-3'>
        <Avatar className='cursor-pointer'>
@@ -108,12 +99,12 @@ export default function Post(props:PostType) {
       
      </form>
    </section>
-   </motion.div></>
+   </div></>
    let containerPost:React.ReactNode;
 
-   if(props.type==="recording"){
+   if(query==="recording"){
     containerPost=PostInit
-   }else if(props.type===""){
+   }else if(!query){
     containerPost=PostInit
    }
   return containerPost
