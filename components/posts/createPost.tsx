@@ -19,7 +19,6 @@ import paths from "@/path"
 import PostMic from "./mic/PostMic"
 import Image from "next/image"
 import { Separator } from "../ui/separator"
-import { z } from 'zod';
 import Palette from "./Palette"
 
 
