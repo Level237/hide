@@ -3,7 +3,7 @@
 import {motion,useAnimate} from "framer-motion"
 import React, { useEffect, useState } from 'react'
 import { Textarea } from '../ui/textarea'
-import { BookHeart, Circle, CircleStop, ListMusic, Mic, MicOff, MicVocalIcon, MoveLeft, Pause, Play, Save, Send, StopCircle, VenetianMaskIcon, Waves, X } from 'lucide-react'
+import { BookHeart, Circle, CircleStop, ListMusic, Mic, MicOff, MicVocalIcon, MoveLeft, Pause, PencilLine, Play, Save, Send, StickyNote, StopCircle, VenetianMaskIcon, Waves, X } from 'lucide-react'
 import { Button } from '../ui/button'
 import { PickerExample } from '../PicExample'
 import { useRouter } from 'next/navigation'
@@ -36,7 +36,7 @@ export default function Post() {
    const PostInit=<> <div 
  
    className='  flex h-[100vh] bg-blue-600 overflow-y-hidden'>
-     <section className="w-[16rem] bg-white relative ">
+     <section className="w-[20rem] bg-white relative ">
       <section className="flex mx-5 flex-col gap-3">
         <div>
         <Image src="/full-logo.png" alt="logo" height={100} width={100} className="mx-auto" />
@@ -46,7 +46,14 @@ export default function Post() {
           <h2 className="text-sm">Type</h2>
           <div className="flex justify-around">
           <div   className='h-12 flex-col  mt-5 cursor-pointer  rounded-sm'>
-           <VenetianMaskIcon className="h-6 w-6" onClick={()=>setQuery(c=> "recording")}/>
+           <PencilLine className="h-6 w-6" onClick={()=>setQuery(c=> "media-post")}/>
+          
+           </div>
+           <div className="flex justify-center items-center">
+           <Separator className="my-1 h-6 bg-slate-400" orientation="vertical" />
+           </div>
+          <div   className='h-12 flex-col  mt-5 cursor-pointer  rounded-sm'>
+           <StickyNote className="h-6 w-6" onClick={()=>setQuery(c=> "simple-post")}/>
           
            </div>
            <div className="flex justify-center items-center">
@@ -95,7 +102,7 @@ export default function Post() {
           
           
           </div>}
-          {!query  &&
+          {!query || query=="simple-post"  &&
           
           
           <Textarea name='content' placeholder="Type your message here." className={`font-bold overflow-y-hidden placeholder:text-gray-300     top-0 h-full py-[18rem]  text-center  text-white   text-xl`} style={{ background:`${bgPost}` }} />}
@@ -135,7 +142,7 @@ export default function Post() {
 
    if(query==="recording"){
     containerPost=PostInit
-   }else if(!query){
+   }else if(!query || query==="simple-post"){
     containerPost=PostInit
    }
   return containerPost

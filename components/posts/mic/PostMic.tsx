@@ -136,7 +136,7 @@ export default function PostMic() {
       return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
     };
   return (
-    <div className='flex flex-col justify-center items-center gap-3'>
+    <div className='flex flex-col mx-36 justify-center items-center gap-3'>
       <Circle id="target2" className="text-[#f33] hidden fill-current mx-[-1rem] mb-12  animate-pulse w-[8rem] h-[8rem] border-gray-600"/>
       
 <Mic id='target' className="w-16 h-16 z-[99999] cursor-pointer"/>
