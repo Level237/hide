@@ -123,7 +123,7 @@ export default function Post() {
 </div>
 
           </div>}
-          {image && <Image src={image} className="w-full h-[10rem]" width="100" height="100" alt="dd"/>}
+          {image && query==="media-post" && <Image src={image} className="w-full h-[10rem]" width="100" height="100" alt="dd"/>}
           <div className="mt-[8rem] flex gap-5">
             <Button className="border-primary" variant="outline">Cancel</Button>
             <Button className="px-8">Save</Button>
