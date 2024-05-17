@@ -3,7 +3,7 @@
 import {motion,useAnimate} from "framer-motion"
 import React, { useEffect, useState } from 'react'
 import { Textarea } from '../ui/textarea'
-import { BookHeart, Circle, CircleStop, GalleryHorizontal, ListMusic, Mic, MicOff, MicVocalIcon, MoveLeft, Pause, PencilLine, Play, Save, Send, StickyNote, StopCircle, VenetianMaskIcon, Waves, X } from 'lucide-react'
+import { BookHeart, Circle, CircleStop, Edit, GalleryHorizontal, ListMusic, Mic, MicOff, MicVocalIcon, MoveLeft, Pause, PencilLine, Play, Save, Send, StickyNote, StopCircle, Trash, VenetianMaskIcon, Waves, X } from 'lucide-react'
 import { Button } from '../ui/button'
 import { PickerExample } from '../PicExample'
 import { useRouter } from 'next/navigation'
@@ -36,7 +36,7 @@ export default function Post() {
    const bgPost=PostStore((state)=>state.bgPost)
    const PostInit=<> <div 
  
-   className='  flex h-[100vh] bg-blue-600 overflow-y-hidden'>
+   className='  flex h-[100vh] bg-gray-100 overflow-y-hidden'>
      <section className="w-[20rem] bg-white relative ">
       <section className="flex mx-5 flex-col gap-3">
         <div>
@@ -123,7 +123,26 @@ export default function Post() {
 </div>
 
           </div>}
-          {image && query==="media-post" && <Image src={image} className="w-full h-[10rem]" width="100" height="100" alt="dd"/>}
+          {image && query==="media-post" && <>
+          <div className="flex flex-col mt-[-5rem]">
+            <div className="flex mb-5 items-center justify-between">
+            <div  className='p-2 flex items-center gap-2 bg-gray-600 mt-5 cursor-pointer  rounded-lg'>
+              <div className="text-[0.7rem] text-white" ><h2>Edit</h2></div>
+           <Edit className="h-4 w-4 text-white" onClick={()=>setQuery(c=> "recording")}/>
+           
+           </div>
+           <div  className='p-2  flex items-center gap-2 bg-red-600 mt-5 cursor-pointer  rounded-lg'>
+              <div className="text-[0.7rem] text-white" ><h2>Delete</h2></div>
+           <Trash className="h-4 w-4 text-white" onClick={()=>setQuery(c=> "recording")}/>
+           
+           </div>
+            </div>
+            <div>
+            <Image src={image} className="w-full h-[10rem]" width="100" height="100" alt="dd"/>
+            </div>
+          
+          </div>
+          </>}
           <div className="mt-[8rem] flex gap-5">
             <Button className="border-primary" variant="outline">Cancel</Button>
             <Button className="px-8">Save</Button>
@@ -147,15 +166,12 @@ export default function Post() {
           
           
           </div>}
-          {query==="media-post" && <div style={{ background:`${bgPost}` }} className={`font-bold overflow-y-hidden placeholder:text-gray-300     top-0 h-full py-[18rem]  text-center  text-white   text-xl`}>
-          <motion.div
-          ref={scope} 
-          
-          >
+          {query==="media-post" && <div  className={`font-bold overflow-y-hidden placeholder:text-gray-300     top-0 h-full py-[18rem]  text-center  text-white   text-xl`}>
+          <div>
 
-          <PostMic/>
+          <h2 className="text-2xl">ej</h2>
 
-          </motion.div>
+          </div>
           
           
           </div>}
