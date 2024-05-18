@@ -3,7 +3,7 @@
 import {motion,useAnimate} from "framer-motion"
 import React, { useEffect, useState } from 'react'
 import { Textarea } from '../ui/textarea'
-import { BookHeart, Circle, CircleStop, Edit, GalleryHorizontal, ListMusic, Mic, MicOff, MicVocalIcon, MoveLeft, Pause, PencilLine, Play, Save, Send, StickyNote, StopCircle, Trash, VenetianMaskIcon, Waves, X } from 'lucide-react'
+import { BookHeart, Circle, CircleStop, Edit, FileQuestion, GalleryHorizontal, ListMusic, Mic, MicOff, MicVocalIcon, MoveLeft, Pause, PencilLine, Play, Save, Send, StickyNote, StopCircle, Trash, VenetianMaskIcon, Waves, X } from 'lucide-react'
 import { Button } from '../ui/button'
 import { PickerExample } from '../PicExample'
 import { useRouter } from 'next/navigation'
@@ -44,31 +44,45 @@ export default function Post() {
         </div>
         
         <div className="flex flex-col">
-          <h2 className="text-sm">Type</h2>
-          <div className="flex justify-around">
-          <div   className='h-12 flex-col  mt-5 cursor-pointer  rounded-sm'>
-           <PencilLine className="h-6 w-6" onClick={()=>setQuery(c=> "media-post")}/>
-          
-           </div>
-           <div className="flex justify-center items-center">
-           <Separator className="my-1 h-6 bg-slate-400" orientation="vertical" />
-           </div>
-          <div   className='h-12 flex-col  mt-5 cursor-pointer  rounded-sm'>
-           <StickyNote className="h-6 w-6" onClick={()=>setQuery(c=> "simple-post")}/>
-          
-           </div>
-           <div className="flex justify-center items-center">
-           <Separator className="my-1 h-6 bg-slate-400" orientation="vertical" />
-           </div>
-           <div  className='h-12 flex flex-col mt-5 cursor-pointer  rounded-sm'>
-           <Mic className="h-6 w-6" onClick={()=>setQuery(c=> "recording")}/>
+          <h2 className="text-sm font-bold">Create a new Post</h2>
+          <div className="flex flex-col gap-3 justify-around">
+          <div   className=' flex justify-between items-center mt-5 cursor-pointer  rounded-sm'>
+            <div className="flex items-center  gap-3 ">
+            <PencilLine className="h-10 w-10 bg-gray-100 p-2 rounded-lg" onClick={()=>setQuery(c=> "media-post")}/>
+          <div>
+            <h2 className="">Post</h2>
+          </div>
+            </div>
            
            </div>
-           <div className="flex justify-center items-center">
-           <Separator className="my-1 h-6 bg-slate-400" orientation="vertical" />
+           
+           <div   className='h-12 flex justify-between items-center cursor-pointer  rounded-sm'>
+            <div className="flex items-center  gap-3 ">
+            <StickyNote className="h-10 w-10 bg-gray-100 p-2 rounded-lg" onClick={()=>setQuery(c=> "simple-post")}/>
+          <div>
+            <h2 className="">Cover Post</h2>
+          </div>
+            </div>
+           
            </div>
-           <div  className='h-12 flex flex-col mt-5 cursor-pointer  rounded-sm'>
-           <BookHeart onClick={()=>setQuery("")} className="h-6 w-6"/>
+           
+           <div   className='h-12 flex justify-between items-center cursor-pointer  rounded-sm'>
+            <div className="flex items-center  gap-3 ">
+            <Mic className="h-10 w-10 bg-gray-100 p-2 rounded-lg" onClick={()=>setQuery(c=> "media-post")}/>
+          <div>
+            <h2 className="">Voice Post</h2>
+          </div>
+            </div>
+           
+           </div>
+          
+           <div   className='h-12 flex justify-between items-center  cursor-pointer  rounded-sm'>
+            <div className="flex items-center  gap-3 ">
+            <FileQuestion className="h-10 w-10 bg-gray-100 p-2 rounded-lg" onClick={()=>setQuery(c=> "media-post")}/>
+          <div>
+            <h2 className="">Poll Post</h2>
+          </div>
+            </div>
            
            </div>
           </div>
@@ -166,11 +180,14 @@ export default function Post() {
           
           
           </div>}
-          {query==="media-post" && <div  className={`font-bold overflow-y-hidden placeholder:text-gray-300     top-0 h-full py-[18rem]  text-center  text-white   text-xl`}>
+          {query==="media-post" && <div  className={`mx-24 overflow-y-hidden placeholder:text-gray-300 mt-24  text-center  text-white   text-xl`}>
           <div>
 
-          <h2 className="text-2xl">ej</h2>
-
+          <h2 className="text-2xl text-black">Post</h2>
+          <div>
+            
+          <Textarea  name='content' placeholder="Type your message here." className={`mt-5 w-full h-[9rem] flex justify-center relative overflow-y-hidden  rounded-2xl placeholder:text-gray-300         text-black  text-sm`}  />
+          </div>
           </div>
           
           
