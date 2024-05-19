@@ -3,7 +3,7 @@
 import {motion,useAnimate} from "framer-motion"
 import React, { useEffect, useState } from 'react'
 import { Textarea } from '../ui/textarea'
-import { BookHeart, Circle, CircleStop, Edit, FileQuestion, GalleryHorizontal, ListMusic, Mic, MicOff, MicVocalIcon, MoveLeft, Pause, PencilLine, Play, Save, Send, StickyNote, StopCircle, Trash, VenetianMaskIcon, Waves, X } from 'lucide-react'
+import { Bold, BookHeart, Camera, Circle, CircleStop, Edit, File, FileQuestion, GalleryHorizontal, Italic, ListMusic, Mic, MicOff, MicVocalIcon, MoveLeft, Pause, PencilLine, Play, Save, Send, Smile, StickyNote, StopCircle, Trash, VenetianMaskIcon, Waves, X } from 'lucide-react'
 import { Button } from '../ui/button'
 import { PickerExample } from '../PicExample'
 import { useRouter } from 'next/navigation'
@@ -186,12 +186,30 @@ export default function Post() {
           <h2 className="text-2xl text-black">Post</h2>
           <div className="flex relative justify-center items-center w-[100%]">
             
-          <Textarea  name='content' placeholder="Enter your hide post" className={`mt-5 w-[100%] bg-transparent border-[0.15rem] placeholder:pt-8 placeholder:pl-20 h-[9rem] resize-none flex justify-center items-center  overflow-y-hidden  rounded-2xl placeholder:text-gray-400         text-black  text-sm`}  />
+          <Textarea  name='content' placeholder="Enter your hide post" className={`mt-5 w-[100%] bg-transparent border-[0.15rem]   h-[9rem] resize-none flex justify-center items-center  overflow-y-hidden pl-20 pt-8  rounded-2xl placeholder:text-gray-400         text-black  text-sm`}  />
           <div className="absolute top-12 left-8">
           <Avatar>
       <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
       <AvatarFallback>CN</AvatarFallback>
     </Avatar>
+          </div>
+
+          <div className="flex justify-between items-center absolute bottom-4 right-8 gap-2">
+          <div>
+            <Camera className="text-gray-500 w-6 h-6 cursor-pointer"/>
+          </div>
+          <div>
+            <Smile className="text-gray-500 w-6 h-6 cursor-pointer"/>
+          </div>
+          <div>
+            <Bold className="text-gray-500 w-6 h-6 cursor-pointer"/>
+          </div>
+          <div>
+            <Italic className="text-gray-500 w-6 h-6 cursor-pointer"/>
+          </div>
+          <div>
+            <Button>Post</Button>
+          </div>
           </div>
           </div>
           
