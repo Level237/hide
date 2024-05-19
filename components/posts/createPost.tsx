@@ -48,9 +48,9 @@ export default function Post() {
           <div className="flex flex-col gap-3 justify-around">
           <div   className=' flex justify-between items-center mt-5 cursor-pointer  rounded-sm'>
             <div className="flex items-center  gap-3 ">
-            <PencilLine className="h-10 w-10 bg-gray-100 p-2 rounded-lg" onClick={()=>setQuery(c=> "media-post")}/>
+            <PencilLine className="h-8 w-8 bg-gray-100 p-2 rounded-lg" onClick={()=>setQuery(c=> "media-post")}/>
           <div>
-            <h2 className="">Post</h2>
+            <h2 className="text-sm">Post</h2>
           </div>
             </div>
            
@@ -58,9 +58,9 @@ export default function Post() {
            
            <div   className='h-12 flex justify-between items-center cursor-pointer  rounded-sm'>
             <div className="flex items-center  gap-3 ">
-            <StickyNote className="h-10 w-10 bg-gray-100 p-2 rounded-lg" onClick={()=>setQuery(c=> "simple-post")}/>
+            <StickyNote className="h-8 w-8 bg-gray-100 p-2 rounded-lg" onClick={()=>setQuery(c=> "simple-post")}/>
           <div>
-            <h2 className="">Cover Post</h2>
+            <h2 className="text-sm">Cover Post</h2>
           </div>
             </div>
            
@@ -68,9 +68,9 @@ export default function Post() {
            
            <div   className='h-12 flex justify-between items-center cursor-pointer  rounded-sm'>
             <div className="flex items-center  gap-3 ">
-            <Mic className="h-10 w-10 bg-gray-100 p-2 rounded-lg" onClick={()=>setQuery(c=> "media-post")}/>
+            <Mic className="h-8 w-8 bg-gray-100 p-2 rounded-lg" onClick={()=>setQuery(c=> "recording")}/>
           <div>
-            <h2 className="">Voice Post</h2>
+            <h2 className="text-sm">Voice Post</h2>
           </div>
             </div>
            
@@ -78,9 +78,9 @@ export default function Post() {
           
            <div   className='h-12 flex justify-between items-center  cursor-pointer  rounded-sm'>
             <div className="flex items-center  gap-3 ">
-            <FileQuestion className="h-10 w-10 bg-gray-100 p-2 rounded-lg" onClick={()=>setQuery(c=> "media-post")}/>
+            <FileQuestion className="h-8 w-8 bg-gray-100 p-2 rounded-lg" onClick={()=>setQuery(c=> "media-post")}/>
           <div>
-            <h2 className="">Poll Post</h2>
+            <h2 className="text-sm">Poll Post</h2>
           </div>
             </div>
            
