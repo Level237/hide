@@ -3,7 +3,7 @@
 import {motion,useAnimate} from "framer-motion"
 import React, { useEffect, useState } from 'react'
 import { Textarea } from '../ui/textarea'
-import { Bold, BookHeart, Camera, Circle, CircleStop, Edit, File, FileQuestion, GalleryHorizontal, Italic, ListMusic, Mic, MicOff, MicVocalIcon, MoveLeft, Pause, PencilLine, Play, Save, Send, Smile, StickyNote, StopCircle, Trash, VenetianMaskIcon, Waves, X } from 'lucide-react'
+import { Bold, BookHeart, Camera, Circle, CircleStop, Edit, Eye, File, FileQuestion, GalleryHorizontal, Italic, ListMusic, Mic, MicOff, MicVocalIcon, MoveLeft, Pause, PencilLine, Play, Save, Send, Smile, SmilePlus, StickyNote, StopCircle, Trash, VenetianMaskIcon, Waves, X } from 'lucide-react'
 import { Button } from '../ui/button'
 import { PickerExample } from '../PicExample'
 import { useRouter } from 'next/navigation'
@@ -180,7 +180,8 @@ export default function Post() {
           
           
           </div>}
-          {query==="media-post" && <div  className={`mx-52 overflow-y-hidden placeholder:text-gray-300 mt-24  text-center  text-white   text-xl`}>
+          {query==="media-post" && <>
+          <div  className={`mx-52 overflow-y-hidden placeholder:text-gray-300 mt-10`}>
           
 
           <h2 className="text-2xl text-black">Post</h2>
@@ -195,9 +196,7 @@ export default function Post() {
           </div>
 
           <div className="flex justify-between items-center absolute bottom-4 right-8 gap-2">
-          <div>
-            <Camera className="text-gray-500 w-6 h-6 cursor-pointer"/>
-          </div>
+         
           <div>
             <Smile className="text-gray-500 w-6 h-6 cursor-pointer"/>
           </div>
@@ -207,15 +206,31 @@ export default function Post() {
           <div>
             <Italic className="text-gray-500 w-6 h-6 cursor-pointer"/>
           </div>
-          <div>
-            <Button>Post</Button>
+         
           </div>
           </div>
+          <div className="flex justify-center gap-5 mt-6">
+          <div className="flex items-center cursor-pointer gap-2 ">
+          <Camera className="text-gray-500 w-5 h-5 cursor-pointer"/>
+          <h2 className="text-gray-500 text-sm">Photos</h2>
+            
+          </div>
+          <div className="flex items-center cursor-pointer gap-2">
+          <SmilePlus className="text-gray-500 w-5 h-5 cursor-pointer"/>
+          <h2 className="text-gray-500 text-sm">Share your Humour</h2>
+            
+          </div>
+          <div className="flex items-center cursor-pointer gap-2">
+          <Eye className="text-gray-500 w-5 h-5 cursor-pointer"/>
+          <h2 className="text-gray-500 text-sm">View Post</h2>
+            
+          </div>
+         
+          </div>
+         
           </div>
           
-          
-          
-          </div>}
+          </>}
           {!query || query=="simple-post"  &&
           
           
