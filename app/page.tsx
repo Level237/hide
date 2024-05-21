@@ -33,7 +33,7 @@ SideBar Section
 
 <section>
 <div>
-<h2 className="font-bold text-gray-700 text-xl">Recents posts</h2>
+<h2 className="font-bold text-gray-700 text-lg">Recents posts</h2>
 <RecentPost/>
 </div>
 <section>
