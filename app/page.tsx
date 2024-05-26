@@ -32,12 +32,9 @@ SideBar Section
 <CreateWidget/>
 
 <section>
-<div>
-<h2 className="font-bold text-gray-700 text-md">Recents posts</h2>
-<RecentPost/>
-</div>
+
 <section>
-<h2 className="font-bold text-gray-700 text-md">Mon Mur</h2>
+
 <PostList/>
 
 </section>
