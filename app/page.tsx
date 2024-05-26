@@ -25,19 +25,19 @@ export default function Home() {
     <HeaderProfile param="posts"/>
 
 <section className="flex justify-between">
-<section className="w-[90rem]">
+<section className="w-[130rem]">
 SideBar Section
 </section>
-<section className=" flex flex-col max-w-full min-w-[50rem]  gap-10 justify-center">
+<section className=" flex flex-col max-w-full min-w-[45rem]  gap-3 justify-center">
 <CreateWidget/>
 
 <section>
 <div>
-<h2 className="font-bold text-gray-700 text-lg">Recents posts</h2>
+<h2 className="font-bold text-gray-700 text-md">Recents posts</h2>
 <RecentPost/>
 </div>
 <section>
-<h2 className="font-bold text-gray-700 text-xl">Mon Mur</h2>
+<h2 className="font-bold text-gray-700 text-md">Mon Mur</h2>
 <PostList/>
 
 </section>
@@ -47,7 +47,7 @@ SideBar Section
 <section className="w-[6rem]">
 
 </section>
-<section className="w-[70rem]">
+<section className="w-[90rem]">
 SideBar Section
 </section>
 </section>

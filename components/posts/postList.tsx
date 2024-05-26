@@ -28,7 +28,7 @@ export default function PostList() {
   <div className="mt-5 h-96 flex justify-center items-center  p-10 px-8 rounded-2xl " style={{ background:"linear-gradient(to top left,#000000,#434343)" }}>
         
         <div className="mt-5">
-          <h2 className="text-3xl text-center font-bold" style={{ color:"white" }}>-How create post in Hide ,Please..I have forget that...</h2>
+          <h2 className="text-2xl text-center font-bold" style={{ color:"white" }}>-How create post in Hide ,Please..I have forget that...</h2>
         </div>
         
     </div>
@@ -41,23 +41,23 @@ export default function PostList() {
             <AvatarFallback>CN</AvatarFallback>
             </Avatar>
             <div className="w-full relative">
-            <Textarea className="" placeholder="Enter your comment" />
+            <Textarea className="text-sm" placeholder="Enter your comment" />
             <div className="absolute bottom-6  right-4">
-            <SendIcon className=""/> 
+            <SendIcon className="w-6 h-6"/> 
             </div>
             </div>
             
       </div>
       <div className='flex w-[12rem]  justify-around text-black mt-5'>
           <div className='flex items-center gap-1'>
-          <Heart className="font-bold text-primary text-xl "/><span className='text-[0.8rem] text-primary font-bold'>3</span> 
+          <Heart className="font-bold text-primary text-md w-6 h-6"/><span className='text-[0.8rem] text-primary font-bold'>32</span> 
           
           </div>
           <div className='flex items-center gap-1'>
-          <LucideMessageSquare className=""/> <span className='text-[0.8rem]'>0</span> 
+          <LucideMessageSquare className="w-6 h-6"/> <span className='text-[0.8rem]'>0</span> 
         </div>
         <div className='flex items-center gap-1'>
-          <Share/><span className='text-[0.8rem]'>0</span> 
+          <Share className='w-6 h-6'/><span className='text-[0.8rem]'>0</span> 
         </div>
        
         
@@ -85,7 +85,7 @@ export default function PostList() {
   <div className="mt-5 h-96 flex justify-center items-center  p-10 px-8 rounded-2xl " style={{ background:"linear-gradient(to top left,#40E0D0,#FF8C00,#FF0080)" }}>
         
         <div className="mt-5">
-          <h2 className="text-3xl text-center font-bold" style={{ color:"white" }}>-Hello i like this social media.it{`'`} very beautiful post...</h2>
+          <h2 className="text-2xl text-center font-bold" style={{ color:"white" }}>-Hello i like this social media.it{`'`} very beautiful post...</h2>
         </div>
         
     </div>
@@ -100,7 +100,7 @@ export default function PostList() {
             <div className="w-full relative">
             <Textarea className="" placeholder="Enter your comment" />
             <div className="absolute bottom-6  right-4">
-            <SendIcon className=""/> 
+            <SendIcon className="w-6 h-6"/> 
             
             </div>
             </div>
@@ -108,16 +108,16 @@ export default function PostList() {
       </div>
       <div className='flex w-[12rem]  justify-around text-black mt-5'>
           <div className='flex items-center gap-1'>
-          <Heart className="font-bold text-primary text-xl "/><span className='text-[0.8rem] text-primary font-bold'>3</span> 
+          <Heart className="font-bold text-primary text-xl w-6 h-6"/><span className='text-[0.8rem] text-primary font-bold'>3</span> 
           
           </div>
           <div className='flex items-center gap-1'>
           
-          <LucideMessageSquare className=""/> <span className='text-[0.8rem]'>0</span> 
+          <LucideMessageSquare className="w-6 h-6"/> <span className='text-[0.8rem]'>0</span> 
         </div>
         <div className='flex items-center gap-1'>
 
-          <Share/><span className='text-[0.8rem]'>0</span> 
+          <Share className='w-6 h-6'/><span className='text-[0.8rem]'>0</span> 
         </div>
        
         
