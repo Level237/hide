@@ -13,6 +13,7 @@ import HeaderAuth from "@/components/header/HeaderAuth";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import RecentPost from '../components/posts/recentPost';
 import PostList from "@/components/posts/postList";
+import HomeSidebar from "@/components/sidebar/HomeSidebar";
 
 export default function Home() {
   return (
@@ -21,33 +22,10 @@ export default function Home() {
 
 
     <HomeComponent>
-
-    <HeaderProfile param="posts"/>
-
-<section className="flex justify-between">
-<section className="w-[130rem]">
-SideBar Section
-</section>
-<section className=" flex flex-col max-w-full min-w-[45rem]  gap-3 justify-center">
-<CreateWidget/>
-
 <section>
-
-<section>
-
-<PostList/>
-
+  <HomeSidebar/>
 </section>
 
-</section>
-</section>
-<section className="w-[6rem]">
-
-</section>
-<section className="w-[90rem]">
-SideBar Section
-</section>
-</section>
 
     </HomeComponent>
   </section>

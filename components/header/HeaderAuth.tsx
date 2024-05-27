@@ -78,32 +78,15 @@ export default  function HeaderAuth(props?:any) {
    
     return(
      
-<header   className='w-[100%]    max-lg:gap-y-6   sm:px-10 bg-gray-900 pb-2 font-[sans-serif] ' >
-        <div className='flex flex-wrap items-center justify-between gap-x-2'>
-        <div className='flex items-center gap-3'>
+<header   className='w-[100%]    max-lg:gap-y-6   sm:px-10 bg-[#282828] pb-2 font-[sans-serif] ' >
+<section className='flex items-center justify-between'>
+        <section className='flex items-center gap-3'>
             <Brand/>
-         <div className='text-white font-bold'> Dashboard</div>
+            <div>
+              <Input className='bg-[#363636] h-8 placeholder:text-sm rounded-xl placeholder:text-gray-400 border-[#363636]' type='text' placeholder='#Explore'/>
             </div>
-           
-        <div className='flex gap-2 items-center'>
-            <div className='relative'>
-            <Input placeholder='Search' type='text' className='bg-transparent placeholder:pl-5 border-[0.1px] pl-7 border-[#ffffff4f] w-[290px] h-full focus:   text-white hover:text-white  hover:bg-[#2dac5c3d]'/>
-            <div className='absolute left-0 top-1 text-[#ffffff4f] w-12'>
-                <Search className='w-4 mx-2'/>
-            </div>
-            </div>
-        
-            <Button variant="outline" className='bg-transparent border-[0.1px] border-[#ffffff4f] w-[50px] h-8  text-white hover:text-white  hover:bg-[#2dac5c3d]'><Plus className=''/></Button>
-           
-          <DropdownAsChild>
-          <Avatar className='cursor-pointer'>
-                <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-        <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
-          </DropdownAsChild>
-     
-        </div>
-        </div>
+        </section>
+    </section>
           
           
           
