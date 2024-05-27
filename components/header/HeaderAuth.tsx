@@ -79,14 +79,7 @@ export default  function HeaderAuth(props?:any) {
     return(
      
 <header   className='w-[100%]    max-lg:gap-y-6   sm:px-10 bg-[#282828] pb-2 font-[sans-serif] ' >
-<section className='flex items-center justify-between'>
-        <section className='flex items-center gap-3'>
-            <Brand/>
-            <div>
-              <Input className='bg-[#363636] h-8 placeholder:text-sm rounded-xl placeholder:text-gray-400 border-[#363636]' type='text' placeholder='#Explore'/>
-            </div>
-        </section>
-    </section>
+
           
           
           

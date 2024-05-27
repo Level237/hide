@@ -22,8 +22,14 @@ export default function Home() {
 
 
     <HomeComponent>
-<section>
+<section className="flex">
+  
+  <section className="">
   <HomeSidebar/>
+  </section>
+ <section className="align-text-top">
+ lore
+ </section>
 </section>
 
 

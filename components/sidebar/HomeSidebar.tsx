@@ -15,8 +15,8 @@ import { Separator } from '../ui/separator'
 import { Button } from '../ui/button'
 export default function HomeSidebar() {
   return (
-    <>
-    <section className='fixed flex flex-col gap-3  max-w-[300px]'>
+  
+    <section  className='fixed scroll-m-0 top-0 bottom-0 overflow-y-scroll flex flex-col gap-3  max-w-[300px]'>
     <section className='flex items-center justify-between'>
         <section className='flex items-center gap-3'>
         <div className="flex items-center justify-between py-5 md:block">
@@ -30,8 +30,11 @@ export default function HomeSidebar() {
         </Link>
         
     </div>
-            <div>
+            <div className=''>
               <Input className='bg-[#363636] h-8 placeholder:text-sm rounded-xl placeholder:text-gray-400 border-[#363636]' type='text' placeholder='#Explore'/>
+              <section className='flex justify-center'>
+              
+              </section>
             </div>
         </section>
     </section>
@@ -73,12 +76,66 @@ export default function HomeSidebar() {
       
       </CardContent>
       <CardFooter className="flex justify-between">
-      <Button className='w-full'>My Profile</Button>
+      <Button className='w-full bg-[#4d4b4b]'>My Profile</Button>
       </CardFooter>
     </Card>
     </section>
+    <section className='flex flex-col gap-5'>
+      <section>
+      <h2 className='text-white'>Interesting</h2>
+      </section>
+     <section className='grid grid-cols-3 gap-2'>
+
+      <div className='py-2  text-center bg-[#363636] text-white text-sm rounded-xl'>
+     Sport
+      </div>
+      <div className='py-2  text-center bg-[#363636] text-white text-sm rounded-xl'>
+      Management
+      </div>
+      <div className='py-2  text-center bg-[#363636] text-white text-sm rounded-xl'>
+     Life
+      </div>
+      <div className='py-2  text-center bg-[#363636] text-white text-sm rounded-xl'>
+    Programming
+      </div>
+      <div className='py-2  text-center bg-[#363636] text-white text-sm rounded-xl'>
+     Gamming
+      </div>
+      <div className='py-2  text-center bg-[#363636] text-white text-sm rounded-xl'>
+    Humor
+      </div>
+     
+     </section>
+    </section>
+    <section className='flex flex-col gap-2'>
+      <section>
+      <h2 className='text-white'>Friends</h2>
+      </section>
+     <section className='flex flex-col gap-2'>
+
+      <div className='py-2  text-center bg-[#363636] text-white text-sm rounded-xl'>
+     Sport
+      </div>
+      <div className='py-2  text-center bg-[#363636] text-white text-sm rounded-xl'>
+      Management
+      </div>
+      <div className='py-2  text-center bg-[#363636] text-white text-sm rounded-xl'>
+     Life
+      </div>
+      <div className='py-2  text-center bg-[#363636] text-white text-sm rounded-xl'>
+    Programming
+      </div>
+      <div className='py-2  text-center bg-[#363636] text-white text-sm rounded-xl'>
+     Gamming
+      </div>
+      <div className='py-2  text-center bg-[#363636] text-white text-sm rounded-xl'>
+    Humor
+      </div>
+     
+     </section>
+    </section>
     </section>
    
-    </>
+  
   )
 }
