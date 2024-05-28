@@ -120,12 +120,10 @@ export default  function HeaderAuth(props?:any) {
         </div>
         </section>
   
-        <section className='flex flex-2 gap-7 ml-12 bg-[#363636] pr-3 pl-[0.1rem] rounded-lg items-center justify-between'>
+        <section className='flex flex-2 gap-7 ml-12 bg-[#363636] pr-3 py-1 pl-[0.1rem] rounded-lg items-center justify-between'>
           <section className='flex flex-2 gap-2 items-center justify-center'>
           <div>
-       <Avatar className='cursor-pointer w-8 h-8 rounded-xl'>
-                    <AvatarImage  src="/profile.jpg" alt="@shadcn" />
-            <AvatarFallback>CN</AvatarFallback>
+       <Avatar style={{ background:"url('/profile.jpg')",backgroundPosition:"center",backgroundSize:"cover" }} className='cursor-pointer w-7 h-7 rounded-xl'>
             </Avatar>
     
        </div>

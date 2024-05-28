@@ -1,6 +1,6 @@
 import React from 'react'
-import { Brand } from '../ui/Logo'
-import { Input } from '../ui/input'
+import { Brand } from '../../ui/Logo'
+import { Input } from '../../ui/input'
 import Link from 'next/link'
 import Image from 'next/image'
 import {
@@ -11,8 +11,8 @@ import {
     CardHeader,
     CardTitle,
   } from "@/components/ui/card"
-import { Separator } from '../ui/separator'
-import { Button } from '../ui/button'
+import { Separator } from '../../ui/separator'
+import { Button } from '../../ui/button'
 export default function HomeSidebar() {
   return (
   
@@ -56,7 +56,7 @@ export default function HomeSidebar() {
       
       </CardContent>
       <CardFooter className="flex justify-between">
-      <Button className='w-full bg-[#4d4b4b]'>My Profile</Button>
+      <Button className='w-full bg-[#4d4b4b75]'>My Profile</Button>
       </CardFooter>
     </Card>
     </section>
