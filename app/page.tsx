@@ -25,17 +25,25 @@ export default function Home() {
 
 
     <HomeComponent>
-<section className="flex">
+
+    <HeaderAuth/>
+  <section className="flex items-center flex-col justify-items-start  w-[100%]  h-screen">
   
-  <section className="">
   <HomeSidebar/>
+  <section className="text-black fixed left-[350px] right-[350px]  my-24">
+    <CreateWidget/>
+  
   </section>
-    <section>
-      <HomeRightSidebar/>
-    </section>
- <HeaderAuth/>
+  <HomeRightSidebar/>
  
-</section>
+  </section>
+    
+      
+    
+ 
+ 
+
+
 
 
     </HomeComponent>

@@ -84,10 +84,10 @@ export default  function HeaderAuth(props?:any) {
    
     return(
      
-<header   className='flex w-full sticky items-center justify-between' >
+<header   className='flex w-full mr-8 fixed items-center justify-around top-0 right-8 left-8' >
 
 
-        <section className='flex flex-2 items-center gap-3'>
+        <section className='flex flex-2 items-center gap-3 absolute top-0 left-0'>
         <div className="flex items-center justify-between py-5 md:block">
         <Link href="/">
             <Image
@@ -106,7 +106,7 @@ export default  function HeaderAuth(props?:any) {
               </section>
             </div>
         </section>
-        <section className='flex  flex-1 gap-10 items-center justify-center'>
+        <section className='flex   flex-1 gap-10 items-center justify-center absolute top-8'>
         <div>
           <Home className='text-primary w-[1.4rem]'/>
         </div>
@@ -122,7 +122,7 @@ export default  function HeaderAuth(props?:any) {
         
         </section>
   
-        <section className='flex flex-2 gap-7 ml-12 bg-[#363636] pr-3 py-1 pl-[0.1rem] rounded-lg items-center justify-between'>
+        <section className='flex flex-2 absolute top-6 right-16  gap-7 ml-12 bg-[#363636] pr-3 py-1 pl-[0.1rem] rounded-lg items-center justify-between'>
           <section className='flex flex-2 gap-2 items-center justify-center'>
           <div>
        <Avatar style={{ background:"url('/profile.jpg')",backgroundPosition:"center",backgroundSize:"cover" }} className='cursor-pointer w-7 h-7 rounded-xl'>
