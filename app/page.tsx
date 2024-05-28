@@ -14,6 +14,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import RecentPost from '../components/posts/recentPost';
 import PostList from "@/components/posts/postList";
 import HomeSidebar from "@/components/sidebar/HomeSidebar";
+import Image from "next/image";
+import { Input } from "@/components/ui/input";
 
 export default function Home() {
   return (
@@ -27,9 +29,9 @@ export default function Home() {
   <section className="">
   <HomeSidebar/>
   </section>
- <section className="align-text-top">
- lore
- </section>
+
+ <HeaderAuth/>
+ 
 </section>
 
 

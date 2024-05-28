@@ -16,28 +16,8 @@ import { Button } from '../ui/button'
 export default function HomeSidebar() {
   return (
   
-    <section  className='fixed scroll-m-0 top-0 bottom-0 overflow-y-scroll flex flex-col gap-3  max-w-[300px]'>
-    <section className='flex items-center justify-between'>
-        <section className='flex items-center gap-3'>
-        <div className="flex items-center justify-between py-5 md:block">
-        <Link href="/">
-            <Image
-                src="/logo.png"
-                width={45}
-                height={45}
-                alt="Float UI logo"
-            />
-        </Link>
-        
-    </div>
-            <div className=''>
-              <Input className='bg-[#363636] h-8 placeholder:text-sm rounded-xl placeholder:text-gray-400 border-[#363636]' type='text' placeholder='#Explore'/>
-              <section className='flex justify-center'>
-              
-              </section>
-            </div>
-        </section>
-    </section>
+    <section  className='fixed mt-24 scroll-m-0 top-0 bottom-0 overflow-y-scroll flex flex-col gap-3  max-w-[300px]'>
+   
     <section className=''>
     <Card className="w-full pb-0 max-w-full rounded-2xl bg-[#363636] border-[#363636]">
       <CardHeader className='h-32 opacity-[0.5] rounded-2xl  relative' style={{ background:"url('/cover.jpg')",backgroundPosition:"center",backgroundSize:"cover" }}>
