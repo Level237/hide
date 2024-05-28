@@ -30,9 +30,9 @@ export default function Home() {
   <section className="flex items-center flex-col justify-items-start  w-[100%]  h-screen">
   
   <HomeSidebar/>
-  <section className="text-black fixed left-[350px] right-[350px]  my-24">
+  <section className=" fixed left-[350px] h-screen top-0 bottom-0 right-[350px] overflow-y-scroll scroll-m-0  my-24">
     <CreateWidget/>
-  
+  <PostList/>
   </section>
   <HomeRightSidebar/>
  

@@ -7,28 +7,31 @@ import PostVoice from './PostVoice'
 export default function PostList() {
   return (
     <div className="mt-5 flex flex-col gap-3">
-  <div className="bg-white px-12 py-12 mb-6 rounded-3xl">
+  <div className="bg-[#363636] px-6 py-4 mb-6 rounded-3xl">
     <div className="flex justify-between">
-    <div className="flex justify-between w-[5rem] gap-3 ">
-        <Avatar className='cursor-pointer'>
-                    <AvatarImage src="/hidd.jpg" alt="@shadcn" />
-            <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
+    <div className="flex justify-between w-[8rem] ">
+      <div className='flex-1'>
+      <Avatar style={{ background:"url('/profile2.jpg')",backgroundPosition:"center",backgroundSize:"cover" }} className='cursor-pointer w-10 h-10 rounded-xl'>
+                    
+                   
+                    </Avatar>
+      </div>
     
-            <div className="flex flex-col">
-              <h2 className="font-bold text-md " style={{ color:"black" }}>#uizog234</h2>
+    
+            <div className="flex  flex-col flex-2">
+              <h2 className="font-bold text-sm text-gray-400" >Zed Camara</h2>
               <span className="text-sm text-gray-500 ">1h ago</span>
             </div>
         </div>
-        <div className="">
+        <div className="text-white">
        <MoreHorizontal/>
         </div>
     </div>
   
-  <div className="mt-5 h-96 flex justify-center items-center  p-10 px-8 rounded-2xl " style={{ background:"linear-gradient(to top left,#000000,#434343)" }}>
+  <div className="mt-5 h-96 flex justify-center items-center  p-10 px-8 rounded-2xl " style={{ background:"linear-gradient(to top left,#00416A,#ec008c)" }}>
         
         <div className="mt-5">
-          <h2 className="text-2xl text-center font-bold" style={{ color:"white" }}>-How create post in Hide ,Please..I have forget that...</h2>
+          <h2 className="text-2xl text-center font-bold" style={{ color:"white" }}>-😄😄😄Tu trouve le bon mais il est toujours devant sa machine..</h2>
         </div>
         
     </div>
@@ -36,27 +39,25 @@ export default function PostList() {
     <div className="flex mt-5 justify-between items-center">
       <div className="flex items-center gap-3 flex-1">
         
-      <Avatar className='cursor-pointer'>
-                    <AvatarImage src="/hidd.jpg" alt="@shadcn" />
-            <AvatarFallback>CN</AvatarFallback>
+      <Avatar style={{ background:"url('/profile.jpg')",backgroundPosition:"center",backgroundSize:"cover" }} className='cursor-pointer w-8 h-8 rounded-xl'>
             </Avatar>
             <div className="w-full relative">
-            <Textarea className="text-sm" placeholder="Enter your comment" />
-            <div className="absolute bottom-6  right-4">
-            <SendIcon className="w-6 h-6"/> 
+            <textarea name="" id="" placeholder='Enter your comment' className={`font-bold placeholder:text-sm  w-full bg-[#282828] resize-none max-h-12 flex justify-center relative overflow-y-hidden border-[#00000041] rounded-2xl placeholder:text-[#ffffff21] py-4 px-3 cursor-pointer        text-white  text-sm`} ></textarea>
+            <div className="absolute bottom-2  right-4">
+            <SendIcon className="w-6 h-6 text-gray-400"/> 
             </div>
             </div>
             
       </div>
       <div className='flex w-[12rem]  justify-around text-black mt-5'>
           <div className='flex items-center gap-1'>
-          <Heart className="font-bold text-primary text-md w-6 h-6"/><span className='text-[0.8rem] text-primary font-bold'>32</span> 
+          <Heart className="font-bold text-primary fill-current text-md w-6 h-6"/><span className='text-[0.8rem] text-primary font-bold'>32</span> 
           
           </div>
-          <div className='flex items-center gap-1'>
+          <div className='flex items-center gap-1 text-gray-300'>
           <LucideMessageSquare className="w-6 h-6"/> <span className='text-[0.8rem]'>0</span> 
         </div>
-        <div className='flex items-center gap-1'>
+        <div className='flex items-center gap-1 text-gray-300'>
           <Share className='w-6 h-6'/><span className='text-[0.8rem]'>0</span> 
         </div>
        
@@ -64,28 +65,31 @@ export default function PostList() {
         </div>
     </div>
   </div>
-  <div className="bg-white px-12 py-12 mb-6 rounded-3xl">
+  <div className="bg-[#363636] px-6 py-4 mb-6 rounded-3xl">
     <div className="flex justify-between">
-    <div className="flex justify-between w-[5rem] gap-3 ">
-        <Avatar className='cursor-pointer'>
-                    <AvatarImage src="/hidd.jpg" alt="@shadcn" />
-            <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
+    <div className="flex justify-between w-[12rem] ">
+      <div className='flex-1'>
+      <Avatar style={{ background:"url('/profile1.jpg')",backgroundPosition:"center",backgroundSize:"cover" }} className='cursor-pointer w-10 h-10 rounded-xl'>
+                    
+                   
+                    </Avatar>
+      </div>
     
-            <div className="flex flex-col">
-              <h2 className="font-bold text-md " style={{ color:"black" }}>#uizog234</h2>
+    
+            <div className="flex  flex-col flex-2">
+              <h2 className="font-bold text-sm text-gray-400" >Ibrahima Djamilatou</h2>
               <span className="text-sm text-gray-500 ">1h ago</span>
             </div>
         </div>
-        <div className="">
+        <div className="text-white">
        <MoreHorizontal/>
         </div>
     </div>
   
-  <div className="mt-5 h-96 flex justify-center items-center  p-10 px-8 rounded-2xl " style={{ background:"linear-gradient(to top left,#40E0D0,#FF8C00,#FF0080)" }}>
+  <div className="mt-5 h-96 flex justify-center items-center  p-10 px-8 rounded-2xl " style={{ background:"linear-gradient(to top left,#1488CC,#000)" }}>
         
         <div className="mt-5">
-          <h2 className="text-2xl text-center font-bold" style={{ color:"white" }}>-Hello i like this social media.it{`'`} very beautiful post...</h2>
+          <h2 className="text-2xl text-center font-bold" style={{ color:"white" }}>🚀Les Barcelonais vous etes à la place? faites du bruit </h2>
         </div>
         
     </div>
@@ -93,30 +97,25 @@ export default function PostList() {
     <div className="flex mt-5 justify-between items-center">
       <div className="flex items-center gap-3 flex-1">
         
-      <Avatar className='cursor-pointer'>
-                    <AvatarImage src="/hidd.jpg" alt="@shadcn" />
-            <AvatarFallback>CN</AvatarFallback>
+      <Avatar style={{ background:"url('/profile.jpg')",backgroundPosition:"center",backgroundSize:"cover" }} className='cursor-pointer w-8 h-8 rounded-xl'>
             </Avatar>
             <div className="w-full relative">
-            <Textarea className="" placeholder="Enter your comment" />
-            <div className="absolute bottom-6  right-4">
-            <SendIcon className="w-6 h-6"/> 
-            
+            <textarea name="" id="" placeholder='Enter your comment' className={`font-bold placeholder:text-sm  w-full bg-[#282828] resize-none max-h-12 flex justify-center relative overflow-y-hidden border-[#00000041] rounded-2xl placeholder:text-[#ffffff21] py-4 px-3 cursor-pointer        text-white  text-sm`} ></textarea>
+            <div className="absolute bottom-2  right-4">
+            <SendIcon className="w-6 h-6 text-gray-400"/> 
             </div>
             </div>
             
       </div>
       <div className='flex w-[12rem]  justify-around text-black mt-5'>
           <div className='flex items-center gap-1'>
-          <Heart className="font-bold text-primary text-xl w-6 h-6"/><span className='text-[0.8rem] text-primary font-bold'>3</span> 
+          <Heart className="font-bold text-primary fill-current text-md w-6 h-6"/><span className='text-[0.8rem] text-primary font-bold'>3</span> 
           
           </div>
-          <div className='flex items-center gap-1'>
-          
-          <LucideMessageSquare className="w-6 h-6"/> <span className='text-[0.8rem]'>0</span> 
+          <div className='flex items-center gap-1 text-gray-300'>
+          <LucideMessageSquare className="w-6 h-6"/> <span className='text-[0.8rem]'>5</span> 
         </div>
-        <div className='flex items-center gap-1'>
-
+        <div className='flex items-center gap-1 text-gray-300'>
           <Share className='w-6 h-6'/><span className='text-[0.8rem]'>0</span> 
         </div>
        
@@ -124,29 +123,30 @@ export default function PostList() {
         </div>
     </div>
   </div>
-  <div className="bg-white px-12 py-12 mb-6 rounded-3xl">
+  <div className="bg-[#363636] px-6 py-4 mb-6 rounded-3xl">
     <div className="flex justify-between">
-    <div className="flex justify-between w-[5rem] gap-3 ">
-        <Avatar className='cursor-pointer'>
-                    <AvatarImage src="/hidd.jpg" alt="@shadcn" />
-            <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
+    <div className="flex justify-between w-[12rem] ">
+      <div className='flex-1'>
+      <Avatar style={{ background:"url('/profile1.jpg')",backgroundPosition:"center",backgroundSize:"cover" }} className='cursor-pointer w-10 h-10 rounded-xl'>
+                    
+                   
+                    </Avatar>
+      </div>
     
-            <div className="flex flex-col">
-              <h2 className="font-bold text-md " style={{ color:"black" }}>#uizog234</h2>
+    
+            <div className="flex  flex-col flex-2">
+              <h2 className="font-bold text-sm text-gray-400" >Ibrahima Djamilatou</h2>
               <span className="text-sm text-gray-500 ">1h ago</span>
             </div>
         </div>
-        <div className="">
+        <div className="text-white">
        <MoreHorizontal/>
         </div>
     </div>
   
-  <div className="mt-5 h-96 flex justify-center items-center relative  p-10 px-8 rounded-2xl " style={{ background:"linear-gradient(to top left,#AC32E4,#7918F2,#4801FF)" }}>
-  <div className='bg-[#0000003d] absolute inset-0  top-0 left-0 w-full h-full'>
-
-</div>
-        <div className="mt-5">
+  <div className="mt-5 h-96 flex justify-center items-center  p-10 px-8 rounded-2xl " style={{ background:"#ec008c" }}>
+        
+  <div className="mt-5">
           <h2 className="text-3xl font-bold" style={{ color:"white" }}><PostVoice audioUrl={'afrobeat.mp3'} waveId={'wave1'}/></h2>
         </div>
         
@@ -155,99 +155,34 @@ export default function PostList() {
     <div className="flex mt-5 justify-between items-center">
       <div className="flex items-center gap-3 flex-1">
         
-      <Avatar className='cursor-pointer'>
-                    <AvatarImage src="/hidd.jpg" alt="@shadcn" />
-            <AvatarFallback>CN</AvatarFallback>
+      <Avatar style={{ background:"url('/profile.jpg')",backgroundPosition:"center",backgroundSize:"cover" }} className='cursor-pointer w-8 h-8 rounded-xl'>
             </Avatar>
             <div className="w-full relative">
-            <Textarea className="" placeholder="Enter your comment" />
-            <div className="absolute bottom-6  right-4">
-            <SendIcon className=""/> 
-            
+            <textarea name="" id="" placeholder='Enter your comment' className={`font-bold placeholder:text-sm  w-full bg-[#282828] resize-none max-h-12 flex justify-center relative overflow-y-hidden border-[#00000041] rounded-2xl placeholder:text-[#ffffff21] py-4 px-3 cursor-pointer        text-white  text-sm`} ></textarea>
+            <div className="absolute bottom-2  right-4">
+            <SendIcon className="w-6 h-6 text-gray-400"/> 
             </div>
             </div>
             
       </div>
       <div className='flex w-[12rem]  justify-around text-black mt-5'>
           <div className='flex items-center gap-1'>
-          <Heart className="font-bold text-primary text-xl "/><span className='text-[0.8rem] text-primary font-bold'>3</span> 
+          <Heart className="font-bold text-primary fill-current text-md w-6 h-6"/><span className='text-[0.8rem] text-primary font-bold'>3</span> 
           
           </div>
-          <div className='flex items-center gap-1'>
-          
-          <LucideMessageSquare className=""/> <span className='text-[0.8rem]'>0</span> 
+          <div className='flex items-center gap-1 text-gray-300'>
+          <LucideMessageSquare className="w-6 h-6"/> <span className='text-[0.8rem]'>5</span> 
         </div>
-        <div className='flex items-center gap-1'>
-
-          <Share/><span className='text-[0.8rem]'>0</span> 
+        <div className='flex items-center gap-1 text-gray-300'>
+          <Share className='w-6 h-6'/><span className='text-[0.8rem]'>0</span> 
         </div>
        
         
         </div>
     </div>
   </div>
-  <div className="bg-white px-12 py-12 mb-6 rounded-3xl">
-    <div className="flex justify-between">
-    <div className="flex justify-between w-[5rem] gap-3 ">
-        <Avatar className='cursor-pointer'>
-                    <AvatarImage src="/hidd.jpg" alt="@shadcn" />
-            <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-    
-            <div className="flex flex-col">
-              <h2 className="font-bold text-md " style={{ color:"black" }}>#uizog234</h2>
-              <span className="text-sm text-gray-500 ">1h ago</span>
-            </div>
-        </div>
-        <div className="">
-       <MoreHorizontal/>
-        </div>
-    </div>
   
-  <div className="mt-5 h-96 flex justify-center items-center relative  p-10 px-8 rounded-2xl " style={{ background:"linear-gradient(to top left,#8a2be2,#0000cd,#228b22,#ccff00)" }}>
-  <div className='bg-[#0000003d] absolute inset-0  top-0 left-0 w-full h-full'>
-
-</div>
-        <div className="mt-5">
-          <h2 className="text-3xl font-bold" style={{ color:"white" }}><PostVoice audioUrl={'piano.mp3'} waveId={'wave2'}/></h2>
-        </div>
-        
-    </div>
-    
-    <div className="flex mt-5 justify-between items-center">
-      <div className="flex items-center gap-3 flex-1">
-        
-      <Avatar className='cursor-pointer'>
-                    <AvatarImage src="/hidd.jpg" alt="@shadcn" />
-            <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-            <div className="w-full relative">
-            <Textarea className="" placeholder="Enter your comment" />
-            <div className="absolute bottom-6  right-4">
-            <SendIcon className=""/> 
-            
-            </div>
-            </div>
-            
-      </div>
-      <div className='flex w-[12rem]  justify-around text-black mt-5'>
-          <div className='flex items-center gap-1'>
-          <Heart className="font-bold text-primary text-xl "/><span className='text-[0.8rem] text-primary font-bold'>3</span> 
-          
-          </div>
-          <div className='flex items-center gap-1'>
-          
-          <LucideMessageSquare className=""/> <span className='text-[0.8rem]'>0</span> 
-        </div>
-        <div className='flex items-center gap-1'>
-
-          <Share/><span className='text-[0.8rem]'>0</span> 
-        </div>
-       
-        
-        </div>
-    </div>
-  </div>
+ 
 </div>
   )
 }
