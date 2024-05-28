@@ -23,6 +23,7 @@ import {
     LogOut,
     Mail,
     MessageSquare,
+    Mic,
     PanelsRightBottom,
     Plus,
     PlusCircle,
@@ -113,11 +114,12 @@ export default  function HeaderAuth(props?:any) {
           <BellRingIcon className='text-gray-200 w-[1.4rem]'/>
         </div>
         <div>
-          <User2Icon className='text-gray-200 w-[1.4rem]'/>
+          <Mic className='text-gray-200 w-[1.4rem]'/>
         </div>
         <div>
-          <Settings className='text-gray-200 w-[1.4rem]'/>
+          <User2Icon className='text-gray-200 w-[1.4rem]'/>
         </div>
+        
         </section>
   
         <section className='flex flex-2 gap-7 ml-12 bg-[#363636] pr-3 py-1 pl-[0.1rem] rounded-lg items-center justify-between'>

@@ -97,6 +97,31 @@ export default function HomeRightSidebar() {
                
             </div>
         </div>
+        <div className='flex flex-col  items-center gap-4 bg-[#282828a4]  px-5 py-3 rounded-xl'>
+            <div className='flex gap-2 items-center'>
+            <div>
+            <Avatar style={{ background:"url('/anonymous.jpg')",backgroundPosition:"center",backgroundSize:"cover" }} className='cursor-pointer w-8 h-8 rounded-xl'>
+                    
+                   
+                    </Avatar>
+            </div>
+            <div className='flex flex-col'>
+                <div >
+                <h2 className='text-white text-sm'>Anonymous</h2>
+                </div>
+                <div className='leading-4'>
+                    <span className='text-[0.8rem] text-gray-400'>has replied your post <span className='text-primary '> - 3 min ago</span>  </span>
+                </div>
+            </div>
+            </div>
+            
+            <div className='bg-[#282828] rounded-lg gap-2  justify-around py-3 px-2 flex items-center'>
+                
+                <button className='text-[0.78rem]  bg-[#4d4b4b75] text-white py-1 px-10 rounded-md'>Ignore</button>
+                <button className='text-[0.78rem]  bg-primary text-white py-1 px-10 rounded-md'>View</button>
+               
+            </div>
+        </div>
     </div>
    </section>
    </section>
