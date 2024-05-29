@@ -6,7 +6,7 @@ import PostVoice from './PostVoice'
 
 export default function PostList() {
   return (
-    <div className="mt-5 flex flex-col gap-3">
+    <div className="mt-5 mb-32 flex flex-col gap-3">
   <div className="bg-[#363636] px-6 py-4 mb-6 rounded-3xl">
     <div className="flex justify-between">
     <div className="flex justify-between w-[8rem] ">
@@ -123,7 +123,7 @@ export default function PostList() {
         </div>
     </div>
   </div>
-  <div className="bg-[#363636] px-6 py-4 mb-6 rounded-3xl">
+  <div className="bg-[#363636] px-6 py-4  rounded-3xl">
     <div className="flex justify-between">
     <div className="flex justify-between w-[12rem] ">
       <div className='flex-1'>
@@ -182,7 +182,7 @@ export default function PostList() {
     </div>
   </div>
   
- 
+  
 </div>
   )
 }
