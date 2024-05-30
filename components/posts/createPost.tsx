@@ -3,7 +3,7 @@
 import {motion,useAnimate} from "framer-motion"
 import React, { useEffect, useState } from 'react'
 import { Textarea } from '../ui/textarea'
-import { AlignHorizontalDistributeCenter, Bold, BookHeart, Camera, Circle, CircleStop, Edit, Eye, File, FileQuestion, GalleryHorizontal, Italic, ListMusic, Mic, MicOff, MicVocalIcon, MoveLeft, Pause, PencilLine, Play, Save, Send, Smile, SmilePlus, StickyNote, StopCircle, Trash, VenetianMaskIcon, Waves, X } from 'lucide-react'
+import { AlignHorizontalDistributeCenter, Bold, BookHeart, Camera, Circle, CircleStop, Edit, Eye, File, FileQuestion, GalleryHorizontal, Home, Italic, ListMusic, Mic, MicOff, MicVocalIcon, MoveLeft, Pause, PencilLine, Play, Save, Send, SendIcon, Smile, SmilePlus, StickyNote, StopCircle, Trash, VenetianMaskIcon, Waves, X } from 'lucide-react'
 import { Button } from '../ui/button'
 import { PickerExample } from '../PicExample'
 import { useRouter } from 'next/navigation'
@@ -36,60 +36,20 @@ export default function Post() {
    const bgPost=PostStore((state)=>state.bgPost)
    const PostInit=<> <div 
  
-   className='  flex h-[100vh] bg-gray-100 overflow-y-hidden'>
-     <section className="w-[20rem] bg-white relative ">
+   className='  flex mt-6 gap-5 max-h-[100%]  items-stretch  overflow-y-hidden'>
+     <section className="w-[25rem] max-w-[300px]  fixed  py-8  bg-[#363636]  rounded-xl ">
       <section className="flex mx-5 flex-col gap-3">
         <div>
-        <Image src="/full-logo.png" alt="logo" height={100} width={100} className="mx-auto" />
+        <Image src="/logo.png" alt="logo" height={50} width={50} className="mx-auto" />
         </div>
         
         <div className="flex flex-col">
-          <h2 className="text-sm font-bold">Create a new Post</h2>
-          <div className="flex flex-col gap-3 justify-around">
-          <div   className=' flex justify-between items-center mt-5 cursor-pointer  rounded-sm'>
-            <div className="flex items-center  gap-3 ">
-            <PencilLine className="h-8 w-8 bg-gray-100 p-2 rounded-lg" onClick={()=>setQuery(c=> "media-post")}/>
-          <div>
-            <h2 className="text-sm">Post</h2>
+          <h2 className="text-sm text-gray-300 font-bold">Background Post</h2>
           </div>
-            </div>
-           
-           </div>
-           
-           <div   className='h-12 flex justify-between items-center cursor-pointer  rounded-sm'>
-            <div className="flex items-center  gap-3 ">
-            <StickyNote className="h-8 w-8 bg-gray-100 p-2 rounded-lg" onClick={()=>setQuery(c=> "simple-post")}/>
-          <div>
-            <h2 className="text-sm">Cover Post</h2>
-          </div>
-            </div>
-           
-           </div>
-           
-           <div   className='h-12 flex justify-between items-center cursor-pointer  rounded-sm'>
-            <div className="flex items-center  gap-3 ">
-            <Mic className="h-8 w-8 bg-gray-100 p-2 rounded-lg" onClick={()=>setQuery(c=> "recording")}/>
-          <div>
-            <h2 className="text-sm">Voice Post</h2>
-          </div>
-            </div>
-           
-           </div>
-          
-           <div   className='h-12 flex justify-between items-center  cursor-pointer  rounded-sm'>
-            <div className="flex items-center  gap-3 ">
-            <FileQuestion className="h-8 w-8 bg-gray-100 p-2 rounded-lg" onClick={()=>setQuery(c=> "media-post")}/>
-          <div>
-            <h2 className="text-sm">Poll Post</h2>
-          </div>
-            </div>
-           
-           </div>
-          </div>
-        </div>
+        
 
         {query!=="media-post" &&  <div className="flex flex-col gap-4">
-          <h2 className="text-sm">background</h2>
+          
 
           <Palette color="#2cac5c"/>
 
@@ -160,7 +120,7 @@ export default function Post() {
           
       </section>
      </section>
-     <section className="flex-1">
+     <section className="  right-[350px] fixed left-[350px]  bg-[#363636] rounded-2xl py-3 px-8">
      
      <form action={CreatePost} className=''>
       
@@ -177,98 +137,81 @@ export default function Post() {
           
           
           </div>}
-          {query==="media-post" && <>
-          <div  className={`mx-52 overflow-y-hidden placeholder:text-gray-300 mt-10`}>
+          <>
+          <div  className={`  overflow-y-hidden placeholder:text-gray-300 `}>
           
 
-          <h2 className="text-2xl text-black">Post</h2>
+          <h2 className="text-2xl text-gray-300">Post</h2>
           <div className="flex relative justify-center items-center w-[100%]">
             
-          <Textarea  name='content' placeholder="Enter your hide post" className={`mt-5 w-[100%] bg-transparent border-[0.15rem]   h-[9rem] resize-none flex justify-center items-center  overflow-y-hidden pl-20 pt-8  rounded-2xl placeholder:text-gray-400         text-black  text-sm`}  />
+          <textarea name="" id="" placeholder='Tell your hide post to your friend' className={`font-bold mt-5 placeholder:text-sm px-24  w-full bg-[#282828] resize-none h-[12rem] flex justify-center relative overflow-y-hidden border-[#00000041] rounded-2xl placeholder:text-[#ffffff21] py-12  cursor-pointer        text-white  text-sm`} ></textarea>
           <div className="absolute top-12 left-8">
-          <Avatar>
-      <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-      <AvatarFallback>CN</AvatarFallback>
-    </Avatar>
+          <Avatar style={{ background:"url('/profile.jpg')",backgroundPosition:"center",backgroundSize:"cover" }} className='cursor-pointer w-10 h-10 rounded-xl'>
+            </Avatar>
           </div>
-
-          <div className="flex justify-between items-center absolute bottom-4 right-8 gap-2">
-         
-          <div>
-            <Smile className="text-gray-500 w-6 h-6 cursor-pointer"/>
-          </div>
-          <div>
-            <Bold className="text-gray-500 w-6 h-6 cursor-pointer"/>
-          </div>
-          <div>
-            <Italic className="text-gray-500 w-6 h-6 cursor-pointer"/>
-          </div>
-         
-          </div>
-          </div>
-          <div className="flex justify-center gap-5 mt-6">
-            <div>
-            <div className="flex items-center cursor-pointer gap-2 ">
-
-<Camera className="text-gray-500 w-5 h-5 cursor-pointer"/>
-<h2 className="text-gray-500 text-sm">Photos</h2>
-  
-</div>
-            </div>
           
-          <div className="flex items-center cursor-pointer gap-2">
-          <SmilePlus className="text-gray-500 w-5 h-5 cursor-pointer"/>
-          <h2 className="text-gray-500 text-sm">Share your Humour</h2>
-            
+          <div className="flex justify-between items-center absolute bottom-4 right-8 gap-5">
+         
+          <div className="cursor-pointer">
+          <Image width="26" height="26" src='/smile.png' alt={'photo icon'}/>
           </div>
-          <div className="flex items-center cursor-pointer gap-2">
-          <Eye className="text-gray-500 w-5 h-5 cursor-pointer"/>
-          <h2 className="text-gray-500 text-sm">View Post</h2>
-            
+          <div className="cursor-pointer">
+          <Image width="26" height="26" src='/photo.png' alt={'photo icon'}/>
+          </div>
+          <div className="cursor-pointer">
+          <Image width="26" height="26" src='/mic.png' alt={'photo icon'}/>
+          </div>
+          <div className="">
+            <Button className="bg-[#363636] hover:bg-[#363636] flex items-center gap-2 px-8 py-3 rounded-lg">
+            <h2 className="text-gray-300 text-sm">Send</h2>
+            <SendIcon className="text-primary  w-5 h-5 cursor-pointer"/>
+            </Button>
+           
           </div>
          
+         
           </div>
-        
           </div>
-          <div className="mt-10 flex justify-center">
-            <Button className="w-full mx-52 py-6 flex items-center gap-3">Publish</Button>
+          <section className="flex">
+          <div className="grid grid-cols-12 flex-1 gap-3 mt-5">
+          <div className="bg-primary p-4 rounded-md">
+
           </div>
-          </>}
+          <div className="bg-[#000C40] p-4 rounded-md">
+
+          </div>
+          <div className="bg-[#e65c00] p-4 rounded-md">
+
+          </div>
+          <div className="bg-[#4801FF] p-4 rounded-md">
+
+</div>
+<div className="bg-[#F00000] p-4 rounded-md">
+
+</div>
+          </div>
+          </section>
+         
+          
+          </div>
+         
+          </>
           {!query || query=="simple-post"  &&
           
           
           <Textarea name='content' placeholder="Type your message here." className={`font-bold overflow-y-hidden placeholder:text-gray-300     top-0 h-full py-[18rem]  text-center  text-white   text-xl`} style={{ background:`${bgPost}` }} />}
        
-       <section className='absolute w-full top-1 mx-5  flex   items-center justify-between '>
-        
        
-       
-       <motion.div className="p-2 hidden rounded-md left-[-11rem] bg-white absolute  justify-center top-[35vh]"
-        
-        whileHover={{ x:175}}
-        transition={{ 
-         duration:1
-         }}
-        >
-       <PaletteContainer/>
-       </motion.div>
-     </section>
        </div>
        <Input type="hidden" name='color' value={bgPost} />
        <section className='  bottom-0 mx-5  w-[95vw] my-5 flex items-center justify-between absolute'>
-       <div className=' bg-white py-2 px-8 flex   items-center gap-4 z-20'>
-
-          
-         
-       </div>
-       <div className='z-10'>
-         <FormBtn className="bg-white hover:bg-current hover:bg-gray-200 text-black" >Publish<Send className='w-5 ml-2'/></FormBtn>
-           
-       </div>
+      
+       
        </section>
       
      </form>
    </section>
+  
    </div></>
    let containerPost:React.ReactNode;
 

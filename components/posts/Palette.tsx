@@ -84,12 +84,12 @@ export default function Palette(props:{color:string}) {
   }, [background])
   return (
     <div>
-       <Tabs defaultValue={defaultTab} className="w-full">
-          <TabsList className="w-full mb-4">
-            <TabsTrigger className="flex-1" value="solid">
+       <Tabs defaultValue={defaultTab} className="w-full   bg-[#262626] p-3 rounded-2xl ">
+          <TabsList className="w-full  mb-4  bg-[#262626]">
+            <TabsTrigger className="flex-1 " value="solid">
               Solid
             </TabsTrigger>
-            <TabsTrigger className="flex-1" value="gradient">
+            <TabsTrigger className="flex-1 " value="gradient">
               Gradient
             </TabsTrigger>
             <TabsTrigger className="flex-1" value="image">
@@ -97,12 +97,12 @@ export default function Palette(props:{color:string}) {
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="solid" className="flex flex-wrap gap-1 mt-0">
+          <TabsContent value="solid" className="flex  flex-wrap gap-1 mt-0">
             {solids.map((s) => (
               <div
                 key={s}
                 style={{ background: s }}
-                className="rounded-md h-6 w-6 cursor-pointer active:scale-105"
+                className="rounded-md h-6 w-6 cursor-pointer active:bg-blue-200  active:scale-105"
                 onClick={() => {changeBgHandler(s)}}
               />
             ))}
