@@ -29,7 +29,10 @@ export default function CreateWidget() {
     
             <div className='flex flex-1 flex-col'>
               <div>
-              <textarea name="" id="" placeholder='Tell your hide post to your friend' className={`font-bold placeholder:text-sm  w-full bg-[#282828] resize-none max-h-12 flex justify-center relative overflow-y-hidden border-[#00000041] rounded-2xl placeholder:text-[#ffffff21] py-4 px-3 cursor-pointer        text-white  text-sm`} ></textarea>
+                <Link href="new/post">
+                <textarea name="" id="" placeholder='Tell your hide post to your friend' className={`font-bold placeholder:text-sm  w-full bg-[#282828] resize-none max-h-12 flex justify-center relative overflow-y-hidden border-[#00000041] rounded-2xl placeholder:text-[#ffffff21] py-4 px-3 cursor-pointer        text-white  text-sm`} ></textarea>
+                </Link>
+              
               </div>
             <div className="mt-2">
   <div className="flex justify-center items-center gap-5 ">

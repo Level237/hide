@@ -146,34 +146,14 @@ export default function Post() {
             
           <textarea name="" id="" placeholder='Tell your hide post to your friend' className={`font-bold mt-5 placeholder:text-sm px-24  w-full bg-[#282828] resize-none h-[12rem] flex justify-center relative overflow-y-hidden border-[#00000041] rounded-2xl placeholder:text-[#ffffff21] py-12  cursor-pointer        text-white  text-sm`} ></textarea>
           <div className="absolute top-12 left-8">
-          <Avatar style={{ background:"url('/profile.jpg')",backgroundPosition:"center",backgroundSize:"cover" }} className='cursor-pointer w-10 h-10 rounded-xl'>
+          <Avatar style={{ background:"url('/profile.jpg')",backgroundPosition:"center",backgroundSize:"cover" }} className='cursor-pointer w-9 h-9 rounded-xl'>
             </Avatar>
           </div>
           
-          <div className="flex justify-between items-center absolute bottom-4 right-8 gap-5">
-         
-          <div className="cursor-pointer">
-          <Image width="26" height="26" src='/smile.png' alt={'photo icon'}/>
+          
           </div>
-          <div className="cursor-pointer">
-          <Image width="26" height="26" src='/photo.png' alt={'photo icon'}/>
-          </div>
-          <div className="cursor-pointer">
-          <Image width="26" height="26" src='/mic.png' alt={'photo icon'}/>
-          </div>
-          <div className="">
-            <Button className="bg-[#363636] hover:bg-[#363636] flex items-center gap-2 px-8 py-3 rounded-lg">
-            <h2 className="text-gray-300 text-sm">Send</h2>
-            <SendIcon className="text-primary  w-5 h-5 cursor-pointer"/>
-            </Button>
-           
-          </div>
-         
-         
-          </div>
-          </div>
-          <section className="flex">
-          <div className="grid grid-cols-12 flex-1 gap-3 mt-5">
+          <section className="flex items-center mt-5">
+          <div className="grid grid-cols-8 flex-1 gap-8 ">
           <div className="bg-primary p-4 rounded-md">
 
           </div>
@@ -189,6 +169,27 @@ export default function Post() {
 <div className="bg-[#F00000] p-4 rounded-md">
 
 </div>
+          </div>
+          <div className="flex flex-1 justify-end items-center gap-5">
+         
+          <div className="cursor-pointer">
+          <Image width="32" height="32" src='/smile.png' alt={'photo icon'}/>
+          </div>
+          <div className="cursor-pointer">
+          <Image width="26" height="26" src='/photo.png' alt={'photo icon'}/>
+          </div>
+          <div className="cursor-pointer">
+          <Image width="26" height="26" src='/mic.png' alt={'photo icon'}/>
+          </div>
+          <div className="">
+            <Button className="bg-primary hover:bg-[#363636] flex items-center gap-2 px-8 py-3 rounded-lg">
+            <h2 className="text-gray-200 text-sm">Send</h2>
+            <SendIcon className="text-gray-200  w-5 h-5 cursor-pointer"/>
+            </Button>
+           
+          </div>
+         
+         
           </div>
           </section>
          
