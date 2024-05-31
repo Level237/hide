@@ -46,12 +46,24 @@ export default function Post() {
         <div className="flex flex-col">
           <h2 className="text-sm text-gray-300 font-bold">Background Post</h2>
           </div>
-        
-
         {query!=="media-post" &&  <div className="flex flex-col gap-4">
           
 
-          <Palette color="#2cac5c"/>
+          <div>
+
+<label className="inline-flex items-center cursor-pointer">
+  <input type="checkbox" value="" className="sr-only peer" />
+  <div className="relative w-11 h-6 bg-[#262626] rounded-full peer peer-focus:ring-4 peer-focus:ring-[#262626] dark:peer-focus:ring-[#262626] dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+  <span className="ms-3 text-sm font-medium text-gray-300 dark:text-gray-300">Hide Post</span>
+</label>
+
+<label className="inline-flex mt-3 items-center cursor-pointer">
+  <input type="checkbox" value="" className="sr-only peer" />
+  <div className="relative w-11 h-6 bg-[#262626] rounded-full peer peer-focus:ring-4 peer-focus:ring-[#262626] dark:peer-focus:ring-[#262626] dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+  <span className="ms-3 text-sm font-medium text-gray-300 dark:text-gray-300">Hide Comment</span>
+</label>
+
+          </div>
 
           </div>}
        {query==="media-post" &&  <div className="flex flex-col gap-4">
@@ -144,7 +156,7 @@ export default function Post() {
           <h2 className="text-2xl text-gray-300">Post</h2>
           <div className="flex relative justify-center items-center w-[100%]">
             
-          <textarea name="" id="" placeholder='Tell your hide post to your friend' className={`font-bold mt-5 placeholder:text-sm px-24  w-full bg-[#282828] resize-none h-[12rem] flex justify-center relative overflow-y-hidden border-[#00000041] rounded-2xl placeholder:text-[#ffffff21] py-12  cursor-pointer        text-white  text-sm`} ></textarea>
+          <textarea name="" id="" placeholder='Tell your hide post to your friend' className={`font-bold peer-focus:ring-[#262626] peer-focus:ring-4 mt-5 placeholder:text-sm px-24  w-full bg-[#282828] resize-none h-[12rem] flex justify-center relative overflow-y-hidden border-[#00000041] rounded-2xl placeholder:text-[#ffffff21] py-12  cursor-pointer        text-white  text-sm`} ></textarea>
           <div className="absolute top-12 left-8">
           <Avatar style={{ background:"url('/profile.jpg')",backgroundPosition:"center",backgroundSize:"cover" }} className='cursor-pointer w-9 h-9 rounded-xl'>
             </Avatar>
