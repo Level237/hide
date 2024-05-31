@@ -3,7 +3,7 @@
 import {motion,useAnimate} from "framer-motion"
 import React, { useEffect, useState } from 'react'
 import { Textarea } from '../ui/textarea'
-import { AlignHorizontalDistributeCenter, Bold, BookHeart, Camera, Circle, CircleStop, Edit, Eye, File, FileQuestion, GalleryHorizontal, Home, Italic, ListMusic, Mic, MicOff, MicVocalIcon, MoveLeft, Pause, PencilLine, Play, Save, Send, SendIcon, Smile, SmilePlus, StickyNote, StopCircle, Trash, VenetianMaskIcon, Waves, X } from 'lucide-react'
+import { AlignHorizontalDistributeCenter, Bold, BookHeart, Camera, Circle, CircleStop, CloudUpload, Edit, Eye, File, FileQuestion, GalleryHorizontal, Home, Italic, ListMusic, Mic, MicOff, MicVocalIcon, MoveLeft, Pause, PencilLine, Play, Save, Send, SendIcon, Smile, SmilePlus, StickyNote, StopCircle, Trash, VenetianMaskIcon, Waves, X } from 'lucide-react'
 import { Button } from '../ui/button'
 import { PickerExample } from '../PicExample'
 import { useRouter } from 'next/navigation'
@@ -178,8 +178,8 @@ export default function Post() {
           <div className="bg-[#4801FF] p-4 rounded-md">
 
 </div>
-<div className="bg-[#F00000] p-4 rounded-md">
-
+<div className="bg-[#262626] cursor-pointer  w-8  flex items-center justify-center rounded-md">
+<Image width="20" height="20" src='/palette.png' alt={'photo icon'}/>
 </div>
           </div>
           <div className="flex flex-1 justify-end items-center gap-5">
