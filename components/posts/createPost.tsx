@@ -3,7 +3,7 @@
 import {motion,useAnimate} from "framer-motion"
 import React, { useEffect, useState } from 'react'
 import { Textarea } from '../ui/textarea'
-import { AlignHorizontalDistributeCenter, Bold, BookHeart, Camera, Circle, CircleStop, CloudUpload, Edit, Eye, File, FileQuestion, GalleryHorizontal, Home, Italic, ListMusic, Mic, MicOff, MicVocalIcon, MoveLeft, Pause, PencilLine, Play, Save, Send, SendIcon, Smile, SmilePlus, StickyNote, StopCircle, Trash, VenetianMaskIcon, Waves, X } from 'lucide-react'
+import { AlignHorizontalDistributeCenter, Bold, BookHeart, Camera, Circle, CircleStop, CloudUpload, Edit, Eye, File, FileQuestion, GalleryHorizontal, Home, Italic, ListMusic, LucideCircleSlash2, Mic, MicOff, MicVocalIcon, MoveLeft, Pause, PencilLine, Play, Save, Send, SendIcon, Smile, SmilePlus, StickyNote, StopCircle, Trash, VenetianMaskIcon, Waves, X } from 'lucide-react'
 import { Button } from '../ui/button'
 import { PickerExample } from '../PicExample'
 import { useRouter } from 'next/navigation'
@@ -156,7 +156,7 @@ export default function Post() {
           <h2 className="text-2xl text-gray-300">Post</h2>
           <div className="flex relative justify-center items-center w-[100%]">
             
-          <textarea name="" id="" placeholder='Tell your hide post to your friend' className={`font-bold peer-focus:ring-[#262626] peer-focus:ring-4 mt-5 placeholder:text-sm px-24  w-full bg-[#282828] resize-none h-[12rem] flex justify-center relative overflow-y-hidden border-[#00000041] rounded-2xl placeholder:text-[#ffffff21] py-12  cursor-pointer        text-white  text-sm`} ></textarea>
+          <textarea name="" id="" style={{ background:bgPost }} placeholder='Tell your hide post to your friend' className={`font-bold peer-focus:ring-[#262626] peer-focus:ring-4 mt-5 placeholder:text-sm px-24  w-full bg-[#282828] resize-none h-[12rem] flex justify-center relative overflow-y-hidden border-[#00000041] rounded-2xl placeholder:text-[#ffffff21] py-12  cursor-pointer        text-white  text-sm`} ></textarea>
           <div className="absolute top-12 left-8">
           <Avatar style={{ background:"url('/profile.jpg')",backgroundPosition:"center",backgroundSize:"cover" }} className='cursor-pointer w-9 h-9 rounded-xl'>
             </Avatar>
@@ -166,19 +166,22 @@ export default function Post() {
           </div>
           <section className="flex items-center mt-5">
           <div className="grid grid-cols-8 flex-1 gap-8 ">
-          <div className="bg-primary p-4 rounded-md">
+          <div onClick={()=>changeBgHandler("")} className="bg-[#262626]  cursor-pointer  w-8  flex items-center justify-center rounded-md">
+<LucideCircleSlash2 className="text-red-500"/>
+</div>
+          <div onClick={()=>changeBgHandler("#2dac5c")} className="bg-primary cursor-pointer p-4 rounded-md">
 
           </div>
-          <div className="bg-[#000C40] p-4 rounded-md">
+          <div onClick={()=>changeBgHandler("#000C40")} className="bg-[#000C40] cursor-pointer p-4 rounded-md">
 
           </div>
-          <div className="bg-[#e65c00] p-4 rounded-md">
+          <div  onClick={()=>changeBgHandler("#e65c00")} className="bg-[#e65c00] cursor-pointer p-4 rounded-md">
 
           </div>
-          <div className="bg-[#4801FF] p-4 rounded-md">
+          <div onClick={()=>changeBgHandler("#4801FF")} className="bg-[#4801FF] cursor-pointer p-4 rounded-md">
 
 </div>
-<div className="bg-[#262626] cursor-pointer  w-8  flex items-center justify-center rounded-md">
+<div className="bg-[#262626]  cursor-pointer  w-8  flex items-center justify-center rounded-md">
 <Image width="20" height="20" src='/palette.png' alt={'photo icon'}/>
 </div>
           </div>
