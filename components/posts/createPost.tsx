@@ -24,6 +24,8 @@ import Image from "next/image"
 import { Separator } from "../ui/separator"
 import Palette from "./Palette"
 import { Record } from "./mic/record"
+import RecordMic from "./mic/RecordMic"
+import MicAnimate from "./mic/mic"
 
 
 type PostType={
@@ -118,6 +120,7 @@ export default function Post() {
            setRecordingTime((prevTime) => prevTime + 1);
          }, 1000);
          wavesurfer.current.empty();
+         
        };
    
        mediaRecorder.current.onstop = () => {
@@ -146,7 +149,7 @@ export default function Post() {
         setVisible(true)
          setRecordingTime(0)
          startRecording();
-         
+        record(true)
        }
      };
    
@@ -283,8 +286,8 @@ export default function Post() {
 
           <h2 className="text-2xl text-gray-300">Post</h2>
           <div className="flex relative justify-center items-center w-[100%]">
-            <div className="">
-             
+            <div className="absolute bottom-20 left-64 z-30 flex justify-center">
+             <MicAnimate/>
             </div>
           <textarea name="" id="" style={{ background:bgPost }} placeholder='Tell your hide post to your friend' className={`font-bold peer-focus:ring-[#262626] peer-focus:ring-4 mt-5 placeholder:text-sm px-24  w-full bg-[#282828] resize-none h-[12rem] flex justify-center relative overflow-y-hidden border-[#00000041] rounded-2xl placeholder:text-[#ffffff21] py-12  cursor-pointer        text-white  text-sm`} ></textarea>
           <div className="absolute top-12 left-8">
@@ -316,7 +319,7 @@ export default function Post() {
           </div>
           
           </div>
-          <section className="flex items-center mt-5">
+          <section className="flex items-center mt-12">
           <div className="grid grid-cols-8 flex-1 gap-8 ">
           <div onClick={()=>changeBgHandler("")} className="bg-[#262626]  cursor-pointer  w-8  flex items-center justify-center rounded-md">
 <LucideCircleSlash2 className="text-red-500"/>
@@ -345,12 +348,12 @@ export default function Post() {
           <div className="cursor-pointer">
           <Image width="26" height="26" src='/photo.png' alt={'photo icon'}/>
           </div>
-          <div onClick={handleRecordClick} className="cursor-pointer">
+          <RecordMic>
             
-            <Image width="26" height="26" src='/mic.png' alt={'photo icon'}/>
+            <Image className="cursor-pointer" width="26" height="26" src='/mic.png' alt={'photo icon'}/>
             
           
-          </div>
+          </RecordMic>
           <div className="">
             <Button className="bg-primary hover:bg-[#363636] flex items-center gap-2 px-8 py-3 rounded-lg">
             <h2 className="text-gray-200 text-sm">Send</h2>
