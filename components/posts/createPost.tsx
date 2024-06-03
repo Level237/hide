@@ -153,7 +153,10 @@ export default function Post() {
      const handlePlay = () => {
        wavesurfer.current?.playPause();
      };
-   
+   const destroy=()=>{
+    wavesurfer.current.destroy()
+    setVisible(false)
+   }
      const formatTime = (time:any) => {
        const minutes = Math.floor(time / 60);
        const seconds = time % 60;
@@ -302,7 +305,7 @@ export default function Post() {
   <Button onClick={handleRecordClick} type="button"   className="text-white bg-transparent p-0 hover:bg-transparent">
   {isRecording ? <><div className='flex gap-2 items-center'><StopCircle className="w-8"/></div></> : <><div className='flex gap-2 items-center'><SpeechIcon/></div></>}
     </Button>
-    <div onClick={()=>setVisible(false)} className='flex gap-2 items-center cursor-pointer'><X className="w-8 text-white"/></div>
+    <div onClick={destroy} className='flex gap-2 items-center cursor-pointer'><X className="w-8 text-white"/></div>
     
 </div>
 </div>}
