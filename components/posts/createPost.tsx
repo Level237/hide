@@ -1,9 +1,9 @@
 'use client'
 
 import {motion,useAnimate} from "framer-motion"
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Textarea } from '../ui/textarea'
-import { AlignHorizontalDistributeCenter, Bold, BookHeart, Camera, Circle, CircleStop, CloudUpload, Edit, Eye, File, FileQuestion, GalleryHorizontal, Home, Italic, ListMusic, LucideCircleSlash2, Mic, MicOff, MicVocalIcon, MoveLeft, Pause, PencilLine, Play, Save, Send, SendIcon, Smile, SmilePlus, StickyNote, StopCircle, Trash, VenetianMaskIcon, Waves, X } from 'lucide-react'
+import { AlignHorizontalDistributeCenter, Bold, BookHeart, Camera, Circle, CircleStop, CloudUpload, Edit, Eye, File, FileQuestion, GalleryHorizontal, Home, Italic, ListMusic, LucideCircleSlash2, Mic, MicOff, MicVocalIcon, MoveLeft, Pause, PencilLine, Play, Save, Send, SendIcon, ShieldClose, Smile, SmilePlus, Speech, SpeechIcon, StickyNote, StopCircle, Trash, VenetianMaskIcon, Waves, X } from 'lucide-react'
 import { Button } from '../ui/button'
 import { PickerExample } from '../PicExample'
 import { useRouter } from 'next/navigation'
@@ -13,13 +13,17 @@ import { FormBtn } from "../common/FormBtn"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 import {parseAsString, useQueryState} from "nuqs"
 import { PostStore } from "@/store/PostStore"
-import PaletteContainer from "./PaletteContainer"
+import WaveSurfer from 'wavesurfer.js';
+import RegionsPlugin from 'wavesurfer.js/dist/plugins/regions.js';
+import RecordPlugin from 'wavesurfer.js/dist/plugins/record.js';
+import TimelinePlugin from 'wavesurfer.js/dist/plugins/timeline.js';
 import paths from "@/path"
 
 import PostMic from "./mic/PostMic"
 import Image from "next/image"
 import { Separator } from "../ui/separator"
 import Palette from "./Palette"
+import { Record } from "./mic/record"
 
 
 type PostType={
@@ -27,6 +31,7 @@ type PostType={
 }
 export default function Post() {
   const searchParams=useQueryState('type',)
+  const  [visible,setVisible]=useState(false)
   const [query,setQuery]=useQueryState("type",{defaultValue:""})
   const [scope,animate]=useAnimate();
   const changeBgHandler=PostStore((state)=>state.changeBgHandler)
@@ -34,6 +39,126 @@ export default function Post() {
   const [loadImage,setLoadImage]=useState<boolean>(false)
   const router=useRouter()
    const bgPost=PostStore((state)=>state.bgPost)
+   const record=PostStore((state)=>state.playRecord)
+   const isRecording=PostStore((state)=>state.isRecording)
+   const waveformRef = useRef(null);
+   const wavesurfer = useRef<any>(null);
+   const [audioURL, setAudioURL] = useState<any>('');
+   const mediaRecorder = useRef<any>(null);
+   const [recordingTime, setRecordingTime] = useState(0);
+   const timelineRef = useRef<any>(null);
+     
+     let time :any;
+     useEffect(() => {
+       if (waveformRef.current) {
+         wavesurfer.current = WaveSurfer.create({
+           container: waveformRef.current,
+           waveColor: 'white',
+           progressColor: 'white',
+           backend: 'WebAudio',
+           height: 50,
+           normalize: true,
+           hideScrollbar: true,
+           plugins: [
+            
+             RecordPlugin.create({}),
+             
+           ],
+         });
+   
+         wavesurfer.current.on('ready', () => {
+           const timeline = Object.create(TimelinePlugin);
+           
+         });
+   
+         wavesurfer.current.on('audioprocess', (time:number) => {
+           if (isRecording) {
+             // Throttle updates to avoid performance issues
+             requestAnimationFrame(() => {
+               const duration = wavesurfer.current.getDuration();
+               
+               wavesurfer.current.clearRegions();
+               wavesurfer.current.addRegion({
+                 start: 0,
+                 end: time,
+                 color: 'rgba(0, 123, 255, 0.1)',
+               });
+             });
+           }
+         });
+       }
+   
+       let timer:any;
+       console.log(isRecording);
+       
+         timer = setTimeout(() => {
+           mediaRecorder.current?.stop();
+           record(false)
+         }, 15000); // 30000 ms = 30 secondes
+       
+       return () => {
+         clearTimeout(timer);
+         if (wavesurfer.current) {
+           wavesurfer.current.destroy();
+         }
+       };
+     }, []);
+     const startRecording = async () => {
+       if (!navigator.mediaDevices) {
+         console.error('Enregistrement non pris en charge par ce navigateur');
+         return;
+       }
+   
+       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+       mediaRecorder.current = new MediaRecorder(stream);
+   
+       mediaRecorder.current.onstart = () => {
+         record(true)
+         time = setInterval(() => {
+           setRecordingTime((prevTime) => prevTime + 1);
+         }, 1000);
+         wavesurfer.current.empty();
+       };
+   
+       mediaRecorder.current.onstop = () => {
+         record(false)
+         clearInterval(time)
+       };
+   
+       mediaRecorder.current.ondataavailable = (event:any) => {
+         const audioBlob = new Blob([event.data], { type: 'audio/wav' });
+         const audioUrl = URL.createObjectURL(audioBlob);
+         setAudioURL(audioUrl);
+         wavesurfer.current.loadBlob(audioBlob);
+       };
+   
+       mediaRecorder.current.start();
+     };
+   
+     const stopRecording = () => {
+       mediaRecorder.current?.stop();
+     };
+   
+     const handleRecordClick = () => {
+       if (isRecording) {
+         stopRecording();
+       } else {
+        setVisible(true)
+         setRecordingTime(0)
+         startRecording();
+         
+       }
+     };
+   
+     const handlePlay = () => {
+       wavesurfer.current?.playPause();
+     };
+   
+     const formatTime = (time:any) => {
+       const minutes = Math.floor(time / 60);
+       const seconds = time % 60;
+       return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+     };
    const PostInit=<> <div 
  
    className='  flex mt-6 gap-5 max-h-[100%]  items-stretch  overflow-y-hidden'>
@@ -155,13 +280,37 @@ export default function Post() {
 
           <h2 className="text-2xl text-gray-300">Post</h2>
           <div className="flex relative justify-center items-center w-[100%]">
-            
+            <div className="">
+             
+            </div>
           <textarea name="" id="" style={{ background:bgPost }} placeholder='Tell your hide post to your friend' className={`font-bold peer-focus:ring-[#262626] peer-focus:ring-4 mt-5 placeholder:text-sm px-24  w-full bg-[#282828] resize-none h-[12rem] flex justify-center relative overflow-y-hidden border-[#00000041] rounded-2xl placeholder:text-[#ffffff21] py-12  cursor-pointer        text-white  text-sm`} ></textarea>
           <div className="absolute top-12 left-8">
           <Avatar style={{ background:"url('/profile.jpg')",backgroundPosition:"center",backgroundSize:"cover" }} className='cursor-pointer w-9 h-9 rounded-xl'>
             </Avatar>
           </div>
+          <div className="absolute right-4 top-8 left-24">
+         {visible && <div className="text-sm text-white" id='timeline' ref={timelineRef}>{formatTime(recordingTime)}</div>}
           
+          <div ref={waveformRef} className='waveform w-full h-12'></div>
+{visible && <div className="flex flex-col items-start gap-3" >
+
+
+  
+
+<div className="flex flex-row justify-center" >
+<Button onClick={handlePlay} disabled={!audioURL}  type="button"  className="text-white bg-transparent p-0 hover:bg-transparent"><Play className="w-8"/></Button>
+  <Button onClick={handleRecordClick} type="button"   className="text-white bg-transparent p-0 hover:bg-transparent">
+  {isRecording ? <><div className='flex gap-2 items-center'><StopCircle className="w-8"/></div></> : <><div className='flex gap-2 items-center'><SpeechIcon/></div></>}
+    </Button>
+    <div onClick={()=>setVisible(false)} className='flex gap-2 items-center cursor-pointer'><X className="w-8 text-white"/></div>
+    
+</div>
+</div>}
+
+
+
+
+          </div>
           
           </div>
           <section className="flex items-center mt-5">
@@ -193,8 +342,11 @@ export default function Post() {
           <div className="cursor-pointer">
           <Image width="26" height="26" src='/photo.png' alt={'photo icon'}/>
           </div>
-          <div className="cursor-pointer">
-          <Image width="26" height="26" src='/mic.png' alt={'photo icon'}/>
+          <div onClick={handleRecordClick} className="cursor-pointer">
+            
+            <Image width="26" height="26" src='/mic.png' alt={'photo icon'}/>
+            
+          
           </div>
           <div className="">
             <Button className="bg-primary hover:bg-[#363636] flex items-center gap-2 px-8 py-3 rounded-lg">

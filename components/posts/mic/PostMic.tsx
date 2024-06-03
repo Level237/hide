@@ -6,24 +6,21 @@ import WaveSurfer from 'wavesurfer.js';
 import RegionsPlugin from 'wavesurfer.js/dist/plugins/regions.js';
 import RecordPlugin from 'wavesurfer.js/dist/plugins/record.js';
 import TimelinePlugin from 'wavesurfer.js/dist/plugins/timeline.js';
+import { PostStore } from '@/store/PostStore';
+import { Record } from '@/components/posts/mic/record';
 
-export default function PostMic() {
+export default function PostMic({children}:any,type:boolean) {
 
+ 
   const waveformRef = useRef(null);
   const wavesurfer = useRef<any>(null);
-  const [isRecording, setIsRecording] = useState<any>(false);
+  const isRecording=PostStore((state)=>state.isRecording)
+  const record=PostStore((state)=>state.playRecord)
   const [audioURL, setAudioURL] = useState<any>('');
   const mediaRecorder = useRef<any>(null);
   const [recordingTime, setRecordingTime] = useState(0);
   const timelineRef = useRef<any>(null);
-    const handleAnimation=async()=>{
-        await animate('#target',{x:0})
-       await animate('#target',{y:100},{duration:0.5})
-       await animate('#target',{opacity:"0"},{duration:0.5})
-      animate('#target2',{display:"block"},{duration:0.5})
-        animate('#target4',{scale:1,display:"flex"})
-        animate('#target3',{scale:1,display:"flex"})
-    }
+    
     let time :any;
     useEffect(() => {
       if (waveformRef.current) {
@@ -69,9 +66,7 @@ export default function PostMic() {
       
         timer = setTimeout(() => {
           mediaRecorder.current?.stop();
-          
-          setIsRecording(false);
-          console.log("stoping");
+          record(false)
         }, 15000); // 30000 ms = 30 secondes
       
       return () => {
@@ -91,7 +86,7 @@ export default function PostMic() {
       mediaRecorder.current = new MediaRecorder(stream);
   
       mediaRecorder.current.onstart = () => {
-        setIsRecording(true);
+        record(true)
         time = setInterval(() => {
           setRecordingTime((prevTime) => prevTime + 1);
         }, 1000);
@@ -99,7 +94,7 @@ export default function PostMic() {
       };
   
       mediaRecorder.current.onstop = () => {
-        setIsRecording(false);
+        record(false)
         clearInterval(time)
       };
   
@@ -136,10 +131,10 @@ export default function PostMic() {
       return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
     };
   return (
-    <div className='flex flex-col mx-36 justify-center items-center gap-3'>
+    <div >
       <Circle id="target2" className="text-[#f33] hidden fill-current mx-[-1rem] mb-12  animate-pulse w-[8rem] h-[8rem] border-gray-600"/>
       
-<Mic id='target' className="w-16 h-16 z-[99999] cursor-pointer"/>
+
 <div id='timeline' ref={timelineRef}>{formatTime(recordingTime)}</div>
 <div className="flex justify-center mx-[-2rem] items-center mt-5 w-full gap-5">
 
