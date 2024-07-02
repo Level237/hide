@@ -9,7 +9,10 @@ export default function RecordMic({children}:any) {
     const setAudioBlob=PostStore((state)=>state.setAudioBlob)
     const mediaRecorder = useRef<any>(null);
     const timelineRef = useRef<any>(null);
+
+   
     const startRecording = async () => {
+        
         if (!navigator.mediaDevices) {
           console.error('Enregistrement non pris en charge par ce navigateur');
           return;
@@ -32,12 +35,16 @@ export default function RecordMic({children}:any) {
           const audioUrl = URL.createObjectURL(audioBlob);
           setAudioUrl(audioUrl);
           setAudioBlob(audioBlob)
+          console.log("level")
+          console.log(audioBlob)
         };
-    
+        console.log("play")
         mediaRecorder.current.start();
       };
     
       const stopRecording = () => {
+        playRecord(false)
+        console.log("stop")
         mediaRecorder.current?.stop();
       };
     
