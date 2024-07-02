@@ -77,7 +77,20 @@ export default function Post() {
           <div className="flex relative justify-center items-center w-[100%]">
             
          
-            
+            <div className="absolute flex justify-center items-center cursor-pointer  inset-0 z-50 ">
+              <div className="px-6 py-4  flex justify-center items-center flex-col bg-[#363636]  rounded-full">
+                <div>
+                <Mic className="w-6 h-6 text-[#868686]"/>
+                </div>
+              <div>
+                <h2 className="text-[0.7rem] text-[#c2c0c0]">
+                Speak
+                </h2>
+               
+              </div>
+              </div>
+              
+            </div>
            
            
           <textarea name="" id="" style={{ background:bgPost }} placeholder='Tell your hide post to your friend' className={`font-bold peer-focus:ring-[#262626] peer-focus:ring-4 mt-5 placeholder:text-sm px-24  w-full bg-[#282828] resize-none h-[12rem] flex justify-center relative overflow-y-hidden border-[#00000041] rounded-2xl placeholder:text-[#ffffff21] py-12  cursor-pointer        text-white  text-sm`} ></textarea>

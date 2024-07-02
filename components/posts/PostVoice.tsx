@@ -11,13 +11,17 @@ const [isVisible, setIsVisible] = useState<boolean>(true);
     if (!waveformRef.current) {
         waveformRef.current = WaveSurfer.create({
             container: `#${waveId}`,
-            waveColor: '#fff',
-            progressColor: '#2CAC5DB9',
+            waveColor: '#FFFFFF',
+            progressColor: '#2CAC5D',
             height: 50,
             normalize: false,
             hideScrollbar: false,
               backend: 'WebAudio',
-              width:500
+              
+              width:500,
+              cursorColor:"transparent",
+              barWidth:2,
+              barGap:4,
           });
           waveformRef.current.load(audioUrl);
 
