@@ -26,6 +26,18 @@ export default function PostMic({children}:any,type:boolean) {
   const timelineRef = useRef<any>(null);
   const [currentTime,setCurrentTime]=useState(0)
     let time :any;
+    const handleRecordClick = () => {
+      if (record1.isRecording() || record1.isPaused()) {
+        console.log("stop")
+        record1.stopRecording()
+        record(false)
+      }else{
+       
+     record1.startRecording()
+       
+      }
+      
+    };
     useEffect(() => {
       if(waveRefMic.current){
         wavesMic.current = WaveSurfer.create({
@@ -43,8 +55,19 @@ export default function PostMic({children}:any,type:boolean) {
         wavesMic.current.on('audioprocess',()=>{
           console.log("process")
       })
+
+
+
+
+
+
+
+      
         record1.on('record-end',(blob:any)=>{
           const recordedUrl = URL.createObjectURL(blob)
+          if (wavesMic.current) {
+            wavesMic.current.destroy();
+          }
           console.log(recordedUrl)
           if (waveformRef.current) {
             wavesurfer.current = WaveSurfer.create({
@@ -52,10 +75,11 @@ export default function PostMic({children}:any,type:boolean) {
               waveColor: 'white',
               progressColor: 'purple',
               backend: 'WebAudio',
-              height: 400,
               cursorColor:"transparent",
               normalize:true,
               hideScrollbar: true,
+              barWidth:2,
+              barGap:4,
              url:recordedUrl
             });
             
@@ -82,7 +106,7 @@ export default function PostMic({children}:any,type:boolean) {
           wavesurfer.current.destroy();
         }
       };
-    }, []);
+    }, [handleRecordClick]);
     const startRecording = async () => {
       if (!navigator.mediaDevices) {
         console.error('Enregistrement non pris en charge par ce navigateur');
@@ -120,24 +144,7 @@ export default function PostMic({children}:any,type:boolean) {
       mediaRecorder.current?.stop();
     };
   
-    const handleRecordClick = () => {
-      record1= wavesMic.current.registerPlugin(RecordPlugin.create({ scrollingWaveform, renderRecordedAudio: false }))
-      if (record1.isRecording() || record1.isPaused()) {
-        console.log("stop")
-        record1.stopRecording()
-        record(false)
-      }else{
-       
-        const audio=record1.startRecording().then(() => {
-          console.log('recording started');
-           record(true)
-        }).then(()=>{
-          console.log("dd")
-        })
-        console.log(audio)
-      }
-      
-    };
+    
   
     const handlePlay = () => {
       wavesurfer.current?.playPause();
