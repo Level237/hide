@@ -17,7 +17,6 @@ const [isVisible, setIsVisible] = useState<boolean>(true);
             normalize: false,
             hideScrollbar: false,
               backend: 'WebAudio',
-              
               width:500,
               cursorColor:"transparent",
               barWidth:2,

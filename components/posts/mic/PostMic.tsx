@@ -4,73 +4,80 @@ import { Button } from '../../ui/button'
 import { animate } from 'framer-motion'
 import WaveSurfer from 'wavesurfer.js';
 import RegionsPlugin from 'wavesurfer.js/dist/plugins/regions.js';
-import RecordPlugin from 'wavesurfer.js/dist/plugins/record.js';
+import RecordPlugin from 'wavesurfer.js/dist/plugins/record.esm.js'
 import TimelinePlugin from 'wavesurfer.js/dist/plugins/timeline.js';
 import { PostStore } from '@/store/PostStore';
 import { Record } from '@/components/posts/mic/record';
+import MicrophonePlugin from 'wavesurfer.js/src/plugin/microphone';
 
 export default function PostMic({children}:any,type:boolean) {
 
- 
+  let record1:any;
+  let scrollingWaveform = false
   const waveformRef = useRef(null);
+  const waveRefMic = useRef(null);
   const wavesurfer = useRef<any>(null);
+  const wavesMic = useRef<any>(null);
   const isRecording=PostStore((state)=>state.isRecording)
   const record=PostStore((state)=>state.playRecord)
   const [audioURL, setAudioURL] = useState<any>('');
   const mediaRecorder = useRef<any>(null);
   const [recordingTime, setRecordingTime] = useState(0);
   const timelineRef = useRef<any>(null);
-    
+  const [currentTime,setCurrentTime]=useState(0)
     let time :any;
     useEffect(() => {
-      if (waveformRef.current) {
-        wavesurfer.current = WaveSurfer.create({
-          container: waveformRef.current,
+      if(waveRefMic.current){
+        wavesMic.current = WaveSurfer.create({
+          container: waveRefMic.current,
           waveColor: 'white',
           progressColor: 'purple',
           backend: 'WebAudio',
-          height: 100,
-          normalize: true,
+          cursorColor:"transparent",
+          normalize:true,
           hideScrollbar: true,
-          plugins: [
-           
-            RecordPlugin.create({}),
-            
-          ],
+              barWidth:2,
+              barGap:4,
         });
-  
-        wavesurfer.current.on('ready', () => {
-          const timeline = Object.create(TimelinePlugin);
-          
-        });
-  
-        wavesurfer.current.on('audioprocess', (time:number) => {
-          if (isRecording) {
-            // Throttle updates to avoid performance issues
-            requestAnimationFrame(() => {
-              const duration = wavesurfer.current.getDuration();
-              
-              wavesurfer.current.clearRegions();
-              wavesurfer.current.addRegion({
-                start: 0,
-                end: time,
-                color: 'rgba(0, 123, 255, 0.1)',
-              });
+        record1= wavesMic.current.registerPlugin(RecordPlugin.create({ scrollingWaveform, renderRecordedAudio: false }))
+        wavesMic.current.on('audioprocess',()=>{
+          console.log("process")
+      })
+        record1.on('record-end',(blob:any)=>{
+          const recordedUrl = URL.createObjectURL(blob)
+          console.log(recordedUrl)
+          if (waveformRef.current) {
+            wavesurfer.current = WaveSurfer.create({
+              container: waveformRef.current,
+              waveColor: 'white',
+              progressColor: 'purple',
+              backend: 'WebAudio',
+              height: 400,
+              cursorColor:"transparent",
+              normalize:true,
+              hideScrollbar: true,
+             url:recordedUrl
             });
+            
+            
+            
+            wavesurfer.current.on('ready', () => {
+              const timeline = Object.create(TimelinePlugin);
+              
+            });
+      
+            wavesurfer.current.on('audioprocess',()=>{
+              setCurrentTime(wavesurfer.current.getCurrentTime())
+          })
           }
-        });
+        })
       }
+      
+     
   
-      let timer:any;
-      console.log(isRecording);
-      
-        timer = setTimeout(() => {
-          mediaRecorder.current?.stop();
-          record(false)
-        }, 15000); // 30000 ms = 30 secondes
-      
       return () => {
-        clearTimeout(timer);
+        //wavesurfer.current.un('audioprocess');
+       
         if (wavesurfer.current) {
           wavesurfer.current.destroy();
         }
@@ -87,6 +94,7 @@ export default function PostMic({children}:any,type:boolean) {
   
       mediaRecorder.current.onstart = () => {
         record(true)
+        setCurrentTime(wavesurfer.current.getCurrentTime())
         time = setInterval(() => {
           setRecordingTime((prevTime) => prevTime + 1);
         }, 1000);
@@ -113,12 +121,22 @@ export default function PostMic({children}:any,type:boolean) {
     };
   
     const handleRecordClick = () => {
-      if (isRecording) {
-        stopRecording();
-      } else {
-        setRecordingTime(0)
-        startRecording();
+      record1= wavesMic.current.registerPlugin(RecordPlugin.create({ scrollingWaveform, renderRecordedAudio: false }))
+      if (record1.isRecording() || record1.isPaused()) {
+        console.log("stop")
+        record1.stopRecording()
+        record(false)
+      }else{
+       
+        const audio=record1.startRecording().then(() => {
+          console.log('recording started');
+           record(true)
+        }).then(()=>{
+          console.log("dd")
+        })
+        console.log(audio)
       }
+      
     };
   
     const handlePlay = () => {
@@ -126,16 +144,17 @@ export default function PostMic({children}:any,type:boolean) {
     };
   
     const formatTime = (time:any) => {
-      const minutes = Math.floor(time / 60);
-      const seconds = time % 60;
-      return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+      let date=new Date(0)
+      date.setSeconds(time)
+      return date.toISOString().substr(11,8)
     };
   return (
     <div >
       <Circle id="target2" className="text-[#f33] hidden fill-current mx-[-1rem] mb-12  animate-pulse w-[8rem] h-[8rem] border-gray-600"/>
       
 
-<div id='timeline' ref={timelineRef}>{formatTime(recordingTime)}</div>
+<div id='timeline'>
+                    {formatTime(currentTime)} </div>
 <div className="flex justify-center mx-[-2rem] items-center mt-5 w-full gap-5">
 
 
@@ -149,6 +168,7 @@ export default function PostMic({children}:any,type:boolean) {
 </div>
 </div>
 <div ref={waveformRef} className='waveform w-full '></div>
+<div ref={waveRefMic}></div>
     </div>
   )
 }
