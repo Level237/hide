@@ -75,61 +75,11 @@ export default function Post() {
 
           <h2 className="text-2xl text-gray-300">Post</h2>
           <div className="flex overflow-x-hidden relative justify-center items-center w-[100%]">
-            <AnimatePresence>
-            {visible && <motion.div
-             initial={{ 
-              y:6,
-              opacity:0
-             }}
-             animate={{ 
-              y:0,
-              opacity:1
-             }}
-             exit={{ 
-              y:0,
-              opacity:0,
-             
-              }}
-             transition={{ 
-              type:"spring",
-              duration:1.8,
-              }}
-            className="absolute flex justify-center items-end bottom-[-25px] cursor-pointer  inset-0 z-50 ">
-              <div className="px-6 py-4  flex justify-end items-center border-b-[1px] border-[#6d1212] flex-col bg-[#282828]  rounded-full">
-                <motion.div
-                onClick={()=>{}}
-                initial={{ 
-                  y:6,
-                  
-                 }}
-                animate={{ 
-                  y:0,
-                  
-                 }}
-                 transition={{ 
-                  type:"spring",
-                  repeat:Infinity,
-                  duration:1.8,
-                  ease:"easeInOut"
-                  }}
-                >
-                <Mic className="w-6 h-6 text-[#ff1111]"/>
-                </motion.div>
-              <div>
-                <h2 className="text-[0.7rem] text-[#ff1111]">
-                Speak
-                </h2>
-               
-              </div>
-              </div>
-              
-            </motion.div>}
-
-            </AnimatePresence>
-           
-            <div className="absolute top-[3rem] inset-0 z-20">
+            
+           {visible &&  <div className="absolute top-[3rem] inset-0 z-20">
                   <RecordMic/>
-            </div>
+            </div>}
+           
            
            
           <textarea name="" id="" style={{ background:bgPost }} placeholder='Tell your hide post to your friend' className={`overflow-x-hidden  font-bold peer-focus:ring-[#262626] peer-focus:ring-4 mt-5 placeholder:text-sm px-24  w-full bg-[#282828] resize-none h-[12rem] flex justify-center relative overflow-y-hidden border-[#00000041] rounded-2xl placeholder:text-[#ffffff21] py-12  cursor-pointer        text-white  text-sm`} ></textarea>

@@ -1,4 +1,4 @@
-import { Circle, Mic, Pause, PlayCircle, Speech, StopCircle } from 'lucide-react'
+import { Circle, Mic, Pause, Play, PlayCircle, Speech, StopCircle } from 'lucide-react'
 import React, { useEffect, useRef, useState } from 'react'
 import { Button } from '../../ui/button'
 import { animate } from 'framer-motion'
@@ -68,8 +68,8 @@ export default function RecordMic() {
           if (waveformRef.current) {
             wavesurfer.current = WaveSurfer.create({
               container: waveformRef.current,
-              waveColor: 'white',
-              progressColor: 'purple',
+              waveColor: 'green',
+              progressColor: 'white',
               backend: 'WebAudio',
               cursorColor:"transparent",
               normalize:true,
@@ -123,11 +123,11 @@ export default function RecordMic() {
 
 
 <div >
-  <Button onClick={handlePlay} disabled={!audioURL}  type="button" variant="outline" className="text-white bg-primary p-2"><span className='text-[0.7rem]'>Play/Pause</span> </Button>
+  <Button onClick={handlePlay} disabled={!audioURL}  type="button"  className="text-white bg-red-400 px-5 py-2"><Play className='w-3'/> </Button>
 </div>
 <div >
   <Button onClick={handleRecordClick} type="button"  variant="outline" className="bg-[#313131] border-none hover:bg-[#313131]">
-  {isRecording ? <><div className='flex gap-2 items-center'>Stop<StopCircle/></div></> : <><div className='flex gap-2 items-center text-[#9c9c9c] text-sm'><span className='text-[0.7rem]'>Record</span><Speech/></div></>}
+  {isRecording ? <><div className='flex gap-2 items-center'>Stop<StopCircle/></div></> : <><div className=' text-[#9c9c9c] text-sm'><Mic className='w-4'/></div></>}
     </Button>
 </div>
 </div>
