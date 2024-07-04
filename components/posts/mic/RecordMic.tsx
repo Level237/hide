@@ -1,63 +1,130 @@
-import { PostStore } from '@/store/PostStore';
-import { useRef, useState } from 'react';
+import { Circle, Mic, Pause, PlayCircle, Speech, StopCircle } from 'lucide-react'
+import React, { useEffect, useRef, useState } from 'react'
+import { Button } from '../../ui/button'
+import { animate } from 'framer-motion'
 import WaveSurfer from 'wavesurfer.js';
+import RegionsPlugin from 'wavesurfer.js/dist/plugins/regions.js';
+import RecordPlugin from 'wavesurfer.js/dist/plugins/record.esm.js'
+import TimelinePlugin from 'wavesurfer.js/dist/plugins/timeline.js';
+import { PostStore } from '@/store/PostStore';
 
-export default function RecordMic({children}:any) {
-    const isRecording=PostStore((state)=>state.isRecording)
-    const playRecord=PostStore((state)=>state.playRecord)
-    const setAudioUrl=PostStore((state)=>state.setAudioUrl)
-    const setAudioBlob=PostStore((state)=>state.setAudioBlob)
-    const mediaRecorder = useRef<any>(null);
-    const timelineRef = useRef<any>(null);
 
-   
-    const startRecording = async () => {
-        
-        if (!navigator.mediaDevices) {
-          console.error('Enregistrement non pris en charge par ce navigateur');
-          return;
-        }
-    
-        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-        mediaRecorder.current = new MediaRecorder(stream);
-    
-        mediaRecorder.current.onstart = () => {
-          playRecord(true)
-        };
-    
-        mediaRecorder.current.onstop = () => {
-         playRecord(false)
-          //clearInterval(time)
-        };
-    
-        mediaRecorder.current.ondataavailable = (event:any) => {
-          const audioBlob = new Blob([event.data], { type: 'audio/wav' });
-          const audioUrl = URL.createObjectURL(audioBlob);
-          setAudioUrl(audioUrl);
-          setAudioBlob(audioBlob)
-          console.log("level")
-          console.log(audioBlob)
-        };
-        console.log("play")
-        mediaRecorder.current.start();
+
+export default function RecordMic() {
+  let record1:any;
+  let scrollingWaveform = false
+  const waveformRef = useRef(null);
+  const waveRefMic = useRef(null);
+  const wavesurfer = useRef<any>(null);
+  const wavesMic = useRef<any>(null);
+  const isRecording=PostStore((state)=>state.isRecording)
+  const record=PostStore((state)=>state.playRecord)
+  const [audioURL, setAudioURL] = useState<any>('');
+  const mediaRecorder = useRef<any>(null);
+  const [recordingTime, setRecordingTime] = useState(0);
+  const timelineRef = useRef<any>(null);
+  const [currentTime,setCurrentTime]=useState(0)
+    let time :any;
+
+    const handleRecordClick = () => {
+      if (record1.isRecording() || record1.isPaused()) {
+
+        record1.stopRecording()
+        record(false)
+      }else{
+     record1.startRecording()
+      }
+    };
+    useEffect(() => {
+      if(waveRefMic.current){
+        wavesMic.current = WaveSurfer.create({
+          container: waveRefMic.current,
+          waveColor: 'white',
+          progressColor: 'purple',
+          backend: 'WebAudio',
+          cursorColor:"transparent",
+          normalize:true,
+          height:10,
+              barWidth:2,
+              barGap:4,
+             
+        });
+        record1= wavesMic.current.registerPlugin(RecordPlugin.create({ scrollingWaveform, renderRecordedAudio: false }))
+        wavesMic.current.on('audioprocess',()=>{
+          console.log("process")
+      })
+        record1.on('record-end',(blob:any)=>{
+          const recordedUrl = URL.createObjectURL(blob)
+          if (wavesMic.current) {
+            wavesMic.current.destroy();
+          }
+          
+          if (waveformRef.current) {
+            wavesurfer.current = WaveSurfer.create({
+              container: waveformRef.current,
+              waveColor: 'white',
+              progressColor: 'purple',
+              backend: 'WebAudio',
+              cursorColor:"transparent",
+              height:10,
+             
+              barGap:4,
+             url:recordedUrl
+            });
+            
+            wavesurfer.current.on('interaction', () => {
+              wavesurfer.current.play()
+            })
+            
+            wavesurfer.current.on('ready', () => {
+              const timeline = Object.create(TimelinePlugin);
+              setAudioURL(recordedUrl)
+            });
+      
+            wavesurfer.current.on('audioprocess',()=>{
+              setCurrentTime(wavesurfer.current.getCurrentTime())
+          })
+          }
+        })
+      }
+      
+     
+  
+      return () => {
+       
+        //wavesurfer.current.un('audioprocess');
       };
-    
-      const stopRecording = () => {
-        playRecord(false)
-        console.log("stop")
-        mediaRecorder.current?.stop();
-      };
-    
-      const handleRecordClick = () => {
-        if (isRecording) {
-          stopRecording();
-        } else {
-          startRecording();
-        }
-      };
+    }, [handleRecordClick]);
+
+    const handlePlay = () => {
+      wavesurfer.current?.playPause();
+    };
+  
+    const formatTime = (time:any) => {
+      let date=new Date(0)
+      date.setSeconds(time)
+      return date.toISOString().substr(11,8)
+    };
   return (
-    <div onClick={handleRecordClick}>
-      {children}
+    <div className='w-full' >
+    <div ref={waveformRef} className='waveform mx-14  overscroll-none '></div>
+<div ref={waveRefMic} className='mx-14'></div>
+      
+
+
+<div className="flex  justify-center mx-[-2rem] items-center gap-5">
+
+
+<div >
+  <Button onClick={handlePlay} disabled={!audioURL}  type="button" variant="outline" className="text-white bg-primary p-2">Play/Pause</Button>
+</div>
+<div >
+  <Button onClick={handleRecordClick} type="button"  variant="outline" className="bg-[#313131] border-none hover:bg-[#313131]">
+  {isRecording ? <><div className='flex gap-2 items-center'>Stop<StopCircle/></div></> : <><div className='flex gap-2 items-center text-[#9c9c9c] text-sm'>Vocal<Speech/></div></>}
+    </Button>
+</div>
+</div>
+
     </div>
   )
 }

@@ -8,7 +8,6 @@ import RecordPlugin from 'wavesurfer.js/dist/plugins/record.esm.js'
 import TimelinePlugin from 'wavesurfer.js/dist/plugins/timeline.js';
 import { PostStore } from '@/store/PostStore';
 import { Record } from '@/components/posts/mic/record';
-import MicrophonePlugin from 'wavesurfer.js/src/plugin/microphone';
 
 export default function PostMic({children}:any,type:boolean) {
 
@@ -28,15 +27,12 @@ export default function PostMic({children}:any,type:boolean) {
     let time :any;
     const handleRecordClick = () => {
       if (record1.isRecording() || record1.isPaused()) {
-        console.log("stop")
+
         record1.stopRecording()
         record(false)
       }else{
-       
      record1.startRecording()
-       
       }
-      
     };
     useEffect(() => {
       if(waveRefMic.current){
@@ -47,28 +43,21 @@ export default function PostMic({children}:any,type:boolean) {
           backend: 'WebAudio',
           cursorColor:"transparent",
           normalize:true,
-          hideScrollbar: true,
+          height:50,
               barWidth:2,
               barGap:4,
+              plugins: [TimelinePlugin.create()]
         });
         record1= wavesMic.current.registerPlugin(RecordPlugin.create({ scrollingWaveform, renderRecordedAudio: false }))
         wavesMic.current.on('audioprocess',()=>{
           console.log("process")
       })
-
-
-
-
-
-
-
-      
         record1.on('record-end',(blob:any)=>{
           const recordedUrl = URL.createObjectURL(blob)
           if (wavesMic.current) {
             wavesMic.current.destroy();
           }
-          console.log(recordedUrl)
+          
           if (waveformRef.current) {
             wavesurfer.current = WaveSurfer.create({
               container: waveformRef.current,
@@ -83,11 +72,13 @@ export default function PostMic({children}:any,type:boolean) {
              url:recordedUrl
             });
             
-            
+            wavesurfer.current.on('interaction', () => {
+              wavesurfer.current.play()
+            })
             
             wavesurfer.current.on('ready', () => {
               const timeline = Object.create(TimelinePlugin);
-              
+              //setAudioURL(recordedUrl)
             });
       
             wavesurfer.current.on('audioprocess',()=>{
@@ -101,51 +92,9 @@ export default function PostMic({children}:any,type:boolean) {
   
       return () => {
         //wavesurfer.current.un('audioprocess');
-       
-        if (wavesurfer.current) {
-          wavesurfer.current.destroy();
-        }
       };
     }, [handleRecordClick]);
-    const startRecording = async () => {
-      if (!navigator.mediaDevices) {
-        console.error('Enregistrement non pris en charge par ce navigateur');
-        return;
-      }
-  
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      mediaRecorder.current = new MediaRecorder(stream);
-  
-      mediaRecorder.current.onstart = () => {
-        record(true)
-        setCurrentTime(wavesurfer.current.getCurrentTime())
-        time = setInterval(() => {
-          setRecordingTime((prevTime) => prevTime + 1);
-        }, 1000);
-        wavesurfer.current.empty();
-      };
-  
-      mediaRecorder.current.onstop = () => {
-        record(false)
-        clearInterval(time)
-      };
-  
-      mediaRecorder.current.ondataavailable = (event:any) => {
-        const audioBlob = new Blob([event.data], { type: 'audio/wav' });
-        const audioUrl = URL.createObjectURL(audioBlob);
-        setAudioURL(audioUrl);
-        wavesurfer.current.loadBlob(audioBlob);
-      };
-  
-      mediaRecorder.current.start();
-    };
-  
-    const stopRecording = () => {
-      mediaRecorder.current?.stop();
-    };
-  
-    
-  
+
     const handlePlay = () => {
       wavesurfer.current?.playPause();
     };
