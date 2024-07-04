@@ -24,6 +24,7 @@ export default function RecordMic() {
   const [recordingTime, setRecordingTime] = useState(0);
   const timelineRef = useRef<any>(null);
   const [currentTime,setCurrentTime]=useState(0)
+  const [visibleMic,setVisibleMic]=useState(true)
     let time :any;
 
     const handleRecordClick = () => {
@@ -31,9 +32,13 @@ export default function RecordMic() {
 
         record1.stopRecording()
         record(false)
-      }else{
-     record1.startRecording()
       }
+      else{
+       
+     record1.startRecording()
+     
+      }
+     
     };
     useEffect(() => {
       if(waveRefMic.current){
@@ -44,7 +49,7 @@ export default function RecordMic() {
           backend: 'WebAudio',
           cursorColor:"transparent",
           normalize:true,
-          height:10,
+          height:20,
               barWidth:2,
               barGap:4,
              
@@ -57,8 +62,9 @@ export default function RecordMic() {
           const recordedUrl = URL.createObjectURL(blob)
           if (wavesMic.current) {
             wavesMic.current.destroy();
+            
           }
-          
+          setVisibleMic(false)
           if (waveformRef.current) {
             wavesurfer.current = WaveSurfer.create({
               container: waveformRef.current,
@@ -66,8 +72,9 @@ export default function RecordMic() {
               progressColor: 'purple',
               backend: 'WebAudio',
               cursorColor:"transparent",
-              height:10,
-             
+              normalize:true,
+              height:20,
+              barWidth:2,
               barGap:4,
              url:recordedUrl
             });
@@ -107,20 +114,20 @@ export default function RecordMic() {
     };
   return (
     <div className='w-full' >
-    <div ref={waveformRef} className='waveform mx-14  overscroll-none '></div>
-<div ref={waveRefMic} className='mx-14'></div>
+    <div ref={waveformRef} className={`mx-24 ${visibleMic ? '' : 'mt-6'}  overscroll-none`}></div>
+{visibleMic && <div  ref={waveRefMic} className='mx-24'></div>}
       
 
 
-<div className="flex  justify-center mx-[-2rem] items-center gap-5">
+<div className="flex mt-12  justify-center mx-[-2rem] items-center gap-5">
 
 
 <div >
-  <Button onClick={handlePlay} disabled={!audioURL}  type="button" variant="outline" className="text-white bg-primary p-2">Play/Pause</Button>
+  <Button onClick={handlePlay} disabled={!audioURL}  type="button" variant="outline" className="text-white bg-primary p-2"><span className='text-[0.7rem]'>Play/Pause</span> </Button>
 </div>
 <div >
   <Button onClick={handleRecordClick} type="button"  variant="outline" className="bg-[#313131] border-none hover:bg-[#313131]">
-  {isRecording ? <><div className='flex gap-2 items-center'>Stop<StopCircle/></div></> : <><div className='flex gap-2 items-center text-[#9c9c9c] text-sm'>Vocal<Speech/></div></>}
+  {isRecording ? <><div className='flex gap-2 items-center'>Stop<StopCircle/></div></> : <><div className='flex gap-2 items-center text-[#9c9c9c] text-sm'><span className='text-[0.7rem]'>Record</span><Speech/></div></>}
     </Button>
 </div>
 </div>

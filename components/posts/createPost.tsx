@@ -63,7 +63,7 @@ export default function Post() {
           
       </section>
      </section>
-     <section className="overflow-x-hidden right-[350px] fixed left-[350px]  bg-[#363636] rounded-2xl py-3 px-8">
+     <section className="overflow-y-hidden right-[350px] fixed left-[350px]  bg-[#363636] rounded-2xl py-3 px-8">
      
      <form action={CreatePost} className=''>
       
@@ -127,7 +127,7 @@ export default function Post() {
 
             </AnimatePresence>
            
-            <div className="absolute top-24 inset-0 z-20">
+            <div className="absolute top-[3rem] inset-0 z-20">
                   <RecordMic/>
             </div>
            
