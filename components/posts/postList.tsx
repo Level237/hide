@@ -85,7 +85,9 @@ export default function PostList() {
        <MoreHorizontal/>
         </div>
     </div>
-  
+  <div className='mt-4 text-white'>
+    Depuis la je suis bloqué mais je n'arrive pas à trouvé la solution 😄😄😄..
+  </div>
   <div className="mt-5 h-96 flex justify-center items-center  p-10 px-8 rounded-2xl " style={{ background:"url('/cover.png')",backgroundPosition:"center",backgroundSize:"cover",backgroundRepeat: "no-repeat" }}>
     </div>
     
