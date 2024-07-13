@@ -108,10 +108,16 @@ export default  function HeaderAuth(props?:any) {
         </section>
         <section className='flex   flex-1 gap-10 items-center justify-center absolute top-8'>
         <div>
-          <Home className='text-primary w-[1.4rem]'/>
+        <Link href="/">
+        <Home className='text-primary w-[1.4rem]'/>
+          </Link>
+          
         </div>
         <div>
+          <Link href="/notification">
           <BellRingIcon className='text-gray-200 w-[1.4rem]'/>
+          </Link>
+          
         </div>
         <div>
           <Mic className='text-gray-200 w-[1.4rem]'/>

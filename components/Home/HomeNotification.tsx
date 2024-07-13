@@ -20,7 +20,7 @@ export default function HomeNotification() {
       </div>
       </section>
      <section className='flex flex-col'>
-      <section className='bg-[#05050533] border-t-[1px]  border-t-[#ffffff23] max-h-32 px-6 py-8'>
+      <section className='bg-[#05050533] border-t-[1px]  border-t-[#ffffff0a] max-h-32 px-6 py-8'>
       
             <div className='flex flex-row justify-between items-start'>
               <div className='flex items-center min-w-96 justify-start gap-4'>
@@ -47,7 +47,7 @@ export default function HomeNotification() {
             
       
       </section>
-      <section className=' max-h-32 border-t-[1px]  border-t-[#ffffff23] px-6 py-8'>
+      <section className=' max-h-32 border-t-[1px]  border-t-[#ffffff0a] px-6 py-8'>
       
       <div className='flex flex-row justify-between items-start'>
         <div className='flex items-center min-w-96 justify-start gap-4'>
@@ -74,7 +74,7 @@ export default function HomeNotification() {
       
 
 </section>
-<section className='bg-[#05050533] border-t-[1px]  border-t-[#ffffff23] max-h-32 px-6 py-8'>
+<section className='bg-[#05050533] border-t-[1px]  border-t-[#ffffff0a] max-h-32 px-6 py-8'>
       
             <div className='flex flex-row justify-between items-start'>
               <div className='flex items-center min-w-96 justify-start gap-4'>
@@ -101,7 +101,7 @@ export default function HomeNotification() {
             
       
       </section>
-      <section className='bg-[#05050533] border-t-[1.6px]  border-t-[#ffffff27] max-h-32 px-6 py-8'>
+      <section className='bg-[#05050533] border-t-[1px]  border-t-[#ffffff15] max-h-32 px-6 py-8'>
       
             <div className='flex flex-row justify-between items-start'>
               <div className='flex items-center min-w-96 justify-start gap-4'>
@@ -128,7 +128,7 @@ export default function HomeNotification() {
             
       
       </section>
-      <section className='bg-[#05050533] border-t-[1.6px]  border-t-[#ffffff27] max-h-32 px-6 py-8'>
+      <section className='bg-[#05050533] border-t-[1px]  border-t-[#ffffff15] max-h-32 px-6 py-8'>
       
             <div className='flex flex-row justify-between items-start'>
               <div className='flex items-center min-w-96 justify-start gap-4'>
