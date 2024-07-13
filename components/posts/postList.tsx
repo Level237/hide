@@ -87,9 +87,6 @@ export default function PostList() {
     </div>
   
   <div className="mt-5 h-96 flex justify-center items-center  p-10 px-8 rounded-2xl " style={{ background:"url('/cover.png')",backgroundPosition:"center",backgroundSize:"cover",backgroundRepeat: "no-repeat" }}>
-        
-       
-        
     </div>
     
     <div className="flex mt-5 justify-between items-center">
