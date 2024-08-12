@@ -3,8 +3,6 @@ import { auth } from '@/auth';
 import HeaderAuth from '@/components/header/HeaderAuth';
 import HeaderProfile from '@/components/header/HeaderProfile';
 import { HomeComponent } from '@/components/Home/Home';
-import HomeContent from '@/components/profile/HomeContent';
-import NewHideSection from '@/components/profile/NewHideSection';
 import ProfileSection from '@/components/profile/ProfileSection';
 import { Button } from '@/components/ui/button';
 import getUserByName from '@/db/queries/users/getUserByName';
@@ -45,17 +43,8 @@ export default async function ProfilePage({params,searchParams}:ProfileShowPageP
     
   return (
     <div>
-      <HeaderProfile param={term}/>
-    <HomeComponent>
-   <section  className='flex mt-10 mx-10'>
-    <ProfileSection/>
-    <div className=' w-full py-12 rounded-lg pl-12 pr-12  border-[#00000013] border-[0.12rem]' >
-      <HomeContent tab={term}/>
-    </div>
-   </section>
-    </HomeComponent>
-       
-        
+       <HeaderAuth/>
+
     </div>
   )
 }
