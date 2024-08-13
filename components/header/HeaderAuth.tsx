@@ -12,6 +12,7 @@ import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 
 import {
+  Bell,
   BellRingIcon,
     ChevronDown,
     Cloud,
@@ -33,6 +34,7 @@ import {
     User2Icon,
     UserPlus,
     Users,
+    Users2,
   } from "lucide-react"
   import {
     DropdownMenu,
@@ -84,10 +86,10 @@ export default  function HeaderAuth(props?:any) {
    
     return(
      
-<header   className='flex w-full mr-8 fixed items-center justify-around top-0 right-8 left-8' >
+<header   className='flex w-full z-[9999] bg-[#262626] h-[5rem] fixed items-center justify-around top-0 right-8 left-0' >
 
 
-        <section className='flex flex-2 items-center gap-3 absolute top-0 left-0'>
+        <section className='flex mx-8 flex-2 items-center gap-3 absolute top-0 left-0'>
         <div className="flex items-center justify-between py-5 md:block">
         <Link href="/">
             <Image
@@ -109,13 +111,13 @@ export default  function HeaderAuth(props?:any) {
         <section className='flex   flex-1 gap-10 items-center justify-center absolute top-8'>
         <div>
         <Link href="/">
-        <Home className='text-primary w-[1.4rem]'/>
+        <Home className='text-primary w-[1.3rem]'/>
           </Link>
           
         </div>
         <div>
           <Link href="/notification">
-          <BellRingIcon className='text-gray-200 w-[1.4rem]'/>
+          <Bell className='text-gray-200 w-[1.3rem]'/>
           </Link>
           
         </div>
@@ -123,7 +125,7 @@ export default  function HeaderAuth(props?:any) {
           <Mic className='text-gray-200 w-[1.4rem]'/>
         </div>
         <div>
-          <User2Icon className='text-gray-200 w-[1.4rem]'/>
+          <Users2 className='text-gray-200 w-[1.4rem]'/>
         </div>
         
         </section>
