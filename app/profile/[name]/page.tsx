@@ -43,8 +43,14 @@ export default async function ProfilePage({params,searchParams}:ProfileShowPageP
     
   return (
     <div>
-       <HeaderAuth/>
-
+      <section>
+      <HeaderAuth/>
+      </section>
+      
+       <section className="flex items-start flex-col justify-items-start   h-screen">
+       <ProfileSection/>
+        </section>
+      
     </div>
   )
 }

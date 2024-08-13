@@ -33,7 +33,7 @@ export default function HomeSidebar() {
            <h2 className='text-white font-bold'>197</h2>
            <span className='text-sm text-gray-400'>Followers</span>
          </div>
-       <div className='flex justify-center items-center'>
+       <div className='flex border-[#ccc] justify-center items-center'>
        <div style={{ background:"url('/profile.jpg')",backgroundPosition:"center",backgroundSize:"cover" }} className='absolute left-[40%]   rounded-[28%] w-[4.6rem] h-[4.6rem] '>
 
 </div>
