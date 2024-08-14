@@ -42,7 +42,7 @@ export default async function ProfilePage({params,searchParams}:ProfileShowPageP
 
     
   return (
-    <div className='mx-16'>
+    <div className='mx-[5rem]'>
       <section>
       <HeaderAuth/>
       </section>

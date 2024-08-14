@@ -1,9 +1,11 @@
-import React from 'react'
+"use client"
+import React, { useEffect, useRef } from 'react'
 import { Avatar, AvatarFallback } from '../ui/avatar'
 import { Button } from '../ui/button'
-import { Edit, Eye, EyeOff, MoreHorizontal, NotepadText } from 'lucide-react'
+import { Edit, Eye, EyeOff, MoreHorizontal, NotepadText, Plus } from 'lucide-react'
 import { Card, CardContent, CardFooter, CardHeader } from '../ui/card'
 import { Separator } from '@/components/ui/separator'
+import lottie from 'lottie-web';
 import {
   Tabs,
   TabsContent,
@@ -14,6 +16,19 @@ import { Badge } from '../ui/badge'
 import CreateWidget from '../posts/createWidget'
 import PostList from '../posts/postList'
 export default function ProfileSection() {
+
+  const animationContainer = useRef(null);
+
+  useEffect(() => {
+    lottie.loadAnimation({
+      container: animationContainer.current,
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      path: 'https://lottie.host/4656248f-2bed-46aa-ae57-04b1dc1fe656/dEWFraveye.json'
+    });
+    animationContainer.current=null;
+  }, []);
   return (
     <section  className='mt-24    bottom-0 flex justify-start w-[100%]   gap-8'>
 
@@ -76,8 +91,26 @@ export default function ProfileSection() {
 <PostList/>
 </section>
       </section>
-      <section className='p-16 w-[30%] bg-[#363636]'>
-qq
+      <section className='h-[21rem] relative rounded-md px-4 py-6 w-[30%] bg-[#363636]'>
+        <section className='flex flex-col gap-3'>
+          <div className='flex items-center justify-between'>
+          <h1 className='text-white text-lg font-bold'>Story Hide</h1>
+          <button className='bg-[#00ff001a] py-[0.3rem] px-2 rounded-sm'>
+    <Plus className='w-4 h-4 text-primary'/>
+  </button>
+          
+          </div>
+        
+        <div>
+          <span className='text-md text-gray-400'>
+          Share your story to your friend and get their response hide
+          </span>
+        </div>
+        <div className='absolute bottom-0 w-64 mt-12'>
+        <div ref={animationContainer}></div>
+        </div>
+        </section>
+
 </section>
    </section>
   )
