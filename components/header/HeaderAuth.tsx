@@ -57,7 +57,7 @@ import DropdownAsChild from '../DropdownAsChild';
 export default  function HeaderAuth(props?:any) {
 
 
-    const [state, setState] = useState(false)
+    const [active, setActive] = useState(true)
   // Replace javascript:void(0) paths with your paths
 
 

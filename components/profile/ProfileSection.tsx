@@ -19,7 +19,7 @@ export default function ProfileSection() {
 
       <section className='w-[70%] flex flex-col gap-4'>
 <section className='pb-0 rounded-2xl bg-[#363636] w-full'>
-<Card className="w-full pb-0 max-w-full rounded-2xl bg-[#363636] border-[#363636]">
+<Card className="w-full pb-1 max-w-full rounded-2xl bg-[#363636] border-[#363636]">
      <CardHeader className='h-44  z-[10]   relative' style={{ background:"url('/cover.jpg')",backgroundPosition:"center",backgroundSize:"cover" }}>
        
        
@@ -53,11 +53,11 @@ export default function ProfileSection() {
      
      </CardContent>
      
-     <Tabs defaultValue="account" className="w-full ">
+     <Tabs defaultValue="account" className="w-full  ">
       <TabsList className="grid w-[100%] grid-cols-7 bg-transparent ">
         <TabsTrigger value="account">Posts</TabsTrigger>
         <TabsTrigger value="password">Voice</TabsTrigger>
-        <TabsTrigger value="friends">Friends <Badge className='bg-[#212121] ml-2 text-[0.65rem]'>200</Badge></TabsTrigger>
+        <TabsTrigger value="friends">Friends <Badge className='bg-[#00ff001a] text-primary ml-2 text-[0.65rem]'>200</Badge></TabsTrigger>
         <TabsTrigger value="story">Secret Story</TabsTrigger>
         <TabsTrigger value="media">Media</TabsTrigger>
         <TabsTrigger value="activity">Activity</TabsTrigger>
