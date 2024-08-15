@@ -15,6 +15,7 @@ import {
 import { Badge } from '../ui/badge'
 import CreateWidget from '../posts/createWidget'
 import PostList from '../posts/postList'
+import Image from 'next/image'
 export default function ProfileSection() {
 
   const animationContainer = useRef(null);
@@ -91,7 +92,8 @@ export default function ProfileSection() {
 <PostList/>
 </section>
       </section>
-      <section className='h-[21rem] relative rounded-md px-4 py-6 w-[30%] bg-[#363636]'>
+      <section className='w-[30%] flex flex-col gap-6'>
+      <section className='h-[21rem] relative rounded-md px-4 py-6  bg-[#363636]'>
         <section className='flex flex-col gap-3'>
           <div className='flex items-center justify-between'>
           <h1 className='text-white text-lg font-bold'>Story Hide</h1>
@@ -112,6 +114,41 @@ export default function ProfileSection() {
         </section>
 
 </section>
+<section className='h-[23rem] relative rounded-md px-4 py-6  bg-[#363636]'>
+        <section className='flex flex-col gap-6'>
+        <div className='flex items-center justify-between'>
+          <h1 className='text-white text-lg font-bold'>Photos</h1>
+          <button className='bg-[#00ff001a] text-primary text-[0.8rem] py-[0.3rem] px-2 rounded-sm'>
+   
+    See all photos
+  </button>
+          
+          </div>
+          <section className='flex flex-col gap-3'>
+            <div className='grid grid-cols-2 gap-2'>
+            <div style={{ background:"url('/cover.jpg')",backgroundPosition:"center",backgroundSize:"cover" }} className='relative rounded-xl w-[8.8rem] h-[8.8rem] '>
+
+            </div>
+            <div style={{ background:"url('/cover.png')",backgroundPosition:"center",backgroundSize:"cover" }} className='relative rounded-xl w-[8.8rem] h-[8.8rem] '>
+
+</div>
+            </div>
+            <div className='grid grid-cols-3 gap-2'>
+<div style={{ background:"url('/album1.jpg')",backgroundPosition:"center",backgroundSize:"cover" }} className='relative rounded-xl w-[6rem] h-[6rem] '>
+
+</div>
+<div style={{ background:"url('/tof.jpg')",backgroundPosition:"center",backgroundSize:"cover" }} className='relative rounded-xl w-[6rem] h-[6rem] '>
+
+</div>
+<div style={{ background:"url('/tof2.jpg')",backgroundPosition:"center",backgroundSize:"cover" }} className='relative rounded-xl w-[6rem] h-[6rem] '>
+
+</div>
+    </div>
+          </section>
+        </section>
+
+</section>
+      </section>
    </section>
   )
 }
