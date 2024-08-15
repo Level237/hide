@@ -114,7 +114,7 @@ export default function ProfileSection() {
         </section>
 
 </section>
-<section className='h-[23rem] relative rounded-md px-4 py-6  bg-[#363636]'>
+<section className='h-[23rem] sticky top-24 rounded-md px-4 py-6  bg-[#363636]'>
         <section className='flex flex-col gap-6'>
         <div className='flex items-center justify-between'>
           <h1 className='text-white text-lg font-bold'>Photos</h1>
