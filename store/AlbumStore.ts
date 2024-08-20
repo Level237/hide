@@ -5,7 +5,7 @@ import { create } from "zustand";
 interface AlbumState{
     isVisible:boolean,
     photos:GaleryPhotoType[],
-    currentPhoto:Number,
+    currentPhoto:number,
     setVisible:()=>void,
     closeAlbum:()=>void;
     goToNext:(currentNumber:number)=>boolean,

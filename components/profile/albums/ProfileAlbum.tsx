@@ -7,7 +7,13 @@ import React from 'react'
 export default function ProfileAlbum() {
 
   const isVisible=AlbumStore((state)=>state.isVisible)
+  const photos=AlbumStore((state)=>state.photos)
+  const currentPhoto=AlbumStore((state)=>state.currentPhoto)
+  const nextPhoto=AlbumStore((state)=>state.goToNext)
+  const previousPhoto=AlbumStore((state)=>state.goToPrevious)
   const close=AlbumStore((state)=>state.closeAlbum)
+
+  const foundCurrentPhoto=photos.find((photo)=>photo.id===currentPhoto)
   return (
     <>
 
@@ -20,17 +26,18 @@ export default function ProfileAlbum() {
       </div>
       <section className='flex mx-8 gap-5 items-center w-full justify-between'>
           <div className='opacity-1 relative cursor-pointer'>
-            <button className=' bg-slate-700 p-3'>
+            <button onClick={()=>previousPhoto(currentPhoto)} className=' bg-slate-700 p-3'>
             <ChevronLeft className='text-white w-6 h-8' />
             </button>
           
           </div>
           <div>
-          <div style={{ background:"url('/profile.jpg')",backgroundPosition:"center",backgroundSize:"cover" }} className='relative cursor-pointer w-96 opacity-1 h-[90vh]    rounded-xl '></div>
+            
+          <div style={{ background:`url(${foundCurrentPhoto?.img})`,backgroundPosition:"center",backgroundSize:"cover" }} className='relative cursor-pointer w-96 opacity-1 h-[90vh]    rounded-xl '></div>
             
           </div>
           <div className='opacity-1 relative cursor-pointer'>
-            <button className=' bg-slate-700 p-3'>
+            <button onClick={()=>nextPhoto(currentPhoto)} className=' bg-slate-700 p-3'>
             <ChevronRight className='text-white w-6 h-8' />
             </button>
           
