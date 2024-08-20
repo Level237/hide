@@ -3,9 +3,11 @@ import { auth } from '@/auth';
 import HeaderAuth from '@/components/header/HeaderAuth';
 import HeaderProfile from '@/components/header/HeaderProfile';
 import { HomeComponent } from '@/components/Home/Home';
+import ProfileAlbum from '@/components/profile/albums/ProfileAlbum';
 import ProfileSection from '@/components/profile/ProfileSection';
 import { Button } from '@/components/ui/button';
 import getUserByName from '@/db/queries/users/getUserByName';
+import { AlbumStore } from '@/store/AlbumStore';
 
 import { notFound, redirect } from 'next/navigation';
 import React from 'react'
@@ -39,18 +41,23 @@ export default async function ProfilePage({params,searchParams}:ProfileShowPageP
  }
 
 
-
     
   return (
-    <div className='mx-[5rem]'>
+    <>
+    <ProfileAlbum/>
+     
+     <div className='mx-[5rem]'>
       <section>
       <HeaderAuth/>
       </section>
       
        <section className="flex items-start flex-col justify-items-start   h-screen">
+      
        <ProfileSection/>
         </section>
       
     </div>
+    </>
+   
   )
 }

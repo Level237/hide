@@ -56,7 +56,10 @@ export default function HomeSidebar() {
      
      </CardContent>
      <CardFooter className="flex justify-between">
-     <Button className='w-full bg-[#4d4b4b75]'>My Profile</Button>
+      <Link className='w-full' href="/profile/level">
+      <Button className='w-full hover:bg-[#00ff001a] hover:text-primary bg-[#4d4b4b75]'>My Profile</Button>
+      </Link>
+     
      </CardFooter>
    </Card>
    </section>

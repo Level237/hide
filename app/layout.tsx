@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="">
       
-      <body className="bg-[#282828] mx-8">
+      <body className="bg-[#282828]">
       <Providers>
       <NextTopLoader
       color="#2cac5c"

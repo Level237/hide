@@ -16,6 +16,7 @@ import { Badge } from '../ui/badge'
 import CreateWidget from '../posts/createWidget'
 import PostList from '../posts/postList'
 import Image from 'next/image'
+import ProfileAlbum from './albums/ProfileAlbum'
 export default function ProfileSection() {
 
   const animationContainer = useRef(null);
@@ -31,8 +32,9 @@ export default function ProfileSection() {
     animationContainer.current=null;
   }, []);
   return (
-    <section  className='mt-24    bottom-0 flex justify-start w-[100%]   gap-8'>
-
+    
+    <section  className='mt-24     bottom-0 flex justify-start w-[100%]   gap-8'>
+      
       <section className='w-[70%] flex flex-col gap-4'>
 <section className='pb-0 rounded-2xl bg-[#363636] w-full'>
 <Card className="w-full pb-1 max-w-full rounded-2xl bg-[#363636] border-[#363636]">
