@@ -17,10 +17,12 @@ import CreateWidget from '../posts/createWidget'
 import PostList from '../posts/postList'
 import Image from 'next/image'
 import ProfileAlbum from './albums/ProfileAlbum'
+import AlbumGrid from './albums/AlbumGrid'
+import { AlbumStore } from '@/store/AlbumStore'
 export default function ProfileSection() {
 
   const animationContainer = useRef(null);
-
+  const isVisible=AlbumStore((state)=>state.isVisible)
   useEffect(() => {
     lottie.loadAnimation({
       container: animationContainer.current,
@@ -32,8 +34,8 @@ export default function ProfileSection() {
     animationContainer.current=null;
   }, []);
   return (
-    
-    <section  className='mt-24     bottom-0 flex justify-start w-[100%]   gap-8'>
+    <section className={`${isVisible ? "overflow-y-hidden" : ""}`}>
+ <section  className='mt-24      bottom-0 flex justify-start w-[100%]   gap-8'>
       
       <section className='w-[70%] flex flex-col gap-4'>
 <section className='pb-0 rounded-2xl bg-[#363636] w-full'>
@@ -126,31 +128,13 @@ export default function ProfileSection() {
   </button>
           
           </div>
-          <section className='flex flex-col gap-3'>
-            <div className='grid grid-cols-2 gap-2'>
-            <div style={{ background:"url('/cover.jpg')",backgroundPosition:"center",backgroundSize:"cover" }} className='relative rounded-xl w-[8.8rem] h-[8.8rem] '>
-
-            </div>
-            <div style={{ background:"url('/cover.png')",backgroundPosition:"center",backgroundSize:"cover" }} className='relative rounded-xl w-[8.8rem] h-[8.8rem] '>
-
-</div>
-            </div>
-            <div className='grid grid-cols-3 gap-2'>
-<div style={{ background:"url('/album1.jpg')",backgroundPosition:"center",backgroundSize:"cover" }} className='relative rounded-xl w-[6rem] h-[6rem] '>
-
-</div>
-<div style={{ background:"url('/tof.jpg')",backgroundPosition:"center",backgroundSize:"cover" }} className='relative rounded-xl w-[6rem] h-[6rem] '>
-
-</div>
-<div style={{ background:"url('/tof2.jpg')",backgroundPosition:"center",backgroundSize:"cover" }} className='relative rounded-xl w-[6rem] h-[6rem] '>
-
-</div>
-    </div>
-          </section>
+         <AlbumGrid/>
         </section>
 
 </section>
       </section>
    </section>
+    </section>
+   
   )
 }
