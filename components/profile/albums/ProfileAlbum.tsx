@@ -31,10 +31,8 @@ export default function ProfileAlbum() {
             </button>
           
           </div>
-          <div>
-            
-          <div style={{ background:`url(${foundCurrentPhoto?.img})`,backgroundPosition:"center",backgroundSize:"cover" }} className='relative cursor-pointer w-96 opacity-1 h-[90vh]    rounded-xl '></div>
-            
+          <div className='cursor-pointer  opacity-1 h-[90vh] '>
+            <Image className='relative w-full h-full' src={`${foundCurrentPhoto?.img}`} width={600} height={500} alt={''}/>
           </div>
           <div className='opacity-1 relative cursor-pointer'>
             <button onClick={()=>nextPhoto(currentPhoto)} className=' bg-slate-700 p-3'>

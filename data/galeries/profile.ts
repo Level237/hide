@@ -15,5 +15,9 @@ export const galeries=[
     {
         id:4,
         img:'/tof2.jpg'
+    },
+    {
+        id:5,
+        img:'/cover.jpg'
     }
 ]
