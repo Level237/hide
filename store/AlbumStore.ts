@@ -7,14 +7,18 @@ interface AlbumState{
     photos:GaleryPhotoType[],
     currentPhoto:number,
     setVisible:()=>void,
+    blockedPrevious:boolean,
+    blockedNext:boolean,
     closeAlbum:()=>void;
     goToNext:(currentNumber:number)=>boolean,
-    goToPrevious:(currentNumber:number)=>void,
+    goToPrevious:(currentNumber:number)=>boolean,
 }
 
 export const AlbumStore=create<AlbumState>((set)=>({
     isVisible:false,
     photos:galeries,
+    blockedNext:true,
+    blockedPrevious:false,
     currentPhoto:1,
     setVisible:()=>{
         set({isVisible:true})
@@ -24,16 +28,22 @@ export const AlbumStore=create<AlbumState>((set)=>({
     },
     goToNext:(currentNumber:number)=>{
         if(currentNumber===galeries.length){
-            return false;
+            set({blockedNext:true})
+            set({blockedPrevious:false})
+            return true;
         }
         set({currentPhoto:currentNumber+1})
-        return true;
+        set({blockedNext:false})
+        return false
     },
     goToPrevious:(currentNumber:number)=>{
         if(currentNumber===1){
-            return false
+            set({blockedPrevious:true})
+            set({blockedNext:false})
+            return true;
         }
         set({currentPhoto:currentNumber-1})
-        return true;
+        set({blockedPrevious:false})
+        return false
     }
 }))
