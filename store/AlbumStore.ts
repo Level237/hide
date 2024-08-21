@@ -32,7 +32,7 @@ export const AlbumStore=create<AlbumState>((set)=>({
             set({blockedPrevious:false})
             return true;
         }
-        set({currentPhoto:currentNumber+1})
+        set((state)=>({currentPhoto:state.currentPhoto+1}))
         set({blockedNext:false})
         return false
     },
@@ -40,9 +40,12 @@ export const AlbumStore=create<AlbumState>((set)=>({
         if(currentNumber===1){
             set({blockedPrevious:true})
             set({blockedNext:false})
+            
             return true;
         }
-        set({currentPhoto:currentNumber-1})
+       
+        set((state)=>({currentPhoto:state.currentPhoto-1}))
+        //console.log(currentNumber)
         set({blockedPrevious:false})
         return false
     }

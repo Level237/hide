@@ -2,7 +2,7 @@
 import { AlbumStore } from '@/store/AlbumStore'
 import { ChevronLeft, ChevronRight, MoveLeft, X } from 'lucide-react'
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion';
 
 export default function ProfileAlbum() {
@@ -18,6 +18,25 @@ export default function ProfileAlbum() {
   const isBlockedNext=AlbumStore((state)=>state.blockedNext)
 
   const foundCurrentPhoto=photos.find((photo)=>photo.id===currentPhoto)
+  console.log(currentPhoto)
+
+  const [previousBlock,setPreviousBlock]=useState(false)
+  const [nextBlock,setNextBlock]=useState(false)
+  useEffect(() => {
+    if(currentPhoto===1){
+      setPreviousBlock(true)
+    }else if(currentPhoto > 1){
+      setPreviousBlock(false)
+    }if(currentPhoto===photos.length){
+      setNextBlock(true)
+      console.log("dd")
+    }else if(currentPhoto < photos.length){
+      setNextBlock(false)
+    }
+    
+  }, [currentPhoto])
+  
+  //console.log(nextBlock)
   return (
     <>
    
@@ -31,7 +50,7 @@ export default function ProfileAlbum() {
       <section className='flex mx-8 gap-5 items-center w-full justify-between'>
           <div className='opacity-1 relative cursor-pointer'>
             
-            <button onClick={()=>previousPhoto(currentPhoto)} className={`bg-slate-700 ${isBlockedPrevious ? "opacity-25 cursor-not-allowed" : "" }  p-3`}>
+            <button onClick={()=>previousPhoto(currentPhoto)} className={`bg-slate-700 ${previousBlock ? "opacity-25 cursor-not-allowed" : "" }  p-3`}>
             <ChevronLeft className='text-white w-6 h-8' />
             </button>
             
@@ -59,7 +78,7 @@ export default function ProfileAlbum() {
           
          </AnimatePresence>
           <div className='opacity-1 relative cursor-pointer'>
-            <button onClick={()=>nextPhoto(currentPhoto)} className=' bg-slate-700 p-3'>
+            <button onClick={()=>nextPhoto(currentPhoto)}  className={`bg-slate-700 ${nextBlock ? "opacity-25 cursor-not-allowed" : "" }  p-3`}>
             <ChevronRight className='text-white w-6 h-8' />
             </button>
           
