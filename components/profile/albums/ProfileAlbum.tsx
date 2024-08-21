@@ -14,8 +14,7 @@ export default function ProfileAlbum() {
   const nextPhoto=AlbumStore((state)=>state.goToNext)
   const previousPhoto=AlbumStore((state)=>state.goToPrevious)
   const close=AlbumStore((state)=>state.closeAlbum)
-  const isBlockedPrevious=AlbumStore((state)=>state.blockedPrevious)
-  const isBlockedNext=AlbumStore((state)=>state.blockedNext)
+  const visiblePhoto=AlbumStore((state)=>state.visiblePhoto)
 
   const foundCurrentPhoto=photos.find((photo)=>photo.id===currentPhoto)
   console.log(currentPhoto)
@@ -58,23 +57,28 @@ export default function ProfileAlbum() {
           
           </div>
           <AnimatePresence>
-          
-           <motion.div
-           initial={{ 
-             opacity:0
+          {visiblePhoto && 
+          <motion.div
+          initial={{ 
+            opacity:0
+           }}
+           transition={{ 
+            duration:0.5,
+            
             }}
- 
-            animate={{
-             opacity:1
+           animate={{
+            opacity:1
+           }}
+
+           exit={{ 
+            x:50,
+            opacity:0
             }}
- 
-            exit={{ 
-             x:-500,
-             opacity:0
-             }}
-            className='cursor-pointer  opacity-1 h-[90vh] '>
-             <Image className='relative w-full h-full' src={`${foundCurrentPhoto?.img}`} width={600} height={500} alt={''}/>
-           </motion.div>
+           className='cursor-pointer  opacity-1 h-[90vh] '>
+            <Image className='relative w-full h-full' src={`${foundCurrentPhoto?.img}`} width={600} height={500} alt={''}/>
+          </motion.div>
+          }
+           
           
          </AnimatePresence>
           <div className='opacity-1 relative cursor-pointer'>
