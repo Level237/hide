@@ -6,19 +6,17 @@ import { Edit, Eye, EyeOff, MoreHorizontal, NotepadText, Plus } from 'lucide-rea
 import { Card, CardContent, CardFooter, CardHeader } from '../ui/card'
 import { Separator } from '@/components/ui/separator'
 import lottie from 'lottie-web';
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs"
-import { Badge } from '../ui/badge'
+
+
 import CreateWidget from '../posts/createWidget'
 import PostList from '../posts/postList'
 import Image from 'next/image'
 import ProfileAlbum from './albums/ProfileAlbum'
 import AlbumGrid from './albums/AlbumGrid'
 import { AlbumStore } from '@/store/AlbumStore'
+import TabProfile from './TabProfile'
+
+
 export default function ProfileSection() {
 
   const animationContainer = useRef(null);
@@ -73,18 +71,7 @@ export default function ProfileSection() {
      
      </CardContent>
      
-     <Tabs defaultValue="account" className="w-full  ">
-      <TabsList className="grid w-[100%] grid-cols-7 bg-transparent ">
-        <TabsTrigger value="account">Posts</TabsTrigger>
-        <TabsTrigger value="password">Voice</TabsTrigger>
-        <TabsTrigger value="friends">Friends <Badge className='bg-[#00ff001a] text-primary ml-2 text-[0.65rem]'>200</Badge></TabsTrigger>
-        <TabsTrigger value="story">Secret Story</TabsTrigger>
-        <TabsTrigger value="media">Media</TabsTrigger>
-        <TabsTrigger value="activity">Activity</TabsTrigger>
-        <TabsTrigger value="settings">Settings</TabsTrigger>
-      </TabsList>
-      
-    </Tabs>
+     <TabProfile/>
      
    </Card>
    
