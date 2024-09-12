@@ -39,10 +39,10 @@ export default function ProfileSection({params}:any) {
   }, []);
   return (
     <section className={`${isVisible ? "overflow-y-hidden" : ""}`}>
- <section  className='mt-24      bottom-0 flex justify-start w-[100%]   gap-8'>
+ <section  className='mt-24 bottom-0 flex justify-start w-[100%]   gap-8'>
       
-      <section className='w-[70%] flex flex-col gap-4'>
-<section className='pb-0 rounded-2xl bg-[#363636] w-full'>
+      <section className='w-[70%]  flex flex-col gap-4'>
+<section className='pb-0 rounded-2xl bg-[#363636] w-[100%]'>
 <Card className="w-full pb-1 max-w-full rounded-2xl bg-[#363636] border-[#363636]">
      <CardHeader className='h-44  z-[10]   relative' style={{ background:"url('/cover.jpg')",backgroundPosition:"center",backgroundSize:"cover" }}>
        
@@ -82,7 +82,7 @@ export default function ProfileSection({params}:any) {
    </Card>
    
 </section>
-<section>
+<section className='w-full'>
   {search===null && <PostSection/>}
   {search==="voices" && <VoiceSection/>}
 </section>

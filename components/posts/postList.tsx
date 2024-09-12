@@ -144,7 +144,7 @@ export default function PostList() {
   <div className="mt-5 h-96 flex justify-center items-center  p-10 px-8 rounded-2xl " style={{ background:"#000000" }}>
         
   <div className="mt-5">
-          <h2 className="text-3xl font-bold" style={{ color:"white" }}><PostVoice audioUrl={'/afrobeat.mp3'} waveId={'wave3'}/></h2>
+          <h2 className="text-3xl font-bold" style={{ color:"white" }}><PostVoice heightVoice={50} widthVoice={500} audioUrl={'/afrobeat.mp3'} waveId={'wave3'}/></h2>
         </div>
         
     </div>
@@ -260,7 +260,7 @@ export default function PostList() {
   <div className="mt-5 h-96 flex justify-center items-center  p-10 px-8 rounded-2xl " style={{ background:"#ec008c" }}>
         
   <div className="mt-5">
-          <h2 className="text-3xl font-bold" style={{ color:"white" }}><PostVoice audioUrl={'/afrobeat.mp3'} waveId={'wave1'}/></h2>
+          <h2 className="text-3xl font-bold" style={{ color:"white" }}><PostVoice heightVoice={50} widthVoice={500} audioUrl={'/afrobeat.mp3'} waveId={'wave1'}/></h2>
         </div>
         
     </div>

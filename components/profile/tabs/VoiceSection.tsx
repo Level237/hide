@@ -3,6 +3,7 @@
 import CreateWidget from '@/components/posts/createWidget'
 import PostList from '@/components/posts/postList'
 import React from 'react'
+import ListVoiceProfile from '../voices/ListVoiceProfile'
 
 export default function VoiceSection() {
   return (
@@ -10,7 +11,7 @@ export default function VoiceSection() {
       <section>
 </section>
 <section>
-<PostList/>
+<ListVoiceProfile/>
 </section>
     </>
   )
