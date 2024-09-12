@@ -18,7 +18,7 @@ export default function TabProfile() {
 
   return (
     <>
-      <Tabs defaultValue="account" className="w-full  ">
+      <Tabs defaultValue="account" className="w-full">
       <TabsList className="grid w-[100%] grid-cols-7 bg-transparent ">
         <TabsTrigger onClick={()=>setSwitchProfile(null)} value="account">Posts</TabsTrigger>
         <TabsTrigger onClick={()=>setSwitchProfile("voices")} value="password">Voice</TabsTrigger>

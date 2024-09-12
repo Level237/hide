@@ -15,12 +15,18 @@ import ProfileAlbum from './albums/ProfileAlbum'
 import AlbumGrid from './albums/AlbumGrid'
 import { AlbumStore } from '@/store/AlbumStore'
 import TabProfile from './TabProfile'
+import PostSection from './tabs/PostSection'
+import { useSearchParams } from 'next/navigation'
+import VoiceSection from './tabs/VoiceSection'
 
-
-export default function ProfileSection() {
-
+export default function ProfileSection({params}:any) {
+  const searchParams = useSearchParams()
+  const search = searchParams.get('t')
   const animationContainer = useRef(null);
+
   const isVisible=AlbumStore((state)=>state.isVisible)
+
+
   useEffect(() => {
     lottie.loadAnimation({
       container: animationContainer.current,
@@ -77,11 +83,10 @@ export default function ProfileSection() {
    
 </section>
 <section>
-<CreateWidget/>
+  {search===null && <PostSection/>}
+  {search==="voices" && <VoiceSection/>}
 </section>
-<section>
-<PostList/>
-</section>
+
       </section>
       <section className='w-[30%] flex flex-col gap-6'>
       <section className='h-[21rem] relative rounded-md px-4 py-6  bg-[#363636]'>
