@@ -18,6 +18,7 @@ import TabProfile from './TabProfile'
 import PostSection from './tabs/PostSection'
 import { useSearchParams } from 'next/navigation'
 import VoiceSection from './tabs/VoiceSection'
+import ListFriend from './friends/ListFriend'
 
 export default function ProfileSection({params}:any) {
   const searchParams = useSearchParams()
@@ -85,6 +86,7 @@ export default function ProfileSection({params}:any) {
 <section className='w-full'>
   {search===null && <PostSection/>}
   {search==="voices" && <VoiceSection/>}
+  {search==="friends" && <ListFriend/>}
 </section>
 
       </section>
