@@ -39,7 +39,7 @@ export default function ProfileAlbum() {
   return (
     <>
    
-    {isVisible && <section  className='fixed flex justify-between items-center overflow-y-scroll   h-screen  w-full z-[9999999999999999999999]'>
+    {isVisible && <section  className='absolute flex justify-between items-center overflow-y-scroll   h-screen  w-full z-[9999999999999999999999]'>
       <div onClick={()=>close()} className='absolute inset-0 top-0 bottom-0 bg-black opacity-85'>
 
       </div>

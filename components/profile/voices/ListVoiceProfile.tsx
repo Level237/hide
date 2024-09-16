@@ -20,19 +20,17 @@ export default function ListVoiceProfile() {
 
 
  <section className='grid grid-cols-2 gap-x-4 w-full'>
-      <div className="bg-[#000] cursor-pointer  flex  justify-center items-center   mb-6 rounded-2xl">
+      <div className=" border border-dashed border-x-2 border-y-2 border-[#838080ad] cursor-pointer  flex flex-col gap-2  justify-center items-center   mb-6 rounded-2xl">
    
     <div>
-    <Mic className='w-16  text-primary'/>
+    <Mic className='w-11 h-11  text-primary'/>
     </div>
     <div>
-        <h2 className='text-md text-primary'>New Voice</h2>
+        <h2 className='text-lg font-bold text-muted-foreground'>New Voice</h2>
         
     </div>
    
     <div className="flex mt-5 justify-between items-center">
-     
-      
     </div>
   </div>
   <div className="bg-[#363636] min-w-96 px-6 py-4 mb-6 rounded-2xl">

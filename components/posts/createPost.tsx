@@ -30,7 +30,7 @@ export default function Post() {
    return <> <div 
  
    className='  flex mt-6 gap-5 max-h-[100%]  items-stretch  overflow-y-hidden'>
-     <section className="w-[25rem] max-w-[300px]  fixed  py-8  bg-[#363636]  rounded-xl ">
+     <section className="w-[25rem] mx-6 max-w-[300px]  fixed  py-8  bg-[#363636]  rounded-xl ">
       <section className="flex mx-5 flex-col gap-3">
         <div>
         <Image src="/logo.png" alt="logo" height={50} width={50} className="mx-auto" />
