@@ -2,7 +2,6 @@
 import { registerAction } from "@/actions/auth/register"
 import { useFormState } from "react-dom"
 import { Input } from "./ui/input"
-import { Button } from "./ui/button"
 import {FormBtn} from "./common/FormBtn"
 
 export default function RegisterForm() {
