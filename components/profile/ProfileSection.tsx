@@ -53,7 +53,7 @@ export default function ProfileSection({params}:any) {
      <Separator className='bg-[#363636]'/>
      <CardContent>
       <section className='flex gap-3 items-center'>
-      <div style={{ background:"url('/profile.jpg')",backgroundPosition:"center",backgroundSize:"cover" }} className='mt-[-40px] z-[900]  relative rounded-[100%] w-[7.5rem] h-[7.5rem] '>
+      <div style={{ background:"url('/profile.jpg')",backgroundPosition:"center",backgroundSize:"cover" }} className='mt-[-40px] z-[90]  relative rounded-[100%] w-[7.5rem] h-[7.5rem] '>
 
 </div>
 <div className='mt-2 flex flex-1 flex-col'>

@@ -55,7 +55,7 @@ export default async function ProfilePage({params,searchParams}:ProfileShowPageP
       
        <ProfileSection/>
         </section>
-      
+        
     </div>
     </>
    
