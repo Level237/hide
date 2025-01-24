@@ -75,33 +75,47 @@ export function PostCard({
   }
  
     
-    <div className="flex mt-5 justify-between items-center">
-      <div className="flex items-center gap-3 flex-1">
-        
-      <Avatar style={{ background:"url('/profile.jpg')",backgroundPosition:"center",backgroundSize:"cover" }} className='cursor-pointer w-8 h-8 rounded-xl'>
-            </Avatar>
-            <div className="w-full relative">
-            <textarea name="" id="" placeholder='Enter your comment' className={`font-bold placeholder:text-sm  w-full bg-[#282828] resize-none max-h-12 flex justify-center relative overflow-y-hidden border-[#00000041] rounded-2xl placeholder:text-[#ffffff21] py-4 px-3 cursor-pointer        text-white  text-sm`} ></textarea>
-            <div className="absolute bottom-2  right-4">
-            <SendIcon className="w-6 h-6 text-gray-400"/> 
-            </div>
-            </div>
-            
-      </div>
-      <div className='flex w-[12rem]  justify-around text-black mt-5'>
-          <div className='flex items-center gap-1'>
-          <Heart className={` text-gray-300 ${likes>0 && "fill-current text-primary"}  text-md w-6 h-6`}/><span className={`text-[0.8rem] text-gray-300 ${likes>0 && "font-bold text-primary"}`}>{likes}</span> 
+    <div className="flex flex-col mt-5 space-y-4">
+      {/* Section des statistiques */}
+      <div className='flex justify-between items-center px-2'>
+        <div className='flex items-center space-x-6'>
+          <button className='group flex items-center space-x-2 transition-all'>
+            <Heart className={`w-6 h-6 transition-colors ${likes > 0 ? "fill-primary text-primary" : "text-gray-400 group-hover:text-primary"}`}/>
+            <span className={`text-sm transition-colors ${likes > 0 ? "text-primary font-medium" : "text-gray-400 group-hover:text-primary"}`}>
+              {likes}
+            </span>
+          </button>
           
-          </div>
-          <div className='flex items-center gap-1 text-gray-300'>
-          <LucideMessageSquare className="w-6 h-6"/> <span className='text-[0.8rem]'>{comments}</span> 
+          <button className='group flex items-center space-x-2'>
+            <LucideMessageSquare className="w-6 h-6 text-gray-400 group-hover:text-blue-400"/>
+            <span className='text-sm text-gray-400 group-hover:text-blue-400'>
+              {comments}
+            </span>
+          </button>
         </div>
-        <div className='flex items-center gap-1 text-gray-300'>
-          <Share className='w-6 h-6'/><span className='text-[0.8rem]'>0</span> 
+
+        <button className='group flex items-center space-x-2'>
+          <Share className='w-6 h-6 text-gray-400 group-hover:text-green-400'/>
+          <span className='text-sm text-gray-400 group-hover:text-green-400'>Partager</span>
+        </button>
+      </div>
+
+      {/* Section des commentaires */}
+      <div className="flex items-center space-x-3 bg-[#282828] rounded-2xl p-2">
+        <Avatar 
+          style={{ background:"url('/profile.jpg')", backgroundPosition:"center", backgroundSize:"cover" }} 
+          className='w-8 h-8 rounded-xl shrink-0'
+        />
+        <div className="flex-1 relative">
+          <textarea 
+            placeholder='Ajouter un commentaire...' 
+            className="w-full bg-transparent resize-none max-h-12 outline-none border-none text-white text-sm placeholder:text-gray-500 py-2 pr-10"
+          />
+          <button className="absolute right-2 top-1/2 -translate-y-1/2 p-1 hover:bg-gray-700/50 rounded-full transition-colors">
+            <SendIcon className="w-5 h-5 text-gray-400 hover:text-primary transition-colors"/> 
+          </button>
         </div>
-       
-        
-        </div>
+      </div>
     </div>
   </div>
   )
