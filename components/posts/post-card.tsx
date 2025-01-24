@@ -1,4 +1,4 @@
-import { Heart, LucideMessageSquare, MessageCircle, MoreHorizontal, SendIcon, Share, Share2 } from "lucide-react"
+import { Heart, LucideMessageSquare, MessageCircle, MoreHorizontal, SendIcon, Share, Share2, Mic } from "lucide-react"
 import { Button } from "../ui/button"
 import { cn } from "@/lib/utils"
 import { PostCardProps } from "@/types/Post"
@@ -65,13 +65,27 @@ export function PostCard({
   }
 
   {
-    type==2 &&  <div className="mt-5 h-96 flex justify-center items-center  p-10 px-8 rounded-2xl " style={{ background:`${color}` }}>
+    type==2 &&  
+    <div className="mt-5 rounded-2xl p-6 bg-gradient-to-br from-gray-800 to-gray-900">
+      <div className="flex flex-col space-y-4">
+        <div className="flex items-center space-x-3 text-gray-400">
+          <Mic className="w-5 h-5" />
+          <span className="text-sm font-medium">Message vocal</span>
+        </div>
         
-    <div className="mt-5">
-            <h2 className="text-3xl font-bold" style={{ color:"white" }}><PostVoice heightVoice={50} widthVoice={500} audioUrl={`${url}`} waveId={`${id}`}/></h2>
+        <div className="relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent rounded-xl blur-xl"></div>
+          <div className="relative bg-gray-800/50 rounded-xl p-4 backdrop-blur-sm">
+            <PostVoice 
+              heightVoice={50} 
+              widthVoice={500} 
+              audioUrl={`${url}`} 
+              waveId={`${id}`}
+            />
           </div>
-          
+        </div>
       </div>
+    </div>
   }
  
     

@@ -27,139 +27,97 @@ export default function Post() {
   const [loadImage,setLoadImage]=useState<boolean>(false)
    const bgPost=PostStore((state)=>state.bgPost)
   
-   return <> <div 
- 
-   className='  flex mt-6 gap-5 max-h-[100%]  items-stretch  overflow-y-hidden'>
-     <section className="w-[25rem] mx-6 max-w-[300px]  fixed  py-8  bg-[#363636]  rounded-xl ">
-      <section className="flex mx-5 flex-col gap-3">
-        <div>
-        <Image src="/logo.png" alt="logo" height={50} width={50} className="mx-auto" />
+   return (
+    <> <div 
+   className='flex mt-6 gap-8 max-h-[100%] items-stretch overflow-y-hidden'>
+     {/* Sidebar */}
+     <section className="w-[300px] mx-6 fixed py-8 bg-gradient-to-b from-[#363636] to-[#2a2a2a] rounded-xl shadow-xl">
+      <section className="flex mx-5 flex-col gap-6">
+        <div className="flex justify-center">
+          <Image src="/logo.png" alt="logo" height={50} width={50} className="transition-transform hover:scale-105" />
         </div>
         
-        <div className="flex flex-col">
-          <h2 className="text-sm text-gray-300 font-bold">Background Post</h2>
-          </div>
-         <div className="flex flex-col gap-4">
-          
-
+        <div className="space-y-6">
           <div>
+            <h2 className="text-sm text-gray-300 font-bold mb-3">Paramètres du post</h2>
+            <div className="space-y-4">
+              <label className="flex items-center justify-between p-3 bg-[#2a2a2a] rounded-lg cursor-pointer group transition-colors hover:bg-[#2f2f2f]">
+                <span className="text-sm font-medium text-gray-300 group-hover:text-gray-200">Masquer le post</span>
+                <div className="relative w-11 h-6 bg-[#262626] rounded-full peer-focus:ring-4 peer-focus:ring-primary/20">
+                  <input type="checkbox" className="sr-only peer" />
+                  <div className="absolute inset-y-1 left-1 w-4 h-4 bg-gray-400 rounded-full transition-all peer-checked:translate-x-5 peer-checked:bg-primary"></div>
+                </div>
+              </label>
 
-<label className="inline-flex items-center cursor-pointer">
-  <input type="checkbox" value="" className="sr-only peer" />
-  <div className="relative w-11 h-6 bg-[#262626] rounded-full peer peer-focus:ring-4 peer-focus:ring-[#262626] dark:peer-focus:ring-[#262626] dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
-  <span className="ms-3 text-sm font-medium text-gray-300 dark:text-gray-300">Hide Post</span>
-</label>
-
-<label className="inline-flex mt-3 items-center cursor-pointer">
-  <input type="checkbox" value="" className="sr-only peer" />
-  <div className="relative w-11 h-6 bg-[#262626] rounded-full peer peer-focus:ring-4 peer-focus:ring-[#262626] dark:peer-focus:ring-[#262626] dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
-  <span className="ms-3 text-sm font-medium text-gray-300 dark:text-gray-300">Hide Comment</span>
-</label>
-
+              <label className="flex items-center justify-between p-3 bg-[#2a2a2a] rounded-lg cursor-pointer group transition-colors hover:bg-[#2f2f2f]">
+                <span className="text-sm font-medium text-gray-300 group-hover:text-gray-200">Masquer les commentaires</span>
+                <div className="relative w-11 h-6 bg-[#262626] rounded-full peer-focus:ring-4 peer-focus:ring-primary/20">
+                  <input type="checkbox" className="sr-only peer" />
+                  <div className="absolute inset-y-1 left-1 w-4 h-4 bg-gray-400 rounded-full transition-all peer-checked:translate-x-5 peer-checked:bg-primary"></div>
+                </div>
+              </label>
+            </div>
           </div>
-
-          </div>
-       
-          
+        </div>
       </section>
      </section>
-     <section className="overflow-y-hidden right-[350px] fixed left-[350px]  bg-[#363636] rounded-2xl py-3 px-8">
-     
-     <form action={CreatePost} className=''>
-      
-       <div className='' >
-    
-          <>
-          <div  className={`  overflow-y-hidden placeholder:text-gray-300 `}>
-          
 
-          <h2 className="text-2xl text-gray-300">Post</h2>
-          <div className="flex overflow-x-hidden relative justify-center items-center w-[100%]">
-            
-           {visible &&  <div className="absolute top-[3rem] inset-0 z-20">
-                  <RecordMic/>
-            </div>}
-           
-           
-           
-          <textarea name="" id="" style={{ background:bgPost }} placeholder='Tell your hide post to your friend' className={`overflow-x-hidden  font-bold peer-focus:ring-[#262626] peer-focus:ring-4 mt-5 placeholder:text-sm px-24  w-full bg-[#282828] resize-none h-[12rem] flex justify-center relative overflow-y-hidden border-[#00000041] rounded-2xl placeholder:text-[#ffffff21] py-12  cursor-pointer        text-white  text-sm`} ></textarea>
-          <div className="absolute top-12 left-8">
-          <Avatar style={{ background:"url('/profile.jpg')",backgroundPosition:"center",backgroundSize:"cover" }} className='cursor-pointer w-9 h-9 rounded-xl'>
-            </Avatar>
-          </div>
-          <div className="absolute right-4 top-8 left-24">
+     {/* Main Content */}
+     <section className="overflow-y-hidden right-[350px] fixed left-[350px] bg-gradient-to-b from-[#363636] to-[#2a2a2a] rounded-2xl shadow-xl">
+       <form action={CreatePost} className="p-8">
+         <div className="space-y-6">
+           <div className="flex items-center justify-between">
+             <h2 className="text-2xl font-bold text-gray-200">Créer un nouveau post</h2>
+             <div className="flex items-center space-x-3">
+               <Button variant="ghost" className="text-gray-400 hover:text-gray-200">
+                 <MoveLeft className="w-5 h-5 mr-2" />
+                 Retour
+               </Button>
+               <Button type="submit" className="bg-primary hover:bg-primary/90">
+                 <Save className="w-5 h-5 mr-2" />
+                 Publier
+               </Button>
+             </div>
+           </div>
 
-          </div>
-          
-          </div>
-          <section className="flex items-center mt-4">
-          <div className="grid grid-cols-8 flex-1 gap-8 ">
-          <div onClick={()=>changeBgHandler("")} className="bg-[#262626]  cursor-pointer  w-8  flex items-center justify-center rounded-md">
-<LucideCircleSlash2 className="text-red-500 w-4"/>
-</div>
-          <div onClick={()=>changeBgHandler("#2dac5c")} className="bg-primary cursor-pointer p-[0.7rem] rounded-md">
+           <div className="relative">
+             <div className={`relative rounded-2xl ${visible ? 'filter blur-sm' : ''}`}>
+               <textarea 
+                 style={{ background: bgPost }} 
+                 placeholder="Partagez vos pensées..." 
+                 className="w-full min-h-[12rem] bg-[#282828] rounded-2xl p-6 pl-20 pr-6 text-white placeholder:text-gray-500 resize-none focus:ring-2 focus:ring-primary/50 focus:outline-none"
+               />
+               <div className="absolute top-6 left-6">
+                 <Avatar 
+                   style={{ background: "url('/profile.jpg')", backgroundPosition: "center", backgroundSize: "cover" }} 
+                   className="w-10 h-10 rounded-xl ring-2 ring-gray-700"
+                 />
+               </div>
+             </div>
 
-          </div>
-          <div onClick={()=>changeBgHandler("#000C40")} className="bg-[#000C40] cursor-pointer p-[0.7rem] rounded-md">
+             {visible && (
+               <div className="absolute inset-0 z-20 bg-[#282828]/50 backdrop-blur-sm rounded-2xl">
+                 <RecordMic />
+               </div>
+             )}
+           </div>
 
-          </div>
-          <div  onClick={()=>changeBgHandler("#e65c00")} className="bg-[#e65c00] cursor-pointer p-[0.7rem] rounded-md">
-
-          </div>
-          <div onClick={()=>changeBgHandler("#4801FF")} className="bg-[#4801FF] cursor-pointer p-[0.7rem] rounded-md">
-
-</div>
-<div className="bg-[#262626]  cursor-pointer  w-8  flex items-center justify-center rounded-md">
-<Image width="20" height="20" src='/palette.png' alt={'photo icon'}/>
-</div>
-          </div>
-          <div className="flex flex-1 justify-end items-center gap-5">
-         
-          <div className="cursor-pointer">
-          <Image width="24" height="24" src='/smile.png' alt={'photo icon'}/>
-          </div>
-          <div className="cursor-pointer">
-          <Image width="24" height="24" src='/photo.png' alt={'photo icon'}/>
-          </div>
-         
-            
-            <Image onClick={()=>{
-              if(visible){
-                setVisible(false)
-              }else{
-                setVisible(true)
-              }
-            }} className="cursor-pointer" width="24" height="24" src='/mic.png' alt={'photo icon'}/>
-            
-          
-          
-          <div className="">
-            <Button className="bg-primary hover:bg-[#363636] flex items-center gap-2 px-6 py-2 rounded-lg">
-            <h2 className="text-gray-200 text-[0.8rem]">Send</h2>
-            <SendIcon className="text-gray-200  w-4 h-4 cursor-pointer"/>
-            </Button>
-           
-          </div>
-         
-         
-          </div>
-          </section>
-         
-          
-          </div>
-         
-          </>
-       </div>
-       <Input type="hidden" name='color' value={bgPost} />
-       <section className='  bottom-0 mx-5  w-[95vw] my-5 flex items-center justify-between absolute'>
-      
-       
-       </section>
-      
-     </form>
-   </section>
-  
-   </div></>
-}
-
-
+           <div className="flex items-center justify-between p-4 bg-[#282828] rounded-xl">
+             <div className="flex items-center space-x-4">
+               <Button variant="ghost" className="text-gray-400 hover:text-blue-400" onClick={() => setVisible(!visible)}>
+                 {visible ? <MicOff className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
+               </Button>
+               <Button variant="ghost" className="text-gray-400 hover:text-green-400">
+                 <GalleryHorizontal className="w-5 h-5" />
+               </Button>
+               <Button variant="ghost" className="text-gray-400 hover:text-yellow-400">
+                 <Smile className="w-5 h-5" />
+               </Button>
+             </div>
+           </div>
+         </div>
+       </form>
+     </section>
+   </div>
+</>
+   )}
