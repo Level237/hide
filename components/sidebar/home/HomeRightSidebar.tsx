@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 export default function HomeRightSidebar() {
   return (
-    <section  className='fixed mt-[5.5rem] right-0 bg-[#363636] px-4 rounded-xl py-3 mx-8 scroll-m-0 top-0 bottom-0 overflow-y-scroll flex flex-col gap-3  max-w-[300px]'>
+    <section  className='fixed mt-[5.5rem] right-0 bg-[#363636] px-4 rounded-xl py-3 mx-8  top-0 bottom-0 overflow-y-scroll flex flex-col gap-3  max-w-[300px]'>
    
    <section className='flex flex-col gap-2'>
     <div>

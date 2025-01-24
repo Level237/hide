@@ -2,7 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+::-webkit-scrollbar {
+  width: 4px; /* largeur de la scrollbar */
+}
 
+::-webkit-scrollbar-track {
+  background: #f1f1f11f; /* couleur du fond de la scrollbar */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #88888879; /* couleur de la barre de défilement */
+  border-radius: 10px; /* coins arrondis */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* couleur au survol */
+}
 
 
 
