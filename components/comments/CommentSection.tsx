@@ -2,9 +2,25 @@ import { useState } from 'react'
 import { Avatar } from '../ui/avatar'
 import { Button } from '../ui/button'
 import { Textarea } from '../ui/textarea'
-import { UserCircle2, Heart, MessageCircle, Share2, MoreHorizontal, Send } from 'lucide-react'
+import { UserCircle2, Heart, MessageCircle, Share2, MoreHorizontal, Send, Trash2, AlertCircle } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog"
 
 interface Comment {
   id: string
@@ -17,6 +33,7 @@ interface Comment {
   likes: number
   replies: Comment[]
   createdAt: string
+  isOwner?: boolean
 }
 
 interface CommentSectionProps {
@@ -30,6 +47,8 @@ export function CommentSection({ postId, comments: initialComments }: CommentSec
   const [replyingTo, setReplyingTo] = useState<string | null>(null)
   const [replyContent, setReplyContent] = useState('')
   const [expandedComment, setExpandedComment] = useState<string | null>(null)
+  const [commentToDelete, setCommentToDelete] = useState<string | null>(null)
+  const [isLiked, setIsLiked] = useState<{ [key: string]: boolean }>({})
 
   const handleSubmitComment = () => {
     if (!newComment.trim()) return
@@ -43,7 +62,8 @@ export function CommentSection({ postId, comments: initialComments }: CommentSec
       },
       likes: 0,
       replies: [],
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
+      isOwner: true
     }
 
     setComments([comment, ...comments])
@@ -62,7 +82,8 @@ export function CommentSection({ postId, comments: initialComments }: CommentSec
       },
       likes: 0,
       replies: [],
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
+      isOwner: true
     }
 
     setComments(comments.map(comment => {
@@ -79,6 +100,37 @@ export function CommentSection({ postId, comments: initialComments }: CommentSec
     setReplyingTo(null)
   }
 
+  const handleDeleteComment = (commentId: string) => {
+    setComments(comments.filter(comment => {
+      if (comment.id === commentId) return false
+      comment.replies = comment.replies.filter(reply => reply.id !== commentId)
+      return true
+    }))
+    setCommentToDelete(null)
+  }
+
+  const toggleLike = (commentId: string) => {
+    setIsLiked(prev => ({ ...prev, [commentId]: !prev[commentId] }))
+    setComments(comments.map(comment => {
+      if (comment.id === commentId) {
+        return {
+          ...comment,
+          likes: isLiked[commentId] ? comment.likes - 1 : comment.likes + 1
+        }
+      }
+      comment.replies = comment.replies.map(reply => {
+        if (reply.id === commentId) {
+          return {
+            ...reply,
+            likes: isLiked[commentId] ? reply.likes - 1 : reply.likes + 1
+          }
+        }
+        return reply
+      })
+      return comment
+    }))
+  }
+
   const formatDate = (date: string) => {
     return new Date(date).toLocaleDateString('fr-FR', {
       day: 'numeric',
@@ -91,7 +143,7 @@ export function CommentSection({ postId, comments: initialComments }: CommentSec
   return (
     <div className="space-y-6">
       {/* New Comment Input */}
-      <div className="bg-[#2a2a2a] rounded-xl p-4">
+      <div className=" bg-[#282828]  p-4">
         <div className="flex gap-4">
           <Avatar 
             style={{ background: "url('/profile.jpg')", backgroundPosition: "center", backgroundSize: "cover" }} 
@@ -102,12 +154,12 @@ export function CommentSection({ postId, comments: initialComments }: CommentSec
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
               placeholder="Écrivez un commentaire..."
-              className="min-h-[80px] bg-[#363636] border-none focus:ring-1 focus:ring-primary/50 resize-none rounded-xl"
+              className="min-h-[80px] bg-[#1f1f1f] border-none focus:ring-1 focus:ring-primary/50 resize-none rounded-xl placeholder:text-gray-500"
             />
-            <div className="flex justify-end mt-2">
+            <div className="flex justify-end mt-4">
               <Button 
                 onClick={handleSubmitComment}
-                className="bg-primary hover:bg-primary/90"
+                className="bg-primary hover:bg-primary/90 transition-all duration-200"
               >
                 <Send className="w-4 h-4 mr-2" />
                 Commenter
@@ -124,7 +176,7 @@ export function CommentSection({ postId, comments: initialComments }: CommentSec
             key={comment.id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-[#2a2a2a] rounded-xl p-4"
+            className="group bg-gradient-to-br bg-[#282828] backdrop-blur-sm rounded-xl p-4  transition-all duration-200"
           >
             <div className="flex gap-4">
               {comment.author.image ? (
@@ -144,16 +196,39 @@ export function CommentSection({ postId, comments: initialComments }: CommentSec
                     <span className="font-medium text-gray-200">{comment.author.name}</span>
                     <span className="text-sm text-gray-500 ml-2">{formatDate(comment.createdAt)}</span>
                   </div>
-                  <Button variant="ghost" size="icon" className="text-gray-400 hover:text-gray-300">
-                    <MoreHorizontal className="w-5 h-5" />
-                  </Button>
+                  {comment.isOwner && (
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="ghost" size="icon" className="opacity-0 group-hover:opacity-100 transition-opacity text-gray-400 hover:text-gray-300">
+                          <MoreHorizontal className="w-5 h-5" />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end" className=" border-gray-800">
+                        <DropdownMenuItem 
+                          className="text-red-400 hover:text-red-300 focus:text-red-300 cursor-pointer"
+                          onClick={() => setCommentToDelete(comment.id)}
+                        >
+                          <Trash2 className="w-4 h-4 mr-2" />
+                          Supprimer
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  )}
                 </div>
 
                 <p className="text-gray-300">{comment.content}</p>
 
                 <div className="flex items-center gap-4 pt-2">
-                  <Button variant="ghost" size="sm" className="text-gray-400 hover:text-gray-300">
-                    <Heart className="w-4 h-4 mr-1" />
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    onClick={() => toggleLike(comment.id)}
+                    className={cn(
+                      "text-gray-400 hover:text-gray-300",
+                      isLiked[comment.id] && "text-red-400 hover:text-red-300"
+                    )}
+                  >
+                    <Heart className={cn("w-4 h-4 mr-1", isLiked[comment.id] && "fill-current")} />
                     {comment.likes}
                   </Button>
                   <Button 
@@ -190,7 +265,7 @@ export function CommentSection({ postId, comments: initialComments }: CommentSec
                             value={replyContent}
                             onChange={(e) => setReplyContent(e.target.value)}
                             placeholder="Écrivez une réponse..."
-                            className="min-h-[60px] bg-[#363636] border-none focus:ring-1 focus:ring-primary/50 resize-none rounded-xl"
+                            className="min-h-[60px] bg-[#1f1f1f] border-none focus:ring-1 focus:ring-primary/50 resize-none rounded-xl placeholder:text-gray-500"
                           />
                           <div className="flex justify-end mt-2">
                             <Button 
@@ -210,7 +285,7 @@ export function CommentSection({ postId, comments: initialComments }: CommentSec
 
                 {/* Replies */}
                 {comment.replies.length > 0 && (
-                  <div className="pt-4 pl-4 border-l border-gray-700">
+                  <div className="pt-4 pl-4 border-l border-gray-700/50">
                     <Button
                       variant="ghost"
                       size="sm"
@@ -229,7 +304,7 @@ export function CommentSection({ postId, comments: initialComments }: CommentSec
                           className="space-y-4"
                         >
                           {comment.replies.map(reply => (
-                            <div key={reply.id} className="flex gap-4">
+                            <div key={reply.id} className="flex gap-4 group">
                               {reply.author.image ? (
                                 <Avatar 
                                   style={{ background: `url(${reply.author.image})`, backgroundPosition: "center", backgroundSize: "cover" }} 
@@ -247,14 +322,37 @@ export function CommentSection({ postId, comments: initialComments }: CommentSec
                                     <span className="font-medium text-gray-200">{reply.author.name}</span>
                                     <span className="text-sm text-gray-500 ml-2">{formatDate(reply.createdAt)}</span>
                                   </div>
-                                  <Button variant="ghost" size="icon" className="text-gray-400 hover:text-gray-300">
-                                    <MoreHorizontal className="w-4 h-4" />
-                                  </Button>
+                                  {reply.isOwner && (
+                                    <DropdownMenu>
+                                      <DropdownMenuTrigger asChild>
+                                        <Button variant="ghost" size="icon" className="opacity-0 group-hover:opacity-100 transition-opacity text-gray-400 hover:text-gray-300">
+                                          <MoreHorizontal className="w-4 h-4" />
+                                        </Button>
+                                      </DropdownMenuTrigger>
+                                      <DropdownMenuContent align="end" className="bg-gray-900 border-gray-800">
+                                        <DropdownMenuItem 
+                                          className="text-red-400 hover:text-red-300 focus:text-red-300 cursor-pointer"
+                                          onClick={() => setCommentToDelete(reply.id)}
+                                        >
+                                          <Trash2 className="w-4 h-4 mr-2" />
+                                          Supprimer
+                                        </DropdownMenuItem>
+                                      </DropdownMenuContent>
+                                    </DropdownMenu>
+                                  )}
                                 </div>
                                 <p className="text-gray-300 text-sm">{reply.content}</p>
                                 <div className="flex items-center gap-4 pt-2">
-                                  <Button variant="ghost" size="sm" className="text-gray-400 hover:text-gray-300">
-                                    <Heart className="w-4 h-4 mr-1" />
+                                  <Button 
+                                    variant="ghost" 
+                                    size="sm" 
+                                    onClick={() => toggleLike(reply.id)}
+                                    className={cn(
+                                      "text-gray-400 hover:text-gray-300",
+                                      isLiked[reply.id] && "text-red-400 hover:text-red-300"
+                                    )}
+                                  >
+                                    <Heart className={cn("w-4 h-4 mr-1", isLiked[reply.id] && "fill-current")} />
                                     {reply.likes}
                                   </Button>
                                   <Button variant="ghost" size="sm" className="text-gray-400 hover:text-gray-300">
@@ -275,6 +373,27 @@ export function CommentSection({ postId, comments: initialComments }: CommentSec
           </motion.div>
         ))}
       </div>
+
+      {/* Delete Comment Dialog */}
+      <AlertDialog open={!!commentToDelete} onOpenChange={() => setCommentToDelete(null)}>
+        <AlertDialogContent className="bg-gray-900 border-gray-800">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="text-gray-200">Supprimer le commentaire</AlertDialogTitle>
+            <AlertDialogDescription className="text-gray-400">
+              Êtes-vous sûr de vouloir supprimer ce commentaire ? Cette action est irréversible.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel className="bg-gray-800 text-gray-300 hover:bg-gray-700">Annuler</AlertDialogCancel>
+            <AlertDialogAction
+              className="bg-red-500 hover:bg-red-600 text-white"
+              onClick={() => commentToDelete && handleDeleteComment(commentToDelete)}
+            >
+              Supprimer
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   )
 }

@@ -195,9 +195,11 @@ export default function PostPage({ params }: { params: { id: string } }) {
                 {post.content}
               </div>
             )}
-              <p className="text-gray-200 mb-4">{post.content}</p>
+              
             {post.type === 'image' && (
+              
               <div className="space-y-4">
+                <p className="text-gray-200 mb-4">{post.content}</p>
                 {post.image && (
                   <div className="relative w-full h-[400px] rounded-xl overflow-hidden">
                     <Image
@@ -239,16 +241,16 @@ export default function PostPage({ params }: { params: { id: string } }) {
             {/* Post Stats */}
             <div className="flex items-center gap-6 text-gray-400 mt-4">
               <Button variant="ghost" className="hover:text-gray-300">
-                <Heart className="w-5 h-5 mr-2" />
-                {post.likes}
+                <Heart className="w-5 h-5 mr-1" />
+                {post.likes} likes
               </Button>
               <Button variant="ghost" className="hover:text-gray-300">
                 <MessageCircle className="w-5 h-5 mr-2" />
-                {post.comments}
+                {post.comments} replies
               </Button>
               <Button variant="ghost" className="hover:text-gray-300">
                 <Share2 className="w-5 h-5 mr-2" />
-                {post.shares}
+                {post.shares} shares
               </Button>
             </div>
           </div>
