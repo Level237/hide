@@ -1,13 +1,40 @@
 'use client'
 import { Button } from '@/components/ui/button'
 import { Avatar } from '@/components/ui/avatar'
-import { UserCircle2, Heart, MessageCircle, Share2, ArrowLeft } from 'lucide-react'
+import { UserCircle2, Heart, MessageCircle, Share2, ArrowLeft, Play, Pause, Volume2, Mic } from 'lucide-react'
 import { CommentSection } from '@/components/comments/CommentSection'
+import { useRouter } from 'next/navigation'
+import Image from 'next/image'
+import { useState, useRef, useEffect } from 'react'
+import { cn } from '@/lib/utils'
+import PostVoice from '@/components/posts/PostVoice'
+
+type PostType = 'story' | 'voice' | 'image'
+
+interface Post {
+  id: string
+  type: PostType
+  content: string
+  author: {
+    name: string
+    image?: string
+    anonymous: boolean
+  }
+  likes: number
+  comments: number
+  shares: number
+  createdAt: string
+  background?: string
+  image?: string
+  audio?: string
+  audioDuration?: number
+}
 
 // Mock data for testing
-const post = {
-  id: '1',
-  content: 'Ceci est un exemple de publication avec un contenu intéressant et engageant. Les utilisateurs peuvent interagir avec ce contenu de différentes manières.',
+const post: Post = {
+  id: 'docm356',
+  type: 'voice',
+  content: 'Ceci est un exemple de publication avec un contenu intéressant et engageant.',
   author: {
     name: 'John Doe',
     image: '/profile.jpg',
@@ -17,7 +44,10 @@ const post = {
   comments: 12,
   shares: 5,
   createdAt: '2025-01-24T14:30:00.000Z',
-  background: 'linear-gradient(45deg, #FF416C, #FF4B2B)'
+  background: 'linear-gradient(45deg, #FF416C, #FF4B2B)',
+  image: '/cover.jpg',
+  audio: '/afrobeat.mp3',
+  audioDuration: 30
 }
 
 const mockComments = [
@@ -58,6 +88,12 @@ const mockComments = [
 ]
 
 export default function PostPage({ params }: { params: { id: string } }) {
+  const router = useRouter()
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [currentTime, setCurrentTime] = useState(0)
+  const audioRef = useRef<HTMLAudioElement | null>(null)
+  const [audioVolume, setAudioVolume] = useState(1)
+
   const formatDate = (date: string) => {
     return new Date(date).toLocaleDateString('fr-FR', {
       day: 'numeric',
@@ -67,17 +103,59 @@ export default function PostPage({ params }: { params: { id: string } }) {
     })
   }
 
+  const handlePlayPause = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause()
+      } else {
+        audioRef.current.play()
+      }
+      setIsPlaying(!isPlaying)
+    }
+  }
+
+  const handleTimeUpdate = () => {
+    if (audioRef.current) {
+      setCurrentTime(audioRef.current.currentTime)
+    }
+  }
+
+  const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const volume = parseFloat(e.target.value)
+    setAudioVolume(volume)
+    if (audioRef.current) {
+      audioRef.current.volume = volume
+    }
+  }
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.addEventListener('timeupdate', handleTimeUpdate)
+      audioRef.current.addEventListener('ended', () => setIsPlaying(false))
+    }
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.removeEventListener('timeupdate', handleTimeUpdate)
+        audioRef.current.removeEventListener('ended', () => setIsPlaying(false))
+      }
+    }
+  }, [])
+
   return (
     <div className="min-h-screen bg-[#1a1a1a] text-white">
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 bg-[#2a2a2a] border-b border-gray-800 z-50">
         <div className="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
-          <Button variant="ghost" className="text-gray-400 hover:text-gray-300">
+          <Button 
+            variant="ghost" 
+            className="text-gray-400 hover:text-gray-300"
+            onClick={() => router.back()}
+          >
             <ArrowLeft className="w-5 h-5 mr-2" />
             Retour
           </Button>
           <h1 className="text-lg font-semibold">Publication</h1>
-          <div className="w-20" /> {/* Spacer for centering */}
+          <div className="w-20" />
         </div>
       </header>
 
@@ -108,16 +186,58 @@ export default function PostPage({ params }: { params: { id: string } }) {
               </div>
             </div>
 
-            {/* Post Content */}
-            <div 
-              className="rounded-xl p-6 mb-4 text-lg"
-              style={{ background: post.background }}
-            >
-              {post.content}
-            </div>
+            {/* Post Content based on type */}
+            {post.type === 'story' && (
+              <div 
+                className="rounded-xl p-6 mb-4 text-center text-xl font-medium"
+                style={{ background: post.background }}
+              >
+                {post.content}
+              </div>
+            )}
+              <p className="text-gray-200 mb-4">{post.content}</p>
+            {post.type === 'image' && (
+              <div className="space-y-4">
+                {post.image && (
+                  <div className="relative w-full h-[400px] rounded-xl overflow-hidden">
+                    <Image
+                      src={post.image}
+                      alt="Post image"
+                      layout="fill"
+                      objectFit="cover"
+                      className="rounded-xl"
+                    />
+                  </div>
+                )}
+               
+              </div>
+            )}
+
+            {post.type === 'voice' && (
+             <div className="mt-5 rounded-2xl p-6 bg-gradient-to-br from-gray-800 to-gray-900">
+             <div className="flex flex-col space-y-4">
+               <div className="flex items-center space-x-3 text-gray-400">
+                 <Mic className="w-5 h-5" />
+                 <span className="text-sm font-medium">Message vocal</span>
+               </div>
+               
+               <div className="relative">
+                 <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent rounded-xl blur-xl"></div>
+                 <div className="relative bg-gray-800/50 rounded-xl p-4 backdrop-blur-sm">
+                   <PostVoice
+                     heightVoice={50} 
+                     widthVoice={500} 
+                     audioUrl={`${post.audio}`} 
+                     waveId={`${post.id}`}
+                   />
+                 </div>
+               </div>
+             </div>
+           </div>
+            )}
 
             {/* Post Stats */}
-            <div className="flex items-center gap-6 text-gray-400">
+            <div className="flex items-center gap-6 text-gray-400 mt-4">
               <Button variant="ghost" className="hover:text-gray-300">
                 <Heart className="w-5 h-5 mr-2" />
                 {post.likes}
