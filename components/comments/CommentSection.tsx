@@ -199,7 +199,7 @@ export function CommentSection({ postId, comments: initialComments }: CommentSec
                   {comment.isOwner && (
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="icon" className="opacity-0 group-hover:opacity-100 transition-opacity text-gray-400 hover:text-gray-300">
+                        <Button  size="icon" className="opacity-0 hover:bg-transparent bg-transparent group-hover:opacity-100 transition-opacity text-gray-400 hover:text-gray-300">
                           <MoreHorizontal className="w-5 h-5" />
                         </Button>
                       </DropdownMenuTrigger>
@@ -220,11 +220,11 @@ export function CommentSection({ postId, comments: initialComments }: CommentSec
 
                 <div className="flex items-center gap-4 pt-2">
                   <Button 
-                    variant="ghost" 
+                   
                     size="sm" 
                     onClick={() => toggleLike(comment.id)}
                     className={cn(
-                      "text-gray-400 hover:text-gray-300",
+                      "text-gray-400 bg-transparent hover:bg-transparent hover:text-gray-300",
                       isLiked[comment.id] && "text-red-400 hover:text-red-300"
                     )}
                   >
@@ -232,15 +232,15 @@ export function CommentSection({ postId, comments: initialComments }: CommentSec
                     {comment.likes}
                   </Button>
                   <Button 
-                    variant="ghost" 
+                   
                     size="sm" 
-                    className="text-gray-400 hover:text-gray-300"
+                    className="text-gray-400 bg-transparent hover:bg-transparent hover:text-gray-300"
                     onClick={() => setReplyingTo(replyingTo === comment.id ? null : comment.id)}
                   >
                     <MessageCircle className="w-4 h-4 mr-1" />
                     {comment.replies.length}
                   </Button>
-                  <Button variant="ghost" size="sm" className="text-gray-400 hover:text-gray-300">
+                  <Button  size="sm" className="text-gray-400 bg-transparent hover:bg-transparent hover:text-gray-300">
                     <Share2 className="w-4 h-4 mr-1" />
                     Partager
                   </Button>
@@ -287,9 +287,9 @@ export function CommentSection({ postId, comments: initialComments }: CommentSec
                 {comment.replies.length > 0 && (
                   <div className="pt-4 pl-4 border-l border-gray-700/50">
                     <Button
-                      variant="ghost"
+                      
                       size="sm"
-                      className="text-gray-400 hover:text-gray-300 mb-4"
+                      className="text-gray-400 bg-transparent hover:bg-transparent hover:text-gray-300 mb-4"
                       onClick={() => setExpandedComment(expandedComment === comment.id ? null : comment.id)}
                     >
                       {expandedComment === comment.id ? 'Masquer' : `Voir ${comment.replies.length} réponses`}
@@ -325,7 +325,7 @@ export function CommentSection({ postId, comments: initialComments }: CommentSec
                                   {reply.isOwner && (
                                     <DropdownMenu>
                                       <DropdownMenuTrigger asChild>
-                                        <Button variant="ghost" size="icon" className="opacity-0 group-hover:opacity-100 transition-opacity text-gray-400 hover:text-gray-300">
+                                        <Button  size="icon" className="opacity-0 bg-transparent hover:bg-transparent group-hover:opacity-100 transition-opacity text-gray-400 hover:text-gray-300">
                                           <MoreHorizontal className="w-4 h-4" />
                                         </Button>
                                       </DropdownMenuTrigger>
@@ -341,21 +341,21 @@ export function CommentSection({ postId, comments: initialComments }: CommentSec
                                     </DropdownMenu>
                                   )}
                                 </div>
-                                <p className="text-gray-300 text-sm">{reply.content}</p>
+                                <p className="text-gray-300 text-sm mt-2">{reply.content}</p>
                                 <div className="flex items-center gap-4 pt-2">
                                   <Button 
-                                    variant="ghost" 
+                                    
                                     size="sm" 
                                     onClick={() => toggleLike(reply.id)}
                                     className={cn(
-                                      "text-gray-400 hover:text-gray-300",
+                                      "text-gray-400 bg-transparent hover:bg-transparent hover:text-red-400",
                                       isLiked[reply.id] && "text-red-400 hover:text-red-300"
                                     )}
                                   >
                                     <Heart className={cn("w-4 h-4 mr-1", isLiked[reply.id] && "fill-current")} />
                                     {reply.likes}
                                   </Button>
-                                  <Button variant="ghost" size="sm" className="text-gray-400 hover:text-gray-300">
+                                  <Button  size="sm" className="text-gray-400 bg-transparent hover:bg-transparent hover:text-gray-300">
                                     <Share2 className="w-4 h-4 mr-1" />
                                     Partager
                                   </Button>

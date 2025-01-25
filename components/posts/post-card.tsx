@@ -96,21 +96,21 @@ export function PostCard({
           <button className='group flex items-center space-x-2 transition-all'>
             <Heart className={`w-6 h-6 transition-colors ${likes > 0 ? "fill-primary text-primary" : "text-gray-400 group-hover:text-primary"}`}/>
             <span className={`text-sm transition-colors ${likes > 0 ? "text-primary font-medium" : "text-gray-400 group-hover:text-primary"}`}>
-              {likes}
+              {likes} likes
             </span>
           </button>
           
           <button className='group flex items-center space-x-2'>
             <LucideMessageSquare className="w-6 h-6 text-gray-400 group-hover:text-blue-400"/>
             <span className='text-sm text-gray-400 group-hover:text-blue-400'>
-              {comments}
+              {comments} replies
             </span>
           </button>
         </div>
 
-        <button className='group flex items-center space-x-2'>
-          <Share className='w-6 h-6 text-gray-400 group-hover:text-green-400'/>
-          <span className='text-sm text-gray-400 group-hover:text-green-400'>Partager</span>
+        <button className='group hover:bg-transparent flex items-center space-x-2'>
+          <Share className='w-6 h-6 text-gray-400 '/>
+          <span className='text-sm text-gray-400 '>Partager</span>
         </button>
       </div>
 

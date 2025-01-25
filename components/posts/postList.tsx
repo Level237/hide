@@ -15,7 +15,7 @@ export default function PostList() {
   <PostCard content={''} timestamp={''} likes={3} type={2} url='/afrobeat.mp3' color='#000000' comments={0} author={'Ibrahima Djamilatou'} id='wave1' profile={'/profile1.jpg'} since={'1h ago'} />
   <PostCard content={"🚀Les Barcelonais vous etes à la place? faites du bruit"} color='#000080' timestamp={''} likes={100} type={0} comments={0} author={'Ibrahima Djamilatou'} profile={'/profile1.jpg'} since={'1h ago'}  />
  
-  <PostCard content={''} timestamp={''} likes={3} type={2} url='/afrobeat.mp3' color='#3D348B' comments={0} author={'Ibrahima Djamilatou'} id='wave2' profile={'/profile1.jpg'} since={'1h ago'} />
+  <PostCard content={''} timestamp={''} likes={3} type={2} url='/afrobeat.mp3' color="#3D348B" comments={0} author={'Ibrahima Djamilatou'} id='wave2' profile={'/profile1.jpg'} since={'1h ago'} />
   
   
 </div>

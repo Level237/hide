@@ -160,9 +160,9 @@ export default function PostPage({ params }: { params: { id: string } }) {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-4xl mx-auto px-4 pt-24 pb-16">
+      <main className="max-w-3xl mx-auto px-4 pt-24 pb-16">
         {/* Post */}
-        <div className="bg-[#2a2a2a] rounded-2xl shadow-xl overflow-hidden mb-8">
+        <div className="bg-[#2a2a2a]  rounded-2xl shadow-xl overflow-hidden mb-8">
           {/* Post Header */}
           <div className="p-6">
             <div className="flex items-center justify-between mb-4">
@@ -224,7 +224,7 @@ export default function PostPage({ params }: { params: { id: string } }) {
                </div>
                
                <div className="relative">
-                 <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent rounded-xl blur-xl"></div>
+                 <div className="absolute inset-0  bg-gradient-to-r from-primary/20 to-transparent rounded-xl blur-xl"></div>
                  <div className="relative bg-gray-800/50 rounded-xl p-4 backdrop-blur-sm">
                    <PostVoice
                      heightVoice={50} 
@@ -240,15 +240,15 @@ export default function PostPage({ params }: { params: { id: string } }) {
 
             {/* Post Stats */}
             <div className="flex items-center gap-6 text-gray-400 mt-4">
-              <Button variant="ghost" className="hover:text-gray-300">
-                <Heart className="w-5 h-5 mr-1" />
+              <Button  className="bg-transparent hover:bg-transparent hover:text-red-500">
+                <Heart className="w-5 h-5 mr-1 " />
                 {post.likes} likes
               </Button>
-              <Button variant="ghost" className="hover:text-gray-300">
-                <MessageCircle className="w-5 h-5 mr-2" />
+              <Button className="bg-transparent hover:bg-transparent hover:text-blue-500">
+                <MessageCircle className="w-5 h-5  mr-2" />
                 {post.comments} replies
               </Button>
-              <Button variant="ghost" className="hover:text-gray-300">
+              <Button className="bg-transparent hover:bg-transparent hover:text-primary">
                 <Share2 className="w-5 h-5 mr-2" />
                 {post.shares} shares
               </Button>
