@@ -47,6 +47,16 @@ export default function Post() {
     { id: 3, color: "linear-gradient(45deg, #000C40, #607D8B)" },
     { id: 4, color: "linear-gradient(45deg, #e65c00, #F9D423)" },
     { id: 5, color: "linear-gradient(45deg, #4801FF, #7d01ff)" },
+    { id: 6, color: "linear-gradient(45deg, #8E2DE2, #4A00E0)" },
+    { id: 7, color: "linear-gradient(45deg, #20002c, #cbb4d4)" },
+    { id: 8, color: "linear-gradient(45deg, #11998e, #38ef7d)" },
+    { id: 9, color: "linear-gradient(45deg, #FC466B, #3F5EFB)" },
+    { id: 10, color: "linear-gradient(45deg, #1f4037, #99f2c8)" },
+    { id: 11, color: "linear-gradient(45deg, #c31432, #240b36)" },
+    { id: 12, color: "linear-gradient(45deg, #44A08D, #093637)" },
+    { id: 13, color: "linear-gradient(45deg, #834d9b, #d04ed6)" },
+    { id: 14, color: "linear-gradient(45deg, #4b6cb7, #182848)" },
+    { id: 15, color: "linear-gradient(45deg, #f12711, #f5af19)" }
   ]
 
   return (
@@ -119,14 +129,20 @@ export default function Post() {
             </div>
 
             {postType === 'story' && (
-              <div>
-                <h2 className="text-sm text-gray-300 font-bold mb-3">Couleur du fond</h2>
-                <div className="grid grid-cols-3 gap-3">
+              <div className="relative">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-sm font-medium text-gray-300">Couleur du fond</h3>
+                  <div className="text-xs text-gray-500">Sélectionnez une couleur</div>
+                </div>
+                <div className="grid grid-cols-6 gap-3 gap-1.5">
                   {colors.map((color) => (
                     <button
                       key={color.id}
                       onClick={() => changeBgHandler(color.color)}
-                      className="w-full h-12 rounded-lg transition-transform hover:scale-105 hover:shadow-lg"
+                      className={cn(
+                        "w-8 h-8 rounded-lg transition-all hover:scale-105 hover:shadow-lg",
+                        bgPost === color.color ? "ring-2 ring-primary ring-offset-2 ring-offset-[#2a2a2a]" : ""
+                      )}
                       style={{ background: color.color }}
                     />
                   ))}
@@ -139,7 +155,7 @@ export default function Post() {
 
       {/* Main Content */}
       <section className="overflow-y-hidden right-[350px] fixed left-[350px] bg-gradient-to-b from-[#363636] to-[#2a2a2a] rounded-2xl shadow-xl">
-        <form  className="p-8">
+        <div  className="p-8">
           <div className="space-y-6">
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-bold text-gray-200">
@@ -166,28 +182,67 @@ export default function Post() {
                 visible ? 'filter blur-sm' : ''
               )}>
                 {postType === 'image' && (
-                  <div className="mb-4">
+                  <div className="flex flex-col space-y-4">
+                    <div className="relative">
+                      <textarea 
+                        placeholder="Partagez vos pensées..." 
+                        className="w-full min-h-[120px] bg-[#282828] rounded-2xl p-6 pl-20 pr-6 text-white placeholder:text-gray-500 resize-none focus:ring-2 focus:ring-primary/50 focus:outline-none"
+                      />
+                      {!isAnonymous ? (
+                        <div className="absolute top-6 left-6">
+                          <Avatar 
+                            style={{ background: "url('/profile.jpg')", backgroundPosition: "center", backgroundSize: "cover" }} 
+                            className="w-10 h-10 rounded-xl ring-2 ring-gray-700"
+                          />
+                        </div>
+                      ) : (
+                        <div className="absolute top-6 left-6">
+                          <div className="w-10 h-10 rounded-xl ring-2 ring-gray-700 bg-gray-800 flex items-center justify-center">
+                            <UserCircle2 className="w-6 h-6 text-gray-400" />
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                    
                     <div 
-                      className="w-full h-64 rounded-xl bg-[#282828] flex items-center justify-center cursor-pointer hover:bg-[#2f2f2f] transition-colors"
                       onClick={() => fileInputRef.current?.click()}
+                      className={cn(
+                        "relative w-full h-40 rounded-xl bg-[#282828] flex items-center justify-center cursor-pointer hover:bg-[#2f2f2f] transition-colors overflow-hidden group",
+                      )}
                     >
                       {previewImage ? (
-                        <div className="relative w-full h-full">
+                        <>
                           <Image 
                             src={previewImage} 
                             alt="Preview" 
                             layout="fill" 
-                            objectFit="cover" 
-                            className="rounded-xl"
+                            objectFit="cover"
+                            className="rounded-xl group-hover:opacity-75 transition-opacity"
                           />
-                          <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
-                            <Camera className="w-8 h-8 text-white" />
+                          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/30 gap-4">
+                            <button className="bg-white/20 hover:bg-white/30 transition-colors p-2 rounded-lg backdrop-blur-sm">
+                              <Camera className="w-5 h-5 text-white" />
+                            </button>
+                            <button 
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                // Logique pour supprimer l'image
+                              }} 
+                              className="bg-white/20 hover:bg-white/30 transition-colors p-2 rounded-lg backdrop-blur-sm"
+                            >
+                              <Trash className="w-5 h-5 text-white" />
+                            </button>
                           </div>
-                        </div>
+                        </>
                       ) : (
-                        <div className="text-center">
-                          <Camera className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-                          <p className="text-gray-400">Cliquez pour ajouter une image</p>
+                        <div className="flex flex-col items-center justify-center gap-2 p-4 text-center">
+                          <div className="p-3 rounded-lg bg-[#363636]">
+                            <Camera className="w-6 h-6 text-gray-400" />
+                          </div>
+                          <div>
+                            <p className="text-sm font-medium text-gray-300">Glissez une image ou cliquez pour ajouter</p>
+                            <p className="text-xs text-gray-500 mt-1">PNG, JPG jusqu'à 10MB</p>
+                          </div>
                         </div>
                       )}
                     </div>
@@ -201,35 +256,79 @@ export default function Post() {
                   </div>
                 )}
 
-                <div className="relative">
-                  <textarea 
-                    style={{ background: postType === 'story' ? bgPost : '#282828' }} 
-                    placeholder={
-                      postType === 'story' ? "Partagez votre histoire..." :
-                      postType === 'image' ? "Ajoutez une description..." :
-                      "Partagez vos pensées..."
-                    }
-                    className={cn(
-                      "w-full min-h-[12rem] rounded-2xl p-6 pl-20 pr-6 text-white placeholder:text-gray-500 resize-none focus:ring-2 focus:ring-primary/50 focus:outline-none",
-                      postType === 'story' ? "text-center text-xl font-medium" : ""
-                    )}
-                  />
-                  {!isAnonymous && (
-                    <div className="absolute top-6 left-6">
-                      <Avatar 
-                        style={{ background: "url('/profile.jpg')", backgroundPosition: "center", backgroundSize: "cover" }} 
-                        className="w-10 h-10 rounded-xl ring-2 ring-gray-700"
-                      />
-                    </div>
-                  )}
-                  {isAnonymous && (
-                    <div className="absolute top-6 left-6">
-                      <div className="w-10 h-10 rounded-xl ring-2 ring-gray-700 bg-gray-800 flex items-center justify-center">
-                        <UserCircle2 className="w-6 h-6 text-gray-400" />
+                {postType !== 'image' && (
+                  <div className="relative">
+                    {postType === 'story' && (
+                      <div className="relative">
+                        <textarea 
+                          style={{ background: bgPost }} 
+                          placeholder="Partagez votre histoire..."
+                          className="w-full min-h-[12rem] rounded-2xl p-6 pl-20 pr-6 text-white placeholder:text-gray-500 resize-none focus:ring-2 focus:ring-primary/50 focus:outline-none text-center text-xl font-medium"
+                        />
+                        {!isAnonymous ? (
+                          <div className="absolute top-6 left-6">
+                            <Avatar 
+                              style={{ background: "url('/profile.jpg')", backgroundPosition: "center", backgroundSize: "cover" }} 
+                              className="w-10 h-10 rounded-xl ring-2 ring-gray-700"
+                            />
+                          </div>
+                        ) : (
+                          <div className="absolute top-6 left-6">
+                            <div className="w-10 h-10 rounded-xl ring-2 ring-gray-700 bg-gray-800 flex items-center justify-center">
+                              <UserCircle2 className="w-6 h-6 text-gray-400" />
+                            </div>
+                          </div>
+                        )}
+                        <div className="mt-4 p-4 bg-[#2a2a2a] rounded-xl">
+                          <div className="flex items-center justify-between mb-3">
+                            <h3 className="text-sm font-medium text-gray-300">Couleur du fond</h3>
+                            <div className="text-xs text-gray-500">Sélectionnez une couleur</div>
+                          </div>
+                          <div className="grid grid-cols-12 gap-y-5">
+                            {colors.map((color) => (
+                              <button
+                                key={color.id}
+                                onClick={() => changeBgHandler(color.color)}
+                                className={cn(
+                                  "w-8 h-8 rounded-lg transition-all hover:scale-105 hover:shadow-lg",
+                                  bgPost === color.color ? "ring-2 ring-primary ring-offset-2 ring-offset-[#2a2a2a]" : ""
+                                )}
+                                style={{ background: color.color }}
+                              />
+                            ))}
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  )}
-                </div>
+                    )}
+                    {postType !== 'story' && (
+                      <textarea 
+                        style={{ background: '#282828' }} 
+                        placeholder={
+                          postType === 'story' ? "Partagez votre histoire..." :
+                          "Partagez vos pensées..."
+                        }
+                        className={cn(
+                          "w-full min-h-[12rem] rounded-2xl p-6 pl-20 pr-6 text-white placeholder:text-gray-500 resize-none focus:ring-2 focus:ring-primary/50 focus:outline-none",
+                          postType === 'story' ? "text-center text-xl font-medium" : ""
+                        )}
+                      />
+                    )}
+                    {!isAnonymous ? (
+                      <div className="absolute top-6 left-6">
+                        <Avatar 
+                          style={{ background: "url('/profile.jpg')", backgroundPosition: "center", backgroundSize: "cover" }} 
+                          className="w-10 h-10 rounded-xl ring-2 ring-gray-700"
+                        />
+                      </div>
+                    ) : (
+                      <div className="absolute top-6 left-6">
+                        <div className="w-10 h-10 rounded-xl ring-2 ring-gray-700 bg-gray-800 flex items-center justify-center">
+                          <UserCircle2 className="w-6 h-6 text-gray-400" />
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
 
               {postType === 'voice' && visible && (
@@ -266,7 +365,7 @@ export default function Post() {
             )}
           </div>
           <Input type="hidden" name='color' value={bgPost} />
-        </form>
+        </div>
       </section>
     </div>
   )
