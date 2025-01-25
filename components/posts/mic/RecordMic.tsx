@@ -31,7 +31,7 @@ export default function RecordMic() {
       if (record1.isRecording() || record1.isPaused()) {
 
         record1.stopRecording()
-        record(false)
+      
       }
       else{
        

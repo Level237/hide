@@ -8,7 +8,7 @@ interface PostStoreState{
     audioBlob:Blob,
     setAudioUrl:(audioUrl:string)=>void,
     setAudioBlob:(audioBlob:any)=>void,
-    playRecord:(isPlay:boolean)=>void
+    playRecord:()=>void
 }
 export const PostStore=create<PostStoreState>((set)=>({
     bgPost:"#000000",
@@ -18,8 +18,8 @@ export const PostStore=create<PostStoreState>((set)=>({
 changeBgHandler:(color:string)=>{
 set({bgPost:color})
 },
-playRecord:(isPlay:boolean)=>{
-    set({isRecording:isPlay})
+playRecord:()=>{
+    set((state) => ({ isRecording: !state.isRecording }));  
     
 },
 setAudioUrl:(audioUrl:string)=>{

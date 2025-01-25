@@ -128,27 +128,7 @@ export default function Post() {
               </div>
             </div>
 
-            {postType === 'story' && (
-              <div className="relative">
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-sm font-medium text-gray-300">Couleur du fond</h3>
-                  <div className="text-xs text-gray-500">Sélectionnez une couleur</div>
-                </div>
-                <div className="grid grid-cols-6 gap-3">
-                  {colors.map((color) => (
-                    <button
-                      key={color.id}
-                      onClick={() => changeBgHandler(color.color)}
-                      className={cn(
-                        "w-8 h-8 rounded-lg transition-all hover:scale-105 hover:shadow-lg",
-                        bgPost === color.color ? "ring-2 ring-primary ring-offset-2 ring-offset-[#2a2a2a]" : ""
-                      )}
-                      style={{ background: color.color }}
-                    />
-                  ))}
-                </div>
-              </div>
-            )}
+          
           </div>
         </section>
       </section>
@@ -165,7 +145,7 @@ export default function Post() {
                  'Nouvelle publication'}
               </h2>
               <div className="flex items-center space-x-3">
-                <Button variant="ghost" className="text-gray-400 hover:text-gray-200">
+                <Button  className="text-gray-400 bg-transparent hover:bg-transparent hover:text-primary">
                   <MoveLeft className="w-5 h-5 mr-2" />
                   Retour
                 </Button>
@@ -207,7 +187,8 @@ export default function Post() {
                     <div 
                       onClick={() => fileInputRef.current?.click()}
                       className={cn(
-                        "relative w-full h-40 rounded-xl bg-[#282828] flex items-center justify-center cursor-pointer hover:bg-[#2f2f2f] transition-colors overflow-hidden group",
+                        "relative  h-40 rounded-xl bg-[#282828] flex items-center justify-center cursor-pointer hover:bg-[#2f2f2f] transition-colors overflow-hidden group",
+                      !previewImage ? "w-full" : "w-28"
                       )}
                     >
                       {previewImage ? (
@@ -341,10 +322,10 @@ export default function Post() {
             {postType === 'voice' && (
               <div className="flex items-center justify-center p-4 bg-[#282828] rounded-xl">
                 <Button 
-                  variant="ghost" 
+                  
                   size="lg"
                   className={cn(
-                    "text-gray-400 hover:text-blue-400",
+                    "text-gray-400 bg-transparent hover:bg-transparent hover:text-green-400",
                     visible && "text-red-400 hover:text-red-500"
                   )}
                   onClick={() => setVisible(!visible)}
