@@ -263,7 +263,7 @@ export default function Post() {
                         <textarea 
                           style={{ background: bgPost }} 
                           placeholder="Partagez votre histoire..."
-                          className="w-full min-h-[12rem] rounded-2xl p-6 pl-20 pr-6 text-white placeholder:text-gray-500 resize-none focus:ring-2 focus:ring-primary/50 focus:outline-none text-center text-xl font-medium"
+                          className="w-full min-h-[12rem] rounded-2xl p-6 pl-20 text-white placeholder:text-gray-500 resize-none focus:ring-2 focus:ring-primary/50 focus:outline-none  text-xl font-medium"
                         />
                         {!isAnonymous ? (
                           <div className="absolute top-6 left-6">
@@ -304,12 +304,12 @@ export default function Post() {
                       <textarea 
                         style={{ background: '#282828' }} 
                         placeholder={
-                          postType === 'story' ? "Partagez votre histoire..." :
+                         
                           "Partagez vos pensées..."
                         }
                         className={cn(
                           "w-full min-h-[12rem] rounded-2xl p-6 pl-20 pr-6 text-white placeholder:text-gray-500 resize-none focus:ring-2 focus:ring-primary/50 focus:outline-none",
-                          postType === 'story' ? "text-center text-xl font-medium" : ""
+                         
                         )}
                       />
                     )}

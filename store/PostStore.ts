@@ -11,7 +11,7 @@ interface PostStoreState{
     playRecord:(isPlay:boolean)=>void
 }
 export const PostStore=create<PostStoreState>((set)=>({
-    bgPost:"",
+    bgPost:"#000000",
     isRecording:false,
     audioUrl:"",
     audioBlob:new Blob(),
