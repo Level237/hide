@@ -134,7 +134,7 @@ export default function Post() {
                   <h3 className="text-sm font-medium text-gray-300">Couleur du fond</h3>
                   <div className="text-xs text-gray-500">Sélectionnez une couleur</div>
                 </div>
-                <div className="grid grid-cols-6 gap-3 gap-1.5">
+                <div className="grid grid-cols-6 gap-3">
                   {colors.map((color) => (
                     <button
                       key={color.id}
