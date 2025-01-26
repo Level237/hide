@@ -1,3 +1,5 @@
+'use client'
+
 import { Heart, LucideMessageSquare, MessageCircle, MoreHorizontal, SendIcon, Share, Share2, Mic } from "lucide-react"
 import { Button } from "../ui/button"
 import { cn } from "@/lib/utils"
@@ -5,29 +7,35 @@ import { cn } from "@/lib/utils"
 import { Avatar } from "../ui/avatar"
 import PostVoice from "./PostVoice"
 import { Post } from "@/types/Post"
-
+import { PostStore } from "@/store/PostStore"
+import { formatDistanceToNow } from "date-fns"
+import { fr } from 'date-fns/locale'
+import { useRouter } from 'next/navigation'
 
 
 export function PostCard({ 
-  content, 
-  image, 
-  audio, 
-  createdAt,
-  type,
-  likes,
-  comments,
-  audioDuration,
-  author,
-  background,
-  audioId,
-  id
-}: Post) {
+  post
+}: {post:Post}) {
+  const likePost=PostStore((state)=>state.likePost)
+
+  const handleLike = (e: React.MouseEvent, postId: string) => {
+    e.stopPropagation()
+    likePost(postId)
+  }
+  const router = useRouter()
+
+  const handlePostClick = (post: Post) => {
+    router.push(`/post/${post.id}`)
+  }
+  const formatDate = (date: string) => {
+    return formatDistanceToNow(new Date(date), { addSuffix: true, locale: fr })
+  }
   return (
-    <div className="bg-[#363636] px-6 py-4 mb-6 rounded-3xl">
+    <div key={post.id}  onClick={() => handlePostClick(post)} className="bg-[#363636] cursor-pointer px-6 py-4 mb-6 rounded-3xl">
     <div className="flex justify-between">
     <div className="flex justify-between w-13">
       <div className=''>
-      <Avatar style={{ background:`url(${author.image})`,backgroundPosition:"center",backgroundSize:"cover" }} className='cursor-pointer w-10 h-10 rounded-xl'>
+      <Avatar style={{ background:`url(${post.author.image})`,backgroundPosition:"center",backgroundSize:"cover" }} className='cursor-pointer w-10 h-10 rounded-xl'>
                     
                    
                     </Avatar>
@@ -35,8 +43,8 @@ export function PostCard({
     
     
             <div className="flex flex-1  flex-col max-w-full ml-2">
-              <h2 className="font-bold text-sm text-gray-400" >{author.name}</h2>
-              <span className="text-sm text-gray-500 ">{createdAt}</span>
+              <h2 className="font-bold text-sm text-gray-400" >{post.author.name}</h2>
+              <span className="text-sm text-gray-500 ">{formatDate(post.createdAt)}</span>
             </div>
         </div>
         <div className="text-white">
@@ -45,27 +53,27 @@ export function PostCard({
     </div>
   
   {
-    type=="story" &&  <div className="mt-5 h-96 flex justify-center items-center  p-10 px-8 rounded-2xl " style={{ background:`${background}` }}>
+    post.type=="story" &&  <div className="mt-5 h-96 flex justify-center items-center  p-10 px-8 rounded-2xl " style={{ background:`${post.background}` }}>
         
                   <div className="mt-5">
-                    <h2 className="text-2xl text-center font-bold" style={{ color:"white" }}>{content}</h2>
+                    <h2 className="text-2xl text-center font-bold" style={{ color:"white" }}>{post.content}</h2>
                   </div>
     
               </div>
   }
 
   {
-    type=="image" && <section>
+    post.type=="image" && <section>
                     <div className='mt-4 text-white'>
-                        {content}
+                        {post.content}
                     </div>
-                    <div className="mt-5 h-96 flex justify-center items-center  p-10 px-8 rounded-2xl " style={{ background:`url(${image})`,backgroundPosition:"center",backgroundSize:"cover",backgroundRepeat: "no-repeat" }}>
+                    <div className="mt-5 h-96 flex justify-center items-center  p-10 px-8 rounded-2xl " style={{ background:`url(${post.image})`,backgroundPosition:"center",backgroundSize:"cover",backgroundRepeat: "no-repeat" }}>
                   </div>
               </section>
   }
 
   {
-    type=="voice" &&  
+    post.type=="voice" &&  
     <div className="mt-5 rounded-2xl p-6 bg-gradient-to-br from-gray-800 to-gray-900">
       <div className="flex flex-col space-y-4">
         <div className="flex items-center space-x-3 text-gray-400">
@@ -79,8 +87,8 @@ export function PostCard({
             <PostVoice 
               heightVoice={50} 
               widthVoice={500} 
-              audioUrl={`${audio}`} 
-              waveId={`${audioId}`}
+              audioUrl={`${post.audio}`} 
+              waveId={`${post.audioId}`}
             />
           </div>
         </div>
@@ -93,17 +101,19 @@ export function PostCard({
       {/* Section des statistiques */}
       <div className='flex justify-between items-center px-2'>
         <div className='flex items-center space-x-6'>
-          <button className='group flex items-center space-x-2 transition-all'>
-            <Heart className={`w-6 h-6 transition-colors ${likes > 0 ? "fill-primary text-primary" : "text-gray-400 group-hover:text-primary"}`}/>
-            <span className={`text-sm transition-colors ${likes > 0 ? "text-primary font-medium" : "text-gray-400 group-hover:text-primary"}`}>
-              {likes} likes
+          <button
+          onClick={(e) => handleLike(e, post.id)}
+          className='group flex items-center space-x-2 transition-all'>
+            <Heart className={cn("w-5 h-5 text-gray-400 group-hover:text-red-500 ", post.isLiked && "fill-red-500 text-red-500")} />
+            <span className={`text-sm text-gray-400 group-hover:text-red-500   ${post.likes > 0 && post.isLiked ? "text-red-500 font-medium" : "text-gray-400 "}`}>
+              {post.likes} likes
             </span>
           </button>
           
           <button className='group flex items-center space-x-2'>
             <LucideMessageSquare className="w-6 h-6 text-gray-400 group-hover:text-blue-400"/>
             <span className='text-sm text-gray-400 group-hover:text-blue-400'>
-              {comments.length} replies
+              {post.comments.length} replies
             </span>
           </button>
         </div>

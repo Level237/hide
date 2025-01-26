@@ -5,8 +5,9 @@ type PostType = 'story' | 'voice' | 'image'
 export interface Post {
   id: string
   type: PostType
-  content: string
+  content?: string
   author: {
+    id:string,
     name: string
     image?: string
     anonymous: boolean
@@ -18,6 +19,8 @@ export interface Post {
   background?: string
   image?: string,
   audioId?:string,
-  audio?: string
+  audio?: string,
+  isLiked:boolean,
+  saved?:boolean,
   audioDuration?: number
 }
