@@ -14,18 +14,20 @@ export const mockPosts: Post[] = [
       likes: 23,
       comments: [
         {
-          id: 'comment1',
-          postId: 'post1',
-          content: 'Tellement vrai ! Continue de partager ta joie de vivre 🙌',
-          author: {
-            id: 'user2',
-            name: 'Ibrahima Djamilatou',
-            image: '/profile1.jpg',
-            anonymous:false
-          },
-          likes: 12,
-          replies: [],
-          createdAt: '2025-01-26T08:30:00.000Z'
+            id: 'comment1',
+            postId: 'post1',
+            content: 'Tellement vrai ! Continue de partager ta joie de vivre 🙌',
+            author: {
+                id: 'user2',
+                name: 'Ibrahima Djamilatou',
+                image: '/profile1.jpg',
+                anonymous: false
+            },
+            likes: 12,
+            
+            replies: [],
+            createdAt: '2025-01-26T08:30:00.000Z',
+            isLiked: false
         }
       ],
       shares: 45,
@@ -54,9 +56,11 @@ export const mockPosts: Post[] = [
                     name: 'Romila',
                     image: '/profile3.jpg'
                 },
+                
                 likes: 28,
                 replies: [],
-                createdAt: '2025-01-26T07:45:00.000Z'
+                createdAt: '2025-01-26T07:45:00.000Z',
+                isLiked: false
             }
         ],
         shares: 89,
@@ -99,10 +103,13 @@ export const mockPosts: Post[] = [
                             image: '/profile5.jpg'
                         },
                         likes: 23,
-                        replies: [],
-                        createdAt: '2025-01-26T06:20:00.000Z'
+
+                        createdAt: '2025-01-26T06:20:00.000Z',
+                        isLiked: false,
+                        replies: []
                     }
                 ],
+                isLiked:false,
                 createdAt: '2025-01-26T06:15:00.000Z'
             }
         ],

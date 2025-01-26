@@ -25,7 +25,7 @@ interface PostStoreState{
     savePost: (postId: string) => void
     addComment: (postId: string, comment: Comment) => void
     removeComment: (postId: string, commentId: string) => void
-    likeComment: (postId: string, commentId: string) => void
+    likeComment: (commentId: string) => void
 }
 
 
@@ -43,9 +43,11 @@ export const PostStore=create<PostStoreState>((set,get)=>({
     loadComments:(postId) => {
       set((state) => {
         // Trouver tous les commentaires pour ce post
-        const postComments = state.posts
+       
+          let postComments = state.posts
           .flatMap(post => post.comments)
           .filter(comment => comment.postId === postId);
+          
         
         return { comments: postComments };
       });
@@ -125,18 +127,17 @@ export const PostStore=create<PostStoreState>((set,get)=>({
           : post
       )
     })),
-    likeComment: (postId, commentId) => set((state) => ({
-      posts: state.posts.map((post) =>
-        post.id === postId
+    likeComment: (commentId) => set((state) => {
+      const likedComment=state.comments?.map((comment) =>
+        comment.id === commentId
           ? {
-              ...post,
-              comments: post.comments.map((comment) =>
-                comment.id === commentId
-                  ? { ...comment, likes: comment.likes + 1 }
-                  : comment
-              )
+              ...comment,
+              likes: comment.isLiked ? comment.likes - 1 : comment.likes + 1,
+              isLiked: !comment.isLiked
             }
-          : post
+          : comment
       )
-    }))
+
+      return {comments:likedComment}
+    }),
 }))

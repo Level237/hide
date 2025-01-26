@@ -8,7 +8,8 @@ export interface Comment {
       image?: string
       anonymous?: boolean
     }
-    likes: number
+    likes: number,
+    isLiked:boolean,
     replies: Comment[]
     createdAt: string
     isOwner?: boolean
