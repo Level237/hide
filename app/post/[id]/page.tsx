@@ -55,7 +55,7 @@ const mockComments = [
 export default function PostPage({ params }: { params: { id: string } }) {
   const router = useRouter()
   const likePost=PostStore((state)=>state.likePost)
-  const load=PostStore((state)=>state.loadSelectedPost)
+  const comments=PostStore((state)=>state.comments)
   const post=PostStore((state)=>state.selectedPost)
   const [isPlaying, setIsPlaying] = useState(false)
   const [currentTime, setCurrentTime] = useState(0)
@@ -193,7 +193,7 @@ if(!post){
               </Button>
               <Button className="bg-transparent hover:bg-transparent hover:text-blue-500">
                 <MessageCircle className="w-5 h-5  mr-2" />
-                {post?.comments.length} replies
+                {comments?.length} replies
               </Button>
               <Button className="bg-transparent hover:bg-transparent hover:text-primary">
                 <Share2 className="w-5 h-5 mr-2" />

@@ -42,23 +42,12 @@ export const PostStore=create<PostStoreState>((set,get)=>({
     comments:null,
     loadComments:(postId) => {
       set((state) => {
-          let newArr:Comment[]=[]
-          const filterComments = state.posts.map((post) => post.comments);
-          const fil=filterComments.forEach((el)=>{
-            
-            el.filter((comment)=>{
-              if(comment.postId===postId){
-                newArr.push(comment)
-              }
-            })
-          }
-          
-          )
-          
-          
-          set({comments:newArr})
-          return {comments:newArr}
+        // Trouver tous les commentaires pour ce post
+        const postComments = state.posts
+          .flatMap(post => post.comments)
+          .filter(comment => comment.postId === postId);
         
+        return { comments: postComments };
       });
     },
     audioBlob:new Blob(),

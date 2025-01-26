@@ -1,10 +1,15 @@
-import { useEffect, useState } from 'react'
+'use client'
+import { useState, useEffect } from 'react'
 import { Avatar } from '../ui/avatar'
 import { Button } from '../ui/button'
 import { Textarea } from '../ui/textarea'
-import { UserCircle2, Heart, MessageCircle, Share2, MoreHorizontal, Send, Trash2, AlertCircle } from 'lucide-react'
+import { UserCircle2, Heart, MessageCircle, Share2, MoreHorizontal, Send, Trash2 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
+
+import { Comment } from '@/types/comments'
+import { formatDistanceToNow } from 'date-fns'
+import { fr } from 'date-fns/locale'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,52 +26,52 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
-import { Comment } from '@/types/comments'
 import { PostStore } from '@/store/PostStore'
-import { cp } from 'fs'
 
+interface CommentSectionProps {
+  postId: string
+}
 
-
-
-export function CommentSection({ postId, commentPost}:{postId:string,commentPost:Comment[]} ) {
+export function CommentSection({ postId }: CommentSectionProps) {
   
-  const addComment=PostStore((state)=>state.addComment)
-  const load=PostStore((state)=>state.loadComments)
-  const comments=PostStore((state)=>state.comments)
+  const loadComments=PostStore((state:any)=>state.loadComments)
+  const comments=PostStore((state:any)=>state.comments)
+  const addComment=PostStore((state:any)=>state.addComment)
+  const removeComment=PostStore((state:any)=>state.removeComment)
+  const likeComment=PostStore((state:any)=>state.likeComment)
+  const selectedPost=PostStore((state:any)=>state.selectedPost)
   const [newComment, setNewComment] = useState('')
   const [replyingTo, setReplyingTo] = useState<string | null>(null)
   const [replyContent, setReplyContent] = useState('')
   const [expandedComment, setExpandedComment] = useState<string | null>(null)
   const [commentToDelete, setCommentToDelete] = useState<string | null>(null)
   const [isLiked, setIsLiked] = useState<{ [key: string]: boolean }>({})
-console.log(comments)
 
-useEffect(()=>{
-  load(postId)
+  useEffect(() => {
+    loadComments(postId)
+  }, [postId])
 
-},[])
   const handleSubmitComment = () => {
     if (!newComment.trim()) return
 
     const comment: Comment = {
       id: Math.random().toString(),
       content: newComment,
-      postId:postId,
+      postId,
       author: {
+        id: 'current-user',
         name: 'Vous',
         image: '/profile.jpg',
-        id: 'profi'
+        anonymous:false,
       },
       likes: 0,
       replies: [],
       createdAt: new Date().toISOString(),
       isOwner: true
     }
-    
-    addComment(postId,comment)
-    load(postId)
-    setReplyContent('')
-    setReplyingTo(null)
+
+    addComment(postId, comment)
+    loadComments(postId)
   }
 
   const handleSubmitReply = (commentId: string) => {
@@ -75,7 +80,9 @@ useEffect(()=>{
     const reply: Comment = {
       id: Math.random().toString(),
       content: replyContent,
+      postId,
       author: {
+        id: 'current-user',
         name: 'Vous',
         image: '/profile.jpg'
       },
@@ -85,65 +92,43 @@ useEffect(()=>{
       isOwner: true
     }
 
-    setComments(comments.map(comment => {
-      if (comment.id === commentId) {
-        return {
-          ...comment,
-          replies: [reply, ...comment.replies]
-        }
+    // Trouver le commentaire parent et ajouter la réponse
+    const parentComment = comments?.find(c => c.id === commentId)
+    if (parentComment) {
+      const updatedComment = {
+        ...parentComment,
+        replies: [reply, ...parentComment.replies]
       }
-      return comment
-    }))
+      addComment(postId, updatedComment)
+    }
 
     setReplyContent('')
     setReplyingTo(null)
   }
 
   const handleDeleteComment = (commentId: string) => {
-    setComments(comments.filter(comment => {
-      if (comment.id === commentId) return false
-      comment.replies = comment.replies.filter(reply => reply.id !== commentId)
-      return true
-    }))
+    removeComment(postId, commentId)
     setCommentToDelete(null)
   }
 
   const toggleLike = (commentId: string) => {
-    setIsLiked(prev => ({ ...prev, [commentId]: !prev[commentId] }))
-    setComments(comments.map(comment => {
-      if (comment.id === commentId) {
-        return {
-          ...comment,
-          likes: isLiked[commentId] ? comment.likes - 1 : comment.likes + 1
-        }
-      }
-      comment.replies = comment.replies.map(reply => {
-        if (reply.id === commentId) {
-          return {
-            ...reply,
-            likes: isLiked[commentId] ? reply.likes - 1 : reply.likes + 1
-          }
-        }
-        return reply
-      })
-      return comment
-    }))
-  }
-
-  const formatDate = (date: string) => {
-    return new Date(date).toLocaleDateString('fr-FR', {
-      day: 'numeric',
-      month: 'short',
-      hour: 'numeric',
-      minute: 'numeric'
+    setIsLiked(prev => {
+      const newState = { ...prev, [commentId]: !prev[commentId] }
+      likeComment(postId, commentId)
+      return newState
     })
   }
 
-  
+  const formatDate = (date: string) => {
+    return formatDistanceToNow(new Date(date), { addSuffix: true, locale: fr })
+  }
+
+  if (!comments) return null
+
   return (
     <div className="space-y-6">
       {/* New Comment Input */}
-      <div className=" bg-[#282828]  p-4">
+      <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-xl p-4 shadow-xl">
         <div className="flex gap-4">
           <Avatar 
             style={{ background: "url('/profile.jpg')", backgroundPosition: "center", backgroundSize: "cover" }} 
@@ -154,9 +139,9 @@ useEffect(()=>{
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
               placeholder="Écrivez un commentaire..."
-              className="min-h-[80px] bg-[#1f1f1f] border-none focus:ring-1 focus:ring-primary/50 resize-none rounded-xl placeholder:text-gray-500"
+              className="min-h-[80px] bg-gray-800/50 border-none focus:ring-1 focus:ring-primary/50 resize-none rounded-xl placeholder:text-gray-500"
             />
-            <div className="flex justify-end mt-4">
+            <div className="flex justify-end mt-2">
               <Button 
                 onClick={handleSubmitComment}
                 className="bg-primary hover:bg-primary/90 transition-all duration-200"
@@ -171,13 +156,12 @@ useEffect(()=>{
 
       {/* Comments List */}
       <div className="space-y-4">
-        {comments===null && <><p>Erreur</p></>}
-        {comments!=null && comments.map(comment => (
+        {comments.map((comment:Comment) => (
           <motion.div
             key={comment.id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="group bg-gradient-to-br bg-[#282828] backdrop-blur-sm rounded-xl p-4  transition-all duration-200"
+            className="group bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-xl p-4 shadow-xl hover:shadow-2xl transition-all duration-200"
           >
             <div className="flex gap-4">
               {comment.author.image ? (
@@ -200,11 +184,11 @@ useEffect(()=>{
                   {comment.isOwner && (
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
-                        <Button  size="icon" className="opacity-0 hover:bg-transparent bg-transparent group-hover:opacity-100 transition-opacity text-gray-400 hover:text-gray-300">
+                        <Button variant="ghost" size="icon" className="opacity-0 group-hover:opacity-100 transition-opacity text-gray-400 hover:text-gray-300">
                           <MoreHorizontal className="w-5 h-5" />
                         </Button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end" className=" border-gray-800">
+                      <DropdownMenuContent align="end" className="bg-gray-900 border-gray-800">
                         <DropdownMenuItem 
                           className="text-red-400 hover:text-red-300 focus:text-red-300 cursor-pointer"
                           onClick={() => setCommentToDelete(comment.id)}
@@ -221,11 +205,11 @@ useEffect(()=>{
 
                 <div className="flex items-center gap-4 pt-2">
                   <Button 
-                   
+                    variant="ghost" 
                     size="sm" 
                     onClick={() => toggleLike(comment.id)}
                     className={cn(
-                      "text-gray-400 bg-transparent hover:bg-transparent hover:text-gray-300",
+                      "text-gray-400 hover:text-gray-300",
                       isLiked[comment.id] && "text-red-400 hover:text-red-300"
                     )}
                   >
@@ -233,15 +217,15 @@ useEffect(()=>{
                     {comment.likes}
                   </Button>
                   <Button 
-                   
+                    variant="ghost" 
                     size="sm" 
-                    className="text-gray-400 bg-transparent hover:bg-transparent hover:text-gray-300"
+                    className="text-gray-400 hover:text-gray-300"
                     onClick={() => setReplyingTo(replyingTo === comment.id ? null : comment.id)}
                   >
                     <MessageCircle className="w-4 h-4 mr-1" />
                     {comment.replies.length}
                   </Button>
-                  <Button  size="sm" className="text-gray-400 bg-transparent hover:bg-transparent hover:text-gray-300">
+                  <Button variant="ghost" size="sm" className="text-gray-400 hover:text-gray-300">
                     <Share2 className="w-4 h-4 mr-1" />
                     Partager
                   </Button>
@@ -266,7 +250,7 @@ useEffect(()=>{
                             value={replyContent}
                             onChange={(e) => setReplyContent(e.target.value)}
                             placeholder="Écrivez une réponse..."
-                            className="min-h-[60px] bg-[#1f1f1f] border-none focus:ring-1 focus:ring-primary/50 resize-none rounded-xl placeholder:text-gray-500"
+                            className="min-h-[60px] bg-gray-800/50 border-none focus:ring-1 focus:ring-primary/50 resize-none rounded-xl placeholder:text-gray-500"
                           />
                           <div className="flex justify-end mt-2">
                             <Button 
@@ -288,9 +272,9 @@ useEffect(()=>{
                 {comment.replies.length > 0 && (
                   <div className="pt-4 pl-4 border-l border-gray-700/50">
                     <Button
-                      
+                      variant="ghost"
                       size="sm"
-                      className="text-gray-400 bg-transparent hover:bg-transparent hover:text-gray-300 mb-4"
+                      className="text-gray-400 hover:text-gray-300 mb-4"
                       onClick={() => setExpandedComment(expandedComment === comment.id ? null : comment.id)}
                     >
                       {expandedComment === comment.id ? 'Masquer' : `Voir ${comment.replies.length} réponses`}
@@ -326,7 +310,7 @@ useEffect(()=>{
                                   {reply.isOwner && (
                                     <DropdownMenu>
                                       <DropdownMenuTrigger asChild>
-                                        <Button  size="icon" className="opacity-0 bg-transparent hover:bg-transparent group-hover:opacity-100 transition-opacity text-gray-400 hover:text-gray-300">
+                                        <Button variant="ghost" size="icon" className="opacity-0 group-hover:opacity-100 transition-opacity text-gray-400 hover:text-gray-300">
                                           <MoreHorizontal className="w-4 h-4" />
                                         </Button>
                                       </DropdownMenuTrigger>
@@ -342,21 +326,21 @@ useEffect(()=>{
                                     </DropdownMenu>
                                   )}
                                 </div>
-                                <p className="text-gray-300 text-sm mt-2">{reply.content}</p>
+                                <p className="text-gray-300 text-sm">{reply.content}</p>
                                 <div className="flex items-center gap-4 pt-2">
                                   <Button 
-                                    
+                                    variant="ghost" 
                                     size="sm" 
                                     onClick={() => toggleLike(reply.id)}
                                     className={cn(
-                                      "text-gray-400 bg-transparent hover:bg-transparent hover:text-red-400",
+                                      "text-gray-400 hover:text-gray-300",
                                       isLiked[reply.id] && "text-red-400 hover:text-red-300"
                                     )}
                                   >
                                     <Heart className={cn("w-4 h-4 mr-1", isLiked[reply.id] && "fill-current")} />
                                     {reply.likes}
                                   </Button>
-                                  <Button  size="sm" className="text-gray-400 bg-transparent hover:bg-transparent hover:text-gray-300">
+                                  <Button variant="ghost" size="sm" className="text-gray-400 hover:text-gray-300">
                                     <Share2 className="w-4 h-4 mr-1" />
                                     Partager
                                   </Button>
