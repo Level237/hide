@@ -15,6 +15,7 @@ export const mockPosts: Post[] = [
       comments: [
         {
           id: 'comment1',
+          postId: 'post1',
           content: 'Tellement vrai ! Continue de partager ta joie de vivre 🙌',
           author: {
             id: 'user2',
@@ -46,6 +47,7 @@ export const mockPosts: Post[] = [
         comments: [
             {
                 id: 'comment2',
+                postId: 'post2',
                 content: 'Super message vocal ! J\'adore ton accent 😊',
                 author: {
                     id: 'user4',
@@ -78,6 +80,7 @@ export const mockPosts: Post[] = [
         comments: [
             {
                 id: 'comment3',
+                postId: 'post3',
                 content: "Warrr mon petit c'est toi qui étais laid comme ca ? 😅",
                 author: {
                     id: 'user29',
@@ -88,6 +91,7 @@ export const mockPosts: Post[] = [
                 replies: [
                     {
                         id: 'reply1',
+                        postId: 'post3',
                         content: 'Classique ! Mais ça marche souvent 😂',
                         author: {
                             id: 'user5',

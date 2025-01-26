@@ -17,7 +17,7 @@ export function PostCard({
   post
 }: {post:Post}) {
   const likePost=PostStore((state)=>state.likePost)
-
+  const select=PostStore((state)=>state.selectPostById)
   const handleLike = (e: React.MouseEvent, postId: string) => {
     e.stopPropagation()
     likePost(postId)
@@ -25,6 +25,7 @@ export function PostCard({
   const router = useRouter()
 
   const handlePostClick = (post: Post) => {
+    select(post.id)
     router.push(`/post/${post.id}`)
   }
   const formatDate = (date: string) => {

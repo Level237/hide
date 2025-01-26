@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Avatar } from '../ui/avatar'
 import { Button } from '../ui/button'
 import { Textarea } from '../ui/textarea'
@@ -21,37 +21,52 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
+import { Comment } from '@/types/comments'
+import { PostStore } from '@/store/PostStore'
+import { cp } from 'fs'
 
 
 
 
-export function CommentSection({ postId, comments: initialComments }: CommentSectionProps) {
-  const [comments, setComments] = useState<Comment[]>(initialComments)
+export function CommentSection({ postId, commentPost}:{postId:string,commentPost:Comment[]} ) {
+  
+  const addComment=PostStore((state)=>state.addComment)
+  const load=PostStore((state)=>state.loadComments)
+  const comments=PostStore((state)=>state.comments)
   const [newComment, setNewComment] = useState('')
   const [replyingTo, setReplyingTo] = useState<string | null>(null)
   const [replyContent, setReplyContent] = useState('')
   const [expandedComment, setExpandedComment] = useState<string | null>(null)
   const [commentToDelete, setCommentToDelete] = useState<string | null>(null)
   const [isLiked, setIsLiked] = useState<{ [key: string]: boolean }>({})
+console.log(comments)
 
+useEffect(()=>{
+  load(postId)
+
+},[])
   const handleSubmitComment = () => {
     if (!newComment.trim()) return
 
     const comment: Comment = {
       id: Math.random().toString(),
       content: newComment,
+      postId:postId,
       author: {
         name: 'Vous',
-        image: '/profile.jpg'
+        image: '/profile.jpg',
+        id: 'profi'
       },
       likes: 0,
       replies: [],
       createdAt: new Date().toISOString(),
       isOwner: true
     }
-
-    setComments([comment, ...comments])
-    setNewComment('')
+    
+    addComment(postId,comment)
+    load(postId)
+    setReplyContent('')
+    setReplyingTo(null)
   }
 
   const handleSubmitReply = (commentId: string) => {
@@ -124,6 +139,7 @@ export function CommentSection({ postId, comments: initialComments }: CommentSec
     })
   }
 
+  
   return (
     <div className="space-y-6">
       {/* New Comment Input */}
@@ -155,7 +171,8 @@ export function CommentSection({ postId, comments: initialComments }: CommentSec
 
       {/* Comments List */}
       <div className="space-y-4">
-        {comments.map(comment => (
+        {comments===null && <><p>Erreur</p></>}
+        {comments!=null && comments.map(comment => (
           <motion.div
             key={comment.id}
             initial={{ opacity: 0, y: 20 }}

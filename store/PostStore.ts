@@ -9,13 +9,15 @@ interface PostStoreState{
     isRecording:boolean,
     audioUrl:string,
     audioBlob:Blob,
+    loadComments:(postId:string)=>void,
+   comments:Comment[] | null,
     setAudioUrl:(audioUrl:string)=>void,
     setAudioBlob:(audioBlob:Blob)=>void,
     playRecord:()=>void,
     posts: Post[]
     selectedPost: Post | null
     setPosts: (posts: Post[]) => void
-    setSelectedPost: (post: Post | null) => void
+    selectPostById: (id: string) => void,
     addPost: (post: Post) => void
     removePost: (postId: string) => void
     updatePost: (postId: string, updates: Partial<Post>) => void
@@ -33,10 +35,32 @@ interface PostStoreState{
 // Données de test pour les posts
 
 
-export const PostStore=create<PostStoreState>((set)=>({
+export const PostStore=create<PostStoreState>((set,get)=>({
     bgPost:"#000000",
     isRecording:false,
     audioUrl:"",
+    comments:null,
+    loadComments:(postId) => {
+      set((state) => {
+          let newArr:Comment[]=[]
+          const filterComments = state.posts.map((post) => post.comments);
+          const fil=filterComments.forEach((el)=>{
+            
+            el.filter((comment)=>{
+              if(comment.postId===postId){
+                newArr.push(comment)
+              }
+            })
+          }
+          
+          )
+          
+          
+          set({comments:newArr})
+          return {comments:newArr}
+        
+      });
+    },
     audioBlob:new Blob(),
     changeBgHandler:(color:string)=>{
     set({bgPost:color})
@@ -49,12 +73,22 @@ export const PostStore=create<PostStoreState>((set)=>({
         set({audioUrl:audioUrl})
     },
     setAudioBlob:(audioBlob:Blob)=>{
+      
         set({audioBlob:audioBlob})
     },
     posts: mockPosts,
     selectedPost: null,
+    
     setPosts: (posts) => set({ posts }),
-    setSelectedPost: (post) => set({ selectedPost: post }),
+    selectPostById: (id: string) => {
+      set((state) => {
+        const post = state.posts.find((post) => post.id === id);
+        
+        localStorage.setItem('post',JSON.stringify(post))
+        
+        return { selectedPost: post};
+      });
+    },
     addPost: (post) => set((state) => ({ posts: [post, ...state.posts] })),
     removePost: (postId) => set((state) => ({
       posts: state.posts.filter((post) => post.id !== postId)
@@ -76,15 +110,20 @@ export const PostStore=create<PostStoreState>((set)=>({
       )
     })),
     savePost: (postId) => set((state) => ({
+      
       posts: state.posts.map((post) =>
         post.id === postId ? { ...post, saved: !post.saved } : post
       )
     })),
-    addComment: ({postId, comment}:{postId:string,comment:Comment}) => set((state) => ({
-      posts: state.posts.map((post:Post) =>
+    addComment: (postId, comment) => set((state) => ({
+     
+      posts: state.posts.map((post:Post) =>(
         post.id === postId
-          ? { ...post, comments: [comment, ...post.comments] }
-          : post
+        ? { ...post, comments: [comment, ...post.comments] }
+        : post
+      )
+        
+        
       )
     })),
     removeComment: (postId, commentId) => set((state) => ({

@@ -8,28 +8,12 @@ import Image from 'next/image'
 import { useState, useRef, useEffect } from 'react'
 import { cn } from '@/lib/utils'
 import PostVoice from '@/components/posts/PostVoice'
+import { PostStore } from '@/store/PostStore'
+import { Post } from '@/types/Post'
 
 
 
 // Mock data for testing
-const post: Post = {
-  id: 'docm356',
-  type: 'voice',
-  content: 'Ceci est un exemple de publication avec un contenu intéressant et engageant.',
-  author: {
-    name: 'John Doe',
-    image: '/profile.jpg',
-    anonymous: false
-  },
-  likes: 42,
-  comments: 12,
-  shares: 5,
-  createdAt: '2025-01-24T14:30:00.000Z',
-  background: 'linear-gradient(45deg, #FF416C, #FF4B2B)',
-  image: '/cover.jpg',
-  audio: '/afrobeat.mp3',
-  audioDuration: 30
-}
 
 const mockComments = [
   {
@@ -70,12 +54,20 @@ const mockComments = [
 
 export default function PostPage({ params }: { params: { id: string } }) {
   const router = useRouter()
+  const likePost=PostStore((state)=>state.likePost)
+  const load=PostStore((state)=>state.loadSelectedPost)
+  const post=PostStore((state)=>state.selectedPost)
   const [isPlaying, setIsPlaying] = useState(false)
   const [currentTime, setCurrentTime] = useState(0)
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const [audioVolume, setAudioVolume] = useState(1)
 
-  const formatDate = (date: string) => {
+  const handleLike = (e: React.MouseEvent, postId?: string) => {
+    e.stopPropagation()
+    likePost(params.id)
+  }
+
+  const formatDate = (date?: string) => {
     return new Date(date).toLocaleDateString('fr-FR', {
       day: 'numeric',
       month: 'short',
@@ -84,43 +76,16 @@ export default function PostPage({ params }: { params: { id: string } }) {
     })
   }
 
-  const handlePlayPause = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause()
-      } else {
-        audioRef.current.play()
-      }
-      setIsPlaying(!isPlaying)
-    }
-  }
 
-  const handleTimeUpdate = () => {
-    if (audioRef.current) {
-      setCurrentTime(audioRef.current.currentTime)
-    }
-  }
 
-  const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const volume = parseFloat(e.target.value)
-    setAudioVolume(volume)
-    if (audioRef.current) {
-      audioRef.current.volume = volume
-    }
-  }
+if(!post){
+  return (
+    <>
+    <p>ff</p>
+    </>
+  )
+}
 
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.addEventListener('timeupdate', handleTimeUpdate)
-      audioRef.current.addEventListener('ended', () => setIsPlaying(false))
-    }
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.removeEventListener('timeupdate', handleTimeUpdate)
-        audioRef.current.removeEventListener('ended', () => setIsPlaying(false))
-      }
-    }
-  }, [])
 
   return (
     <div className="min-h-screen bg-[#1a1a1a] text-white">
@@ -148,36 +113,37 @@ export default function PostPage({ params }: { params: { id: string } }) {
           <div className="p-6">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-4">
-                {post.author.anonymous ? (
+                {post?.author.anonymous ? (
                   <div className="w-12 h-12 rounded-xl ring-2 ring-gray-700 bg-gray-800 flex items-center justify-center">
                     <UserCircle2 className="w-7 h-7 text-gray-400" />
                   </div>
                 ) : (
                   <Avatar 
-                    style={{ background: `url(${post.author.image})`, backgroundPosition: "center", backgroundSize: "cover" }} 
+                    style={{ background: `url(${post?.author.image})`, backgroundPosition: "center", backgroundSize: "cover" }} 
                     className="w-12 h-12 rounded-xl ring-2 ring-gray-700"
                   />
                 )}
                 <div>
                   <h2 className="font-semibold text-lg text-gray-200">
-                    {post.author.anonymous ? 'Anonyme' : post.author.name}
+                    {post?.author.anonymous ? 'Anonyme' : post?.author.name}
                   </h2>
-                  <p className="text-sm text-gray-500">{formatDate(post.createdAt)}</p>
+                  <p className="text-sm text-gray-500">{formatDate(post?.createdAt)}</p>
                 </div>
               </div>
             </div>
 
             {/* Post Content based on type */}
-            {post.type === 'story' && (
-              <div 
-                className="rounded-xl p-6 mb-4 text-center text-xl font-medium"
-                style={{ background: post.background }}
-              >
-                {post.content}
+            {post?.type === 'story' && (
+              <div className="mt-5 h-80 flex justify-center items-center  p-10 px-8 rounded-2xl " style={{ background:`${post.background}` }}>
+        
+              <div className="mt-5">
+                <h2 className="text-2xl text-center font-bold" style={{ color:"white" }}>{post.content}</h2>
               </div>
+
+          </div>
             )}
               
-            {post.type === 'image' && (
+            {post?.type === 'image' && (
               
               <div className="space-y-4">
                 <p className="text-gray-200 mb-4">{post.content}</p>
@@ -196,7 +162,7 @@ export default function PostPage({ params }: { params: { id: string } }) {
               </div>
             )}
 
-            {post.type === 'voice' && (
+            {post?.type === 'voice' && (
              <div className="mt-5 rounded-2xl p-6 bg-gradient-to-br from-gray-800 to-gray-900">
              <div className="flex flex-col space-y-4">
                <div className="flex items-center space-x-3 text-gray-400">
@@ -221,17 +187,17 @@ export default function PostPage({ params }: { params: { id: string } }) {
 
             {/* Post Stats */}
             <div className="flex items-center gap-6 text-gray-400 mt-4">
-              <Button  className="bg-transparent hover:bg-transparent hover:text-red-500">
+              <Button  onClick={(e) => handleLike(e,post?.id)} className="bg-transparent hover:bg-transparent hover:text-red-500">
                 <Heart className="w-5 h-5 mr-1 " />
-                {post.likes} likes
+                {post?.likes} likes
               </Button>
               <Button className="bg-transparent hover:bg-transparent hover:text-blue-500">
                 <MessageCircle className="w-5 h-5  mr-2" />
-                {post.comments} replies
+                {post?.comments.length} replies
               </Button>
               <Button className="bg-transparent hover:bg-transparent hover:text-primary">
                 <Share2 className="w-5 h-5 mr-2" />
-                {post.shares} shares
+                {post?.shares} shares
               </Button>
             </div>
           </div>
@@ -240,7 +206,7 @@ export default function PostPage({ params }: { params: { id: string } }) {
           <div className="border-t border-gray-800">
             <div className="p-6">
               <h3 className="text-lg font-semibold mb-6">Commentaires</h3>
-              <CommentSection postId={params.id} comments={mockComments} />
+              <CommentSection postId={post.id} commentPost={post.comments} />
             </div>
           </div>
         </div>

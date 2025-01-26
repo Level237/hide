@@ -14,7 +14,7 @@ export default function PostList() {
     <div className="mt-5 mb-32 flex flex-col gap-3">
 
     {posts.map((post:Post)=>(
-       <PostCard  post={post} />
+       <PostCard key={post.id}  post={post} />
     ))}
 
  
