@@ -1,15 +1,22 @@
-export interface PostCardProps {
-    content: string
+type PostType = 'story' | 'voice' | 'image'
+
+interface Post {
+  id: string
+  type: PostType
+  content: string
+  author: {
+    name: string
     image?: string
-    audioUrl?: string
-    timestamp: string
-    likes: number,
-    type:number,
-    comments: number,
-    color?:string,
-    id?:string,
-    author:string,
-    profile:string,
-    since:string,
-    url?:string
+    anonymous: boolean
   }
+  likes: number,
+  commentsId?:number,
+  comments: number
+  shares: number
+  createdAt: string
+  background?: string
+  image?: string,
+  audioId?:string,
+  audio?: string
+  audioDuration?: number
+}

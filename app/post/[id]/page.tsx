@@ -9,26 +9,7 @@ import { useState, useRef, useEffect } from 'react'
 import { cn } from '@/lib/utils'
 import PostVoice from '@/components/posts/PostVoice'
 
-type PostType = 'story' | 'voice' | 'image'
 
-interface Post {
-  id: string
-  type: PostType
-  content: string
-  author: {
-    name: string
-    image?: string
-    anonymous: boolean
-  }
-  likes: number
-  comments: number
-  shares: number
-  createdAt: string
-  background?: string
-  image?: string
-  audio?: string
-  audioDuration?: number
-}
 
 // Mock data for testing
 const post: Post = {

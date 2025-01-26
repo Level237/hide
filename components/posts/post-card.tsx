@@ -1,7 +1,7 @@
 import { Heart, LucideMessageSquare, MessageCircle, MoreHorizontal, SendIcon, Share, Share2, Mic } from "lucide-react"
 import { Button } from "../ui/button"
 import { cn } from "@/lib/utils"
-import { PostCardProps } from "@/types/Post"
+
 import { Avatar } from "../ui/avatar"
 import PostVoice from "./PostVoice"
 
@@ -10,24 +10,23 @@ import PostVoice from "./PostVoice"
 export function PostCard({ 
   content, 
   image, 
-  audioUrl, 
-  timestamp,
+  audio, 
+  createdAt,
   type,
   likes, 
   comments,
-  profile,
+  audioDuration,
   author,
-  color,
-  since,
-  id,
-  url
-}: PostCardProps) {
+  background,
+  audioId,
+  id
+}: Post) {
   return (
     <div className="bg-[#363636] px-6 py-4 mb-6 rounded-3xl">
     <div className="flex justify-between">
     <div className="flex justify-between w-13">
       <div className=''>
-      <Avatar style={{ background:`url(${profile})`,backgroundPosition:"center",backgroundSize:"cover" }} className='cursor-pointer w-10 h-10 rounded-xl'>
+      <Avatar style={{ background:`url(${author.image})`,backgroundPosition:"center",backgroundSize:"cover" }} className='cursor-pointer w-10 h-10 rounded-xl'>
                     
                    
                     </Avatar>
@@ -35,8 +34,8 @@ export function PostCard({
     
     
             <div className="flex flex-1  flex-col max-w-full ml-2">
-              <h2 className="font-bold text-sm text-gray-400" >{author}</h2>
-              <span className="text-sm text-gray-500 ">{since}</span>
+              <h2 className="font-bold text-sm text-gray-400" >{author.name}</h2>
+              <span className="text-sm text-gray-500 ">{createdAt}</span>
             </div>
         </div>
         <div className="text-white">
@@ -45,7 +44,7 @@ export function PostCard({
     </div>
   
   {
-    type==0 &&  <div className="mt-5 h-96 flex justify-center items-center  p-10 px-8 rounded-2xl " style={{ background:`${color}` }}>
+    type=="story" &&  <div className="mt-5 h-96 flex justify-center items-center  p-10 px-8 rounded-2xl " style={{ background:`${background}` }}>
         
                   <div className="mt-5">
                     <h2 className="text-2xl text-center font-bold" style={{ color:"white" }}>{content}</h2>
@@ -55,7 +54,7 @@ export function PostCard({
   }
 
   {
-    type==1 && <section>
+    type=="image" && <section>
                     <div className='mt-4 text-white'>
                         {content}
                     </div>
@@ -65,7 +64,7 @@ export function PostCard({
   }
 
   {
-    type==2 &&  
+    type=="voice" &&  
     <div className="mt-5 rounded-2xl p-6 bg-gradient-to-br from-gray-800 to-gray-900">
       <div className="flex flex-col space-y-4">
         <div className="flex items-center space-x-3 text-gray-400">
@@ -79,8 +78,8 @@ export function PostCard({
             <PostVoice 
               heightVoice={50} 
               widthVoice={500} 
-              audioUrl={`${url}`} 
-              waveId={`${id}`}
+              audioUrl={`${audio}`} 
+              waveId={`${audioId}`}
             />
           </div>
         </div>

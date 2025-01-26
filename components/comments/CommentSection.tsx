@@ -21,25 +21,9 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
+import { CommentSectionProps } from '@/types/comments'
 
-interface Comment {
-  id: string
-  content: string
-  author: {
-    name: string
-    image?: string
-    anonymous?: boolean
-  }
-  likes: number
-  replies: Comment[]
-  createdAt: string
-  isOwner?: boolean
-}
 
-interface CommentSectionProps {
-  postId: string
-  comments: Comment[]
-}
 
 export function CommentSection({ postId, comments: initialComments }: CommentSectionProps) {
   const [comments, setComments] = useState<Comment[]>(initialComments)
