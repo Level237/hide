@@ -12,7 +12,3 @@ export interface Comment {
     isOwner?: boolean
   }
   
-  export interface CommentSectionProps {
-    postId: string
-    comments: Comment[]
-  }

@@ -1,6 +1,8 @@
+import { Comment } from "./comments"
+
 type PostType = 'story' | 'voice' | 'image'
 
-interface Post {
+export interface Post {
   id: string
   type: PostType
   content: string
@@ -10,8 +12,7 @@ interface Post {
     anonymous: boolean
   }
   likes: number,
-  commentsId?:number,
-  comments: number
+  comments: Comment[]
   shares: number
   createdAt: string
   background?: string

@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils"
 
 import { Avatar } from "../ui/avatar"
 import PostVoice from "./PostVoice"
+import { Post } from "@/types/Post"
 
 
 
@@ -13,7 +14,7 @@ export function PostCard({
   audio, 
   createdAt,
   type,
-  likes, 
+  likes,
   comments,
   audioDuration,
   author,
@@ -102,7 +103,7 @@ export function PostCard({
           <button className='group flex items-center space-x-2'>
             <LucideMessageSquare className="w-6 h-6 text-gray-400 group-hover:text-blue-400"/>
             <span className='text-sm text-gray-400 group-hover:text-blue-400'>
-              {comments} replies
+              {comments.length} replies
             </span>
           </button>
         </div>
