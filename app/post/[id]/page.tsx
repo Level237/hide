@@ -1,7 +1,7 @@
 'use client'
 import { Button } from '@/components/ui/button'
 import { Avatar } from '@/components/ui/avatar'
-import { UserCircle2, Heart, MessageCircle, Share2, ArrowLeft, Play, Pause, Volume2, Mic } from 'lucide-react'
+import { UserCircle2, Heart, MessageCircle, Share2, ArrowLeft, Play, Pause, Volume2, Mic, Send } from 'lucide-react'
 import { CommentSection } from '@/components/comments/CommentSection'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
@@ -11,6 +11,7 @@ import PostVoice from '@/components/posts/PostVoice'
 import { PostStore } from '@/store/PostStore'
 import { Post } from '@/types/Post'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Textarea } from '@/components/ui/textarea'
 
 export default function PostPage({ params }: { params: { id: string } }) {
   const router = useRouter()
@@ -177,14 +178,12 @@ export default function PostPage({ params }: { params: { id: string } }) {
         <AnimatePresence>
           {showComments && (
             <motion.section
-              initial={{ x: "100%", opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: "100%", opacity: 0 }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="h-[calc(100vh-4rem)] overflow-y-auto bg-[#2a2a2a]/50 backdrop-blur-sm scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent"
+             
+              
+              className="h-[calc(100vh-4rem)]  bg-[#2a2a2a]/50 backdrop-blur-sm scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent"
             >
               <div className="p-6">
-                <div className="flex items-center justify-between mb-6 sticky top-0 bg-[#2a2a2a] py-4 z-10">
+                <div className="flex items-center justify-between mb-6 sticky bottom-0 bg-[#2a2a2a] py-4 z-10">
                   <h3 className="text-lg font-semibold">
                     Commentaires ({comments?.length || 0})
                   </h3>
@@ -197,12 +196,14 @@ export default function PostPage({ params }: { params: { id: string } }) {
                     <ArrowLeft className="w-5 h-5" />
                   </Button>
                 </div>
-                <div className="space-y-4">
+                <div className="space-y-4 overscroll-y-auto ">
                   <CommentSection postId={post.id} commentPost={comments} />
                 </div>
               </div>
+          
             </motion.section>
           )}
+          
         </AnimatePresence>
       </main>
     </div>
