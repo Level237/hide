@@ -132,7 +132,7 @@ console.log(comments)
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
               placeholder="Écrivez un commentaire..."
-              className="min-h-[80px] bg-[#1f1f1f] border-none focus:ring-1 focus:ring-primary/50 resize-none rounded-xl placeholder:text-gray-500"
+              className="min-h-[80px] bg-[#1f1f1f] border-none focus:ring-1 focus:ring-primary focus:outline-none resize-none rounded-xl placeholder:text-gray-500"
             />
             <div className="flex justify-end mt-4">
               <Button 

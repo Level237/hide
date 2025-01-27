@@ -15,42 +15,7 @@ import { Post } from '@/types/Post'
 
 // Mock data for testing
 
-const mockComments = [
-  {
-    id: '1',
-    content: 'Super publication ! J\'adore le contenu que vous partagez.',
-    author: {
-      name: 'Alice Martin',
-      image: '/profile.jpg'
-    },
-    likes: 8,
-    replies: [
-      {
-        id: '1-1',
-        content: 'Merci beaucoup Alice ! Je suis content que ça vous plaise.',
-        author: {
-          name: 'John Doe',
-          image: '/profile.jpg'
-        },
-        likes: 3,
-        replies: [],
-        createdAt: '2025-01-24T15:00:00.000Z'
-      }
-    ],
-    createdAt: '2025-01-24T14:45:00.000Z'
-  },
-  {
-    id: '2',
-    content: 'Très intéressant ! J\'aimerais en savoir plus sur ce sujet.',
-    author: {
-      name: 'User Anonyme',
-      anonymous: true
-    },
-    likes: 5,
-    replies: [],
-    createdAt: '2025-01-24T15:15:00.000Z'
-  }
-]
+
 
 export default function PostPage({ params }: { params: { id: string } }) {
   const router = useRouter()
@@ -62,9 +27,9 @@ export default function PostPage({ params }: { params: { id: string } }) {
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const [audioVolume, setAudioVolume] = useState(1)
   const loadComment=PostStore((state)=>state.loadComments)
-  const handleLike = (e: React.MouseEvent, postId?: string) => {
+  const handleLike = (e: React.MouseEvent, postId: string) => {
     e.stopPropagation()
-    likePost(params.id)
+    likePost(postId)
   }
 useEffect(()=>{
 loadComment(params.id)
@@ -189,7 +154,7 @@ if(!post){
 
             {/* Post Stats */}
             <div className="flex items-center gap-6 text-gray-400 mt-4">
-              <Button  onClick={(e) => handleLike(e,post?.id)} className="bg-transparent hover:bg-transparent hover:text-red-500">
+              <Button  onClick={(e) => handleLike(e,post.id)} className="bg-transparent hover:bg-transparent hover:text-red-500">
                 <Heart className="w-5 h-5 mr-1 " />
                 {post?.likes} likes
               </Button>
