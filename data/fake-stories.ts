@@ -3,7 +3,7 @@ import { StoryHide, StoryResponse } from '@/types/story-hide'
 export const fakeStoryResponses: StoryResponse[] = [
   {
     id: '1',
-    content: 'Je pense la même chose ! Continue comme ça 🙌',
+    content: 'Je pense la même chose ! Continue comme ça 🙌 mais je suis decus de toi car hier tu ma dit que tu seras la mais tu nest pas venu ',
     createdAt: '2025-01-27T10:30:00Z',
     isAnonymous: true
   },

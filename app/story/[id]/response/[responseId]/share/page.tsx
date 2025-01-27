@@ -43,7 +43,7 @@ export default function StorySharePage({
       const element = document.getElementById('story-capture')
       if (element) {
         const canvas = await html2canvas(element, {
-          backgroundColor: '#1a1a1a',
+          backgroundColor: '#303030',
           scale: 2
         })
         const link = document.createElement('a')
