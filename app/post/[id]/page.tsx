@@ -61,12 +61,14 @@ export default function PostPage({ params }: { params: { id: string } }) {
   const [currentTime, setCurrentTime] = useState(0)
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const [audioVolume, setAudioVolume] = useState(1)
-
+  const loadComment=PostStore((state)=>state.loadComments)
   const handleLike = (e: React.MouseEvent, postId?: string) => {
     e.stopPropagation()
     likePost(params.id)
   }
-
+useEffect(()=>{
+loadComment(params.id)
+},[])
   const formatDate = (date?: string) => {
     return new Date(date).toLocaleDateString('fr-FR', {
       day: 'numeric',
@@ -206,7 +208,7 @@ if(!post){
           <div className="border-t border-gray-800">
             <div className="p-6">
               <h3 className="text-lg font-semibold mb-6">Commentaires</h3>
-              <CommentSection postId={post.id} commentPost={post.comments} />
+              <CommentSection postId={post.id} commentPost={comments} />
             </div>
           </div>
         </div>

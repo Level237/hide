@@ -28,9 +28,10 @@ import { cp } from 'fs'
 
 
 
-export function CommentSection({ postId, commentPost}:{postId:string,commentPost:Comment[]} ) {
+export function CommentSection({ postId,commentPost}:{postId:string,commentPost:Comment[]} ) {
   
   const addComment=PostStore((state)=>state.addComment)
+  const addReply=PostStore((state)=>state.addReply)
   const likeComment=PostStore((state)=>state.likeComment);
   const load=PostStore((state)=>state.loadComments)
   const comments=PostStore((state)=>state.comments)
@@ -42,17 +43,14 @@ export function CommentSection({ postId, commentPost}:{postId:string,commentPost
   const [isLiked, setIsLiked] = useState<{ [key: string]: boolean }>({})
 console.log(comments)
 
-useEffect(()=>{
-  load(postId)
 
-},[])
   const handleSubmitComment = () => {
     if (!newComment.trim()) return
 
     const comment: Comment = {
       id: Math.random().toString(),
       content: newComment,
-      postId:postId,
+      postId: postId,
       author: {
         name: 'Vous',
         image: '/profile.jpg',
@@ -61,10 +59,11 @@ useEffect(()=>{
       likes: 0,
       replies: [],
       createdAt: new Date().toISOString(),
-      isOwner: true
+      isOwner: true,
+      isLiked: false
     }
     
-    addComment(postId,comment)
+    addComment(comment)
     load(postId)
     setNewComment("")
   }
@@ -77,23 +76,20 @@ useEffect(()=>{
       content: replyContent,
       author: {
         name: 'Vous',
-        image: '/profile.jpg'
+        image: '/profile.jpg',
+        id: "profi"
       },
       likes: 0,
       replies: [],
       createdAt: new Date().toISOString(),
-      isOwner: true
+      isOwner: true,
+      postId: postId,
+      isLiked: false
     }
 
-    setComments(comments.map(comment => {
-      if (comment.id === commentId) {
-        return {
-          ...comment,
-          replies: [reply, ...comment.replies]
-        }
-      }
-      return comment
-    }))
+    addReply(commentId,reply)
+    load(postId)
+    setNewComment("")
 
     setReplyContent('')
     setReplyingTo(null)

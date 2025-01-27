@@ -1,3 +1,4 @@
+import { mockComment } from '@/data/posts/commentsData'
 import { mockPosts } from '@/data/posts/mockData'
 import { Comment } from '@/types/comments'
 import { Post } from '@/types/Post'
@@ -10,11 +11,11 @@ interface PostStoreState{
     audioUrl:string,
     audioBlob:Blob,
     loadComments:(postId:string)=>void,
-   comments:Comment[] | null,
+   comments:Comment[],
     setAudioUrl:(audioUrl:string)=>void,
     setAudioBlob:(audioBlob:Blob)=>void,
     playRecord:()=>void,
-    posts: Post[]
+    posts: Post[],
     selectedPost: Post | null
     setPosts: (posts: Post[]) => void
     selectPostById: (id: string) => void,
@@ -23,7 +24,8 @@ interface PostStoreState{
     updatePost: (postId: string, updates: Partial<Post>) => void
     likePost: (postId: string) => void
     savePost: (postId: string) => void
-    addComment: (postId: string, comment: Comment) => void
+    addComment: (comment: Comment) => void,
+    addReply:(commentId:string,comment:Comment)=>void,
     removeComment: (postId: string, commentId: string) => void
     likeComment: (commentId: string) => void
 }
@@ -38,18 +40,18 @@ interface PostStoreState{
 export const PostStore=create<PostStoreState>((set,get)=>({
     bgPost:"#000000",
     isRecording:false,
+   
+    
     audioUrl:"",
-    comments:null,
+    comments:mockComment,
     loadComments:(postId) => {
       set((state) => {
         // Trouver tous les commentaires pour ce post
        
-          let postComments = state.posts
-          .flatMap(post => post.comments)
-          .filter(comment => comment.postId === postId);
+          const comments = state.comments.filter((comment)=>comment.postId===postId)
           
         
-        return { comments: postComments };
+        return { comments: comments };
       });
     },
     audioBlob:new Blob(),
@@ -106,17 +108,18 @@ export const PostStore=create<PostStoreState>((set,get)=>({
         post.id === postId ? { ...post, saved: !post.saved } : post
       )
     })),
-    addComment: (postId, comment) => set((state) => ({
-     
-      posts: state.posts.map((post:Post) =>(
-        post.id === postId
-        ? { ...post, comments: [comment, ...post.comments] }
-        : post
-      )
+    addComment:  (comment) => set((state) => ({ comments: [comment, ...state.comments] })),
+    addReply:(commentId:string,reply:Comment)=>{
+      set((state) => ({
+        comments:state.comments.map((comment)=>
+        comment.id === commentId ?
+          {
+            ...comment,
+            replies: [reply, ...comment.replies]
+          
         
-        
-      )
-    })),
+      }:comment)}));
+    },
     removeComment: (postId, commentId) => set((state) => ({
       posts: state.posts.map((post) =>
         post.id === postId

@@ -4,7 +4,8 @@ type PostType = 'story' | 'voice' | 'image'
 
 export interface Post {
   id: string
-  type: PostType
+  type: PostType,
+  reply:number,
   content?: string
   author: {
     id:string,
@@ -13,7 +14,6 @@ export interface Post {
     anonymous: boolean
   }
   likes: number,
-  comments: Comment[]
   shares: number
   createdAt: string
   background?: string

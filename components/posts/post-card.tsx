@@ -114,7 +114,7 @@ export function PostCard({
           <button className='group flex items-center space-x-2'>
             <LucideMessageSquare className="w-6 h-6 text-gray-400 group-hover:text-blue-400"/>
             <span className='text-sm text-gray-400 group-hover:text-blue-400'>
-              {post.comments.length} replies
+              {post.reply} replies
             </span>
           </button>
         </div>
