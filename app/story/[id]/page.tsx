@@ -9,6 +9,7 @@ import { fakeStories } from '@/data/fake-stories'
 import { formatDistanceToNow } from 'date-fns'
 import { fr } from 'date-fns/locale'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 export default function StoryDetailPage({ params }: { params: { id: string } }) {
   const router = useRouter()
@@ -103,60 +104,64 @@ export default function StoryDetailPage({ params }: { params: { id: string } }) 
                 </h2>
 
                 {story.responses.map((response, index) => (
-                  <motion.div
+                  <Link 
                     key={response.id}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    className="bg-[#2a2a2a] rounded-xl p-4 hover:bg-[#303030] transition-colors"
+                    href={`/story/${story.id}/response/${response.id}/share`}
                   >
-                    <div className="flex items-start gap-3">
-                      {response.isAnonymous ? (
-                        <div className="w-10 h-10 rounded-xl ring-2 ring-gray-700 bg-gray-800 flex items-center justify-center flex-shrink-0">
-                          <UserCircle2 className="w-6 h-6 text-gray-400" />
-                        </div>
-                      ) : (
-                        <Avatar
-                          style={{
-                            background: `url(${response.author?.image})`,
-                            backgroundPosition: "center",
-                            backgroundSize: "cover"
-                          }}
-                          className="w-10 h-10 rounded-xl ring-2 ring-gray-700"
-                        />
-                      )}
-                      
-                      <div className="flex-1">
-                        <div className="flex items-center justify-between">
-                          <span className="font-medium text-sm">
-                            {response.isAnonymous ? 'Anonyme' : response.author?.name}
-                          </span>
-                          <span className="text-xs text-gray-500">
-                            {formatDistanceToNow(new Date(response.createdAt), { addSuffix: true, locale: fr })}
-                          </span>
-                        </div>
-                        <p className="mt-2 text-gray-300">{response.content}</p>
-                        <div className="flex items-center gap-4 mt-3">
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            className="text-gray-400 hover:text-red-400"
-                          >
-                            <Heart className="w-4 h-4 mr-1" />
-                            J'aime
-                          </Button>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            className="text-gray-400 hover:text-primary"
-                          >
-                            <Share2 className="w-4 h-4 mr-1" />
-                            Partager
-                          </Button>
+                    <motion.div
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      className="bg-[#2a2a2a] rounded-xl p-4 hover:bg-[#303030] transition-colors cursor-pointer group"
+                    >
+                      <div className="flex items-start gap-3">
+                        {response.isAnonymous ? (
+                          <div className="w-10 h-10 rounded-xl ring-2 ring-gray-700 bg-gray-800 flex items-center justify-center flex-shrink-0">
+                            <UserCircle2 className="w-6 h-6 text-gray-400" />
+                          </div>
+                        ) : (
+                          <Avatar
+                            style={{
+                              background: `url(${response.author?.image})`,
+                              backgroundPosition: "center",
+                              backgroundSize: "cover"
+                            }}
+                            className="w-10 h-10 rounded-xl ring-2 ring-gray-700"
+                          />
+                        )}
+                        
+                        <div className="flex-1">
+                          <div className="flex items-center justify-between">
+                            <span className="font-medium text-sm">
+                              {response.isAnonymous ? 'Anonyme' : response.author?.name}
+                            </span>
+                            <span className="text-xs text-gray-500">
+                              {formatDistanceToNow(new Date(response.createdAt), { addSuffix: true, locale: fr })}
+                            </span>
+                          </div>
+                          <p className="mt-2 text-gray-300">{response.content}</p>
+                          <div className="flex items-center gap-4 mt-3">
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="text-gray-400 hover:text-red-400"
+                            >
+                              <Heart className="w-4 h-4 mr-1" />
+                              J'aime
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="text-gray-400 hover:text-primary group-hover:text-primary"
+                            >
+                              <Share2 className="w-4 h-4 mr-1" />
+                              Partager
+                            </Button>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </motion.div>
+                    </motion.div>
+                  </Link>
                 ))}
               </motion.div>
             )}

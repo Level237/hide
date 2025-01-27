@@ -5,6 +5,7 @@ export interface StoryHide {
   responses: StoryResponse[]
   shareLink: string
   viewCount: number
+  background:string
   isPrivate: boolean
 }
 
