@@ -244,7 +244,7 @@ export default function Post() {
                         <textarea 
                           style={{ background: bgPost }} 
                           placeholder="Partagez votre histoire..."
-                          className="w-full min-h-[12rem] rounded-2xl p-6 pl-20 text-white placeholder:text-gray-500 resize-none focus:ring-2 focus:ring-primary/50 focus:outline-none  text-xl font-medium"
+                          className="w-full min-h-[12rem] text-center pt-12 rounded-2xl p-6 pl-20 text-white placeholder:text-gray-300 resize-none focus:ring-2 focus:ring-primary/50 focus:outline-none  text-xl font-medium"
                         />
                         {!isAnonymous ? (
                           <div className="absolute top-6 left-6">
