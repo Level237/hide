@@ -130,11 +130,11 @@ if(!post){
             )}
 
             {post?.type === 'voice' && (
-             <div className="mt-5 rounded-2xl p-6 bg-gradient-to-br from-gray-800 to-gray-900">
+             <div style={{background:`${post.background}`}}  className="mt-5 rounded-2xl p-6">
              <div className="flex flex-col space-y-4">
                <div className="flex items-center space-x-3 text-gray-400">
-                 <Mic className="w-5 h-5" />
-                 <span className="text-sm font-medium">Message vocal</span>
+                 <Mic className="w-5 text-white h-5" />
+                 <span className="text-sm text-white font-medium">Message vocal</span>
                </div>
                
                <div className="relative">

@@ -63,10 +63,11 @@ export const mockPosts: Post[] = [
         reply:0,
         author: {
             id: 'user2',
-            name: 'Ibrahima Djamilatou',
+            name: 'Zed Camara',
             image: "/profile2.jpg",
             anonymous: false
         },
+        background:"linear-gradient(45deg, #000C40, #607D8B)",
         likes: 20,
         shares: 0,
         audioId: "Wvejru",
